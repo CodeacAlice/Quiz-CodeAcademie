@@ -88,7 +88,9 @@ Il doit également être possible de pouvoir visualiser le temps total mis par l
 L'application sera développée en méthode agile par la Code Académie. Le commanditaire fera partie intégrante du processus de livraison. Pour chaque sprint, une version Beta sera livrée au client. 
 
 ### Responsive
-Cette application devra pouvoir s'adapter à différentes tailles d'écran, mais il est nécessaire d'avoir un écran de taille minimum fixée à la taille minimum pour accedér 
+Cette application devra pouvoir s'adapter à différentes tailles d'écran.
+Pour les "Utilisateurs", l'interface doit être accessible et fonctionnelle du mobile au grand écran.
+Pour la partie "Administration", l'interface doit être seulement disponible pour tablette en horizontal et supérieur. Un message indiquant cette contrainte sera indiqué pour les tailles inférieures. 
 
 ### Compatibilité navigateurs
 Il est attendu d'avoir une application compatible avec les navigateurs suivantes : 
