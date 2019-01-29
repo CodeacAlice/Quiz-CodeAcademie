@@ -14,7 +14,7 @@
         <!-- jQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-        <title>[Code Academie] Promo #3 - Trombinoscope</title>
+        <title>[Code Academie] Promo #3 - Quiz</title>
     </head>
 
     <body>
@@ -24,51 +24,9 @@
         header('location:log.php');
       }
        ?>
-        <header class="">
-            <nav class="navbar navbar-light">
-                <a class="navbar-brand" href="#">
-                    <img src="../images/logo-codeacademie.png" height="60" class="d-inline-block align-middle mr-4" alt="">
-                    <span class="h3 align-middle">Promo #3</span>
-                </a>
-                <pre class="d-inline-block align-middle ml-5 mb-0 lead">&lt;limit&gt;&lt;/limit&gt;</pre>
-            </nav>
-        </header>
-
         <div class= 'container'>
           <h3>bienvenue <?= $_SESSION['Loger']?></h3>
-          <a href="Admin/login.php" class="btn btn-info" role="button">Connexion Admin</a>
           <a href="Admin/deconnexion.php" class='btn btn-info' role='button'>Déconnexion</a>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-2 bg-dark">
-                    <div class="row">
-                        <div class="col-12 p-3 d-flex align-items-center justify-content-between">
-                            <h4 class="text-light mb-0">Filtres</h4>
-                            <a href="#" id="btn-reset" class="btn btn-sm btn-light"><i class="fas fa-undo"></i></a>
-                        </div>
-                    </div>
-                    <p class="text-light border-top pt-2 mb-1">Genre :</p>
-                    <a href="#" id="btn-toggle-masculin" class="btn btn-light btn-sm">Masculin</a>
-                    <a href="#" id="btn-toggle-feminin" class="btn btn-light btn-sm">Féminin</a>
-                </div>
-                <div class="col-10">
-                    <div class="row">
-                        <div class="col-12 bg-info text-light p-3">
-                            <h4 class="m-0">Nombre d'apprenants concernés : <span id="studentsConcernedNumber" class="font-weight-bold"></span></h4>
-                        </div>
-                    </div>
-                    <div id="students" class="row py-3">
-
-                        <?php  include 'construct.php'; ?>
-
-                    </div>
-
-                      <?php  include 'modal.php'; ?>
-
-
-                </div>
-            </div>
         </div>
         <script type="text/javascript" src="script.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

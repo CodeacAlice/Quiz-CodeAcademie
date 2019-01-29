@@ -19,7 +19,11 @@
 
     <body>
       <?php
-      require_once 'database.php';
+      require_once '../database.php';
+      if(!$_SESSION['Admin']){
+        header('location:../log.php');
+      }
+
        ?>
         <header class="">
             <nav class="navbar navbar-light">
@@ -31,55 +35,12 @@
             </nav>
         </header>
         <div class= 'container'>
-          <h3>Se connecter:</h3>
-          <?php
-          if (isset($_POST) AND !empty($_POST)){
-              if (!empty(htmlspecialchars($_POST['username'])) AND !empty(htmlspecialchars ($_POST['password']))){
-                $req = $bdd->prepare('SELECT * FROM users WHERE mail = :username AND password = :password');
-                $req->execute([
-                  'username' => $_POST['username'],
-                  'password' => $_POST['password']
-                ]);
-                $user = $req->fetch();
-                if($user){
-                  if($user[10]==0){
 
-                    $_SESSION['Loger'] = $user[2] . " " . $user[1];
-                    header('location:index.php');
-
-                  }
-                elseif($user[10]==1){
-                  $_SESSION['Admin'] = $user[2] . " " . $user[1];
-                  header('location:Admin/index.php');
-
-                }
-
-                }
-                else{
-                  $error = 'identifiants incorrects.';
-                }
-              }
-              if(isset($error)){
-                echo '<div>
-                '.$error.'
-                </div>';
-              }
-          else {
-            $error = 'Veuillez remplir tout les champs.';
-
-            }
-          }
-           ?>
-           <form action='log.php' method='POST'>
-             <input type='text' name='username'/>
-             <input type="password" name="password"/>
-             <button>
-               Se connecter!
-             </button>
-           </form>
+          <h3>bienvenue Maître <?= $_SESSION['Admin']?></h3>
+<a href="deconnexion.php" class='btn btn-info' role='button'>Déconnexion</a>
         </div>
 
-        <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="../script.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
