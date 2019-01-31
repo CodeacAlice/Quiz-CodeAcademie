@@ -37,6 +37,7 @@
         <div class= 'container'>
 
           <h3>bienvenue Maître <?= $_SESSION['Admin']?></h3>
+          <a href="mesquiz.php" class='btn btn-info' role='button'>Quiz</a>
 <a href="deconnexion.php" class='btn btn-info' role='button'>Déconnexion</a>
         </div>
 
