@@ -54,6 +54,38 @@
 
 	<h2>Liste des quiz</h2>
 
+		<div class="modal fade" id="modalAjout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="modal-title" id="exampleModalLabel"><b>Ajouter un quiz</b></div>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="mesquiz.php" method="post">
+						<p>Titre : <input type="text" name="titre" required maxlength="50"></p>
+						<p>Durée : <input type="text" name="duree" required maxlength="45"></p>
+						<p>Description : <textarea rows="2" name="description" required maxlength="255"></textarea></p>
+						<input type="submit" name="add" value="Ajouter" class="btn btn-info">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+	if (isset($_POST['add']) && $_POST['add'] == 'Ajouter') {
+
+		$titre = $_POST['titre'];
+		$duree = $_POST['duree'];
+		$desc = $_POST['description'];
+
+		$sth = $bdd->prepare("INSERT INTO quiz (titre, duree, description) VALUES ('".$titre."', '".$duree."', '".$desc."')");
+		$sth->execute();
+	}
+	?>
+
 	<div id="listedesquiz">
 		<h4>Quiz 1</h4>
 		<button class="btn btn-info" data-toggle="modal"  data-target="#modalDetails">Détails</button>
@@ -105,37 +137,6 @@
 		</div>
 	</div>
 
-	<div class="modal fade" id="modalAjout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<div class="modal-title" id="exampleModalLabel"><b>Ajouter un quiz</b></div>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form action="mesquiz.php" method="post">
-						<p>Titre : <input type="text" name="titre" required maxlength="50"></p>
-						<p>Durée : <input type="text" name="duree" required maxlength="45"></p>
-						<p>Description : <textarea rows="2" name="description" required maxlength="255"></textarea></p>
-						<input type="submit" name="add" value="Ajouter" class="btn btn-info">
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php
-	if (isset($_POST['add']) && $_POST['add'] == 'Ajouter') {
-
-		$titre = $_POST['titre'];
-		$duree = $_POST['duree'];
-		$desc = $_POST['description'];
-
-		$sth = $bdd->prepare("INSERT INTO quiz (titre, duree, description) VALUES ('".$titre."', '".$duree."', '".$desc."')");
-		$sth->execute();
-	}
-	?>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
