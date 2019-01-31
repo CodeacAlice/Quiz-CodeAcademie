@@ -20,7 +20,7 @@
 	<script type="text/javascript">
 		function showDetails(idQuiz) {
 			if (idQuiz == 0) {
-				document.getElementById("infosAppr").innerHTML = "";
+				document.getElementById("infosQuiz").innerHTML = "";
 				return;
 			} else {
 				if (window.XMLHttpRequest) {
@@ -32,7 +32,7 @@
 		        }
 		        xmlhttp.onreadystatechange = function() {
 		        	if (this.readyState == 4 && this.status == 200) {
-		        		document.getElementById("infosAppr").innerHTML = this.responseText;
+		        		document.getElementById("infosQuiz").innerHTML = this.responseText;
 		        	}
 		        };
 		        xmlhttp.open("GET","assets/php/showDetailsQuiz.php?q="+idQuiz,true);
@@ -55,7 +55,11 @@
 	<h2>Liste des quiz</h2>
 
 	<div id="listedesquiz">
-		<h4>Quiz 1</h4> <button class="btn btn-info">Détails</button> <button class="btn btn-info">Questions</button> <button class="btn btn-info">Tags</button> <button class="btn btn-info">Tester</button>
+		<h4>Quiz 1</h4>
+		<button class="btn btn-info" data-toggle="modal"  data-target="#modalDetails">Détails</button>
+		<a href="questions.php?idquiz=0" class="btn btn-info">Questions</a>
+		<a href="tags.php?idquiz=0" class="btn btn-info">Tags</a>
+		<a href="test.php?idquiz=0" class="btn btn-info">Tester</a>
 
 		<?php
 
@@ -65,7 +69,11 @@
 		$result = $sth->fetchAll();
 		if($sth->rowCount()) {
 			foreach($result as $row){
-				echo '<h4>'.$row['titre'].'</h4> <button class="btn btn-info" data-toggle="modal"  data-target="#modalDetails"  onclick="showDetails(' . $row['idquiz'] . ')">Détails</button> <button class="btn btn-info">Questions</button> <button class="btn btn-info">Tags</button> <button class="btn btn-info">Tester</button>';
+				echo '<h4>'.$row['titre'].'</h4>
+				<button class="btn btn-info" data-toggle="modal"  data-target="#modalDetails"  onclick="showDetails(' . $row['idquiz'] . ')">Détails</button> 
+				<a href="questions.php?idquiz='.$row['idquiz'].'" class="btn btn-info">Questions</a> 
+				<a href="tags.php?idquiz='.$row['idquiz'].'" class="btn btn-info">Tags</a> 
+				<a href="test.php?idquiz='.$row['idquiz'].'" class="btn btn-info">Tester</a>';
 			}
 		}
 		else {echo "Il n'y a pas encore de quiz.";}
@@ -78,8 +86,24 @@
 
 	<div class="modal fade" id="modalDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content" id="infosAppr">
-				
+			<div class="modal-content" id="infosQuiz">
+				<div class="modal-header">
+					<div class="modal-title" id="exampleModalLabel"><b>Titre de quiz</b></div>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="p-4">
+						Questions : nombredequestions<br><br>
+						Durée : unedurée<br><br>
+						Description :<br>
+						<p class="py-2 px-3">Lorem ipsum</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-info" data-dismiss="modal" style="margin: auto;">Fermer</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
