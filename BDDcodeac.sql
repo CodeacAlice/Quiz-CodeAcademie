@@ -41,6 +41,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `quizcodac`.`quiz` (
   `idquiz` INT NOT NULL AUTO_INCREMENT,
+  `titre` VARCHAR(50) NOT NULL,
   `duree` VARCHAR(45) NOT NULL,
   `description` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`idquiz`))
@@ -59,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `quizcodac`.`questions` (
   `reponse4` VARCHAR(255) NOT NULL,
   `bonnerep` VARCHAR(255) NOT NULL,
   `quiz_idquiz` INT NOT NULL,
+  `numero` INT NOT NULL,
   PRIMARY KEY (`idquestions`, `quiz_idquiz`),
   INDEX `fk_questions_quiz1_idx` (`quiz_idquiz` ASC),
   CONSTRAINT `fk_questions_quiz1`
