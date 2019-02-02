@@ -18,7 +18,7 @@
 	<title>[Code Academie] Promo #3 - Liste des tags</title>
 
 	<script type="text/javascript">
-		function modifTag(idtag) {
+		function modifTag(idtag, idquiz) {
 			if (idtag == 0) {
 				document.getElementById("modifTag").innerHTML = "";
 				return;
@@ -35,12 +35,12 @@
 		        		document.getElementById("modifTag").innerHTML = this.responseText;
 		        	}
 		        };
-		        xmlhttp.open("GET","assets/php/modifTag.php?q="+idtag,true);
+		        xmlhttp.open("GET","assets/php/modifTag.php?t="+idtag+"&q="+idquiz,true);
 		        xmlhttp.send();
 		    }
 		}
 		
-		function deleteTag(idtag) {
+		function deleteTag(idtag, idquiz) {
 			if (idtag == 0) {
 				document.getElementById("supprTag").innerHTML = "";
 				return;
@@ -57,7 +57,7 @@
 		        		document.getElementById("supprTag").innerHTML = this.responseText;
 		        	}
 		        };
-		        xmlhttp.open("GET","assets/php/supprTag.php?q="+idtag,true);
+		        xmlhttp.open("GET","assets/php/supprTag.php?t="+idtag+"&q="+idquiz,true);
 		        xmlhttp.send();
 		    }
 		}
@@ -85,7 +85,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="tags.php" method="post">
+					<?php echo '<form action="tags.php?idquiz='.$_GET["idquiz"].'" method="post">'; ?>
 						<p>Nom : <input type="text" name="nom" required maxlength="45"></p>
 						<input type="submit" name="add" value="Ajouter" class="btn btn-info">
 					</form>
@@ -114,7 +114,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="tags.php" method="post">
+					<?php echo '<form action="tags.php?idquiz='.$_GET["idquiz"].'" method="post">'; ?>
 						<p style="display:none">id : <input type="text" name="id" required value="0"></p>
 						<p>Nom : <input type="text" name="nom" required maxlength="45" value="nom_tag"></p>
 						<input type="submit" name="update" value="Modifier" class="btn btn-info">
@@ -146,7 +146,7 @@
 				</div>
 				<div class="modal-body" id="supprTag">
 					<p>Voulez-vous vraiment supprimer définitivement le tag nom_tag ?</p>
-					<form action="tags.php" method="post">
+					<?php echo '<form action="tags.php?idquiz='.$_GET["idquiz"].'" method="post">'; ?>
 						<p style="display:none">id : <input type="text" name="idSupp" required value="0"></p>
 						<input type="submit" name="delete" value="Oui" class="btn btn-info">
 						<button type="button" class="btn btn-info" data-dismiss="modal" style="margin: auto;">Non</button>
@@ -206,8 +206,8 @@
 					}
 				}
 
-				echo '<button class="btn btn-info" onclick="modifTag('.$row['idtags'].')" data-toggle="modal" data-target="#modalModif">Modifier</button>
-				<button class="btn btn-info" onclick="deleteTag('.$row['idtags'].')" data-toggle="modal" data-target="#modalDelete">Supprimer</button>
+				echo '<button class="btn btn-info" onclick="modifTag('.$row['idtags'].', '.$_GET["idquiz"].')" data-toggle="modal" data-target="#modalModif">Modifier</button>
+				<button class="btn btn-info" onclick="deleteTag('.$row['idtags'].', '.$_GET["idquiz"].')" data-toggle="modal" data-target="#modalDelete">Supprimer</button>
 				<br>';
 			}
 		}

@@ -1,7 +1,9 @@
 <?php
 require_once '../../../database.php';
 
-$idtag = intval($_GET['q']);
+$idtag = intval($_GET['t']);
+$idquiz = intval($_GET['q']);
+
 $sth = $bdd->prepare("SELECT * FROM tags WHERE idtags = '".$idtag."'");
 $sth->execute();
 $row = $sth->fetch(PDO::FETCH_ASSOC);
@@ -12,7 +14,7 @@ $row = $sth->fetch(PDO::FETCH_ASSOC);
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="tags.php" method="post">
+					<form action="tags.php?idquiz='.$idquiz.'" method="post">
 						<p style="display:none">id : <input type="text" name="id" required value="'.$idtag.'"></p>
 						<p>Nom : <input type="text" name="nom" required maxlength="45" value="'.$row['nom'].'"></p>
 						<input type="submit" name="update" value="Modifier" class="btn btn-info">
