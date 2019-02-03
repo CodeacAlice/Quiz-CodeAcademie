@@ -161,7 +161,8 @@
 
 		$id = $_POST['idSupp'];
 
-		$sth = $bdd->prepare("DELETE FROM tags WHERE idtags = '".$id."' ");
+		$sth = $bdd->prepare("DELETE FROM tags_has_questions WHERE tags_idtags = '".$id."';
+			DELETE FROM tags WHERE idtags = '".$id."';");
 		$sth->execute();
 	}
 	?>
