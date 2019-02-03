@@ -228,6 +228,7 @@
 		echo $result['titre'];
 		?> :
 	</h2>
+	<a class="btn btn-info" href="mesquiz.php">Retour</a>
 
 	<div id="listedesquestions">
 		<?php
