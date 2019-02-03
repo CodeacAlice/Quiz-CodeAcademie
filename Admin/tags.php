@@ -97,7 +97,7 @@
 	// Code pour ajouter un tag
 	if (isset($_POST['add']) && $_POST['add'] == 'Ajouter') {
 
-		$nom = $_POST['nom'];
+		$nom = str_replace("'", "\'", $_POST['nom']);
 
 		$sth = $bdd->prepare("INSERT INTO tags (nom) VALUES ('".$nom."')");
 		$sth->execute();
@@ -129,7 +129,7 @@
 	if (isset($_POST['update']) && $_POST['update'] == 'Modifier') {
 
 		$id = $_POST['id'];
-		$nom = $_POST['nom'];
+		$nom = str_replace("'", "\'", $_POST['nom']);
 
 		$sth = $bdd->prepare("UPDATE tags SET nom = '".$nom."' WHERE idtags = '".$id."';");
 		$sth->execute();

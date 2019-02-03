@@ -97,12 +97,12 @@
 	if (isset($_POST['add']) && $_POST['add'] == 'Ajouter') {
 
 		// Requête envoyée à la table 'questions'
-		$quest = $_POST['quest'];
-		$rep1 = $_POST['rep1'];
-		$rep2 = $_POST['rep2'];
-		$rep3 = $_POST['rep3'];
-		$rep4 = $_POST['rep4'];
-		$bon = $_POST['rep'.$_POST['bonnerep']];
+		$quest = str_replace("'", "\'", $_POST['quest']);
+		$rep1 = str_replace("'", "\'", $_POST['rep1']);
+		$rep2 = str_replace("'", "\'", $_POST['rep2']);
+		$rep3 = str_replace("'", "\'", $_POST['rep3']);
+		$rep4 = str_replace("'", "\'", $_POST['rep4']);
+		$bon = str_replace("'", "\'", $_POST['rep'.$_POST['bonnerep']]);
 
 		$searchmax = $bdd->prepare("SELECT MAX(numero) FROM questions WHERE quiz_idquiz = '".$_GET["idquiz"]."'");
 		$searchmax->execute();
@@ -177,12 +177,12 @@
 
 		// Requête envoyée à la table 'questions'
 		$id = $_POST['id'];
-		$quest = $_POST['quest'];
-		$rep1 = $_POST['rep1'];
-		$rep2 = $_POST['rep2'];
-		$rep3 = $_POST['rep3'];
-		$rep4 = $_POST['rep4'];
-		$bon = $_POST['rep'.$_POST['bonnerep']];
+		$quest = str_replace("'", "\'", $_POST['quest']);
+		$rep1 = str_replace("'", "\'", $_POST['rep1']);
+		$rep2 = str_replace("'", "\'", $_POST['rep2']);
+		$rep3 = str_replace("'", "\'", $_POST['rep3']);
+		$rep4 = str_replace("'", "\'", $_POST['rep4']);
+		$bon = str_replace("'", "\'", $_POST['rep'.$_POST['bonnerep']]);
 
 		$upquest = $bdd->prepare("UPDATE questions 
 			SET question = '".$quest."', reponse1 = '".$rep1."', reponse2 = '".$rep2."', reponse3 = '".$rep3."', reponse4 = '".$rep4."', bonnerep = '".$bon."'

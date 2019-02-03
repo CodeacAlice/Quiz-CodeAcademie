@@ -99,9 +99,9 @@
 	// Code pour ajouter un quiz
 	if (isset($_POST['add']) && $_POST['add'] == 'Ajouter') {
 
-		$titre = $_POST['titre'];
-		$duree = $_POST['duree'];
-		$desc = $_POST['description'];
+		$titre = str_replace("'", "\'", $_POST['titre']);
+		$duree = str_replace("'", "\'", $_POST['duree']);
+		$desc = str_replace("'", "\'", $_POST['description']);
 
 		$sth = $bdd->prepare("INSERT INTO quiz (titre, duree, description) VALUES ('".$titre."', '".$duree."', '".$desc."')");
 		$sth->execute();
@@ -133,9 +133,9 @@
 	// Code pour modifier un quiz
 	if (isset($_POST['update']) && $_POST['update'] == 'Modifier') {
 
-		$titre = $_POST['titre'];
-		$duree = $_POST['duree'];
-		$desc = $_POST['description'];
+		$titre = str_replace("'", "\'", $_POST['titre']);
+		$duree = str_replace("'", "\'", $_POST['duree']);
+		$desc = str_replace("'", "\'", $_POST['description']);
 
 		$sth = $bdd->prepare("UPDATE quiz SET titre = '".$titre."', duree = '".$duree."', description = '".$desc."'");
 		$sth->execute();
