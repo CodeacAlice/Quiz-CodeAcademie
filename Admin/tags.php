@@ -74,7 +74,7 @@
 	}
 	?>
 
-	<button class="btn btn-info" data-toggle="modal"  data-target="#modalAjout">Ajouter</button>
+	
 	<div class="modal fade" id="modalAjout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -177,6 +177,7 @@
 		echo $result['titre'];
 		?> :
 	</h2>
+	<button class="btn btn-info" data-toggle="modal"  data-target="#modalAjout">Ajouter</button>
 
 	<div id="listedestags">
 		<?php
