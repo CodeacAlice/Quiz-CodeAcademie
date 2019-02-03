@@ -18,9 +18,9 @@
 	<title>[Code Academie] Promo #3 - Liste des questions</title>
 
 	<script type="text/javascript">
-		function modifTag(idtag, idquiz) {
-			if (idtag == 0) {
-				document.getElementById("modifTag").innerHTML = "";
+		function modifQuest(idquest, idquiz) {
+			if (idquest == 0) {
+				document.getElementById("modifQuest").innerHTML = "";
 				return;
 			} else {
 				if (window.XMLHttpRequest) {
@@ -32,32 +32,10 @@
 		        }
 		        xmlhttp.onreadystatechange = function() {
 		        	if (this.readyState == 4 && this.status == 200) {
-		        		document.getElementById("modifTag").innerHTML = this.responseText;
+		        		document.getElementById("modifQuest").innerHTML = this.responseText;
 		        	}
 		        };
-		        xmlhttp.open("GET","assets/php/modifTag.php?t="+idtag+"&q="+idquiz,true);
-		        xmlhttp.send();
-		    }
-		}
-		
-		function deleteTag(idtag, idquiz) {
-			if (idtag == 0) {
-				document.getElementById("supprTag").innerHTML = "";
-				return;
-			} else {
-				if (window.XMLHttpRequest) {
-		            // code for IE7+, Firefox, Chrome, Opera, Safari
-		            xmlhttp = new XMLHttpRequest();
-		        } else {
-		            // code for IE6, IE5
-		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		        }
-		        xmlhttp.onreadystatechange = function() {
-		        	if (this.readyState == 4 && this.status == 200) {
-		        		document.getElementById("supprTag").innerHTML = this.responseText;
-		        	}
-		        };
-		        xmlhttp.open("GET","assets/php/supprTag.php?t="+idtag+"&q="+idquiz,true);
+		        xmlhttp.open("GET","assets/php/modifQuest.php?que="+idquest+"&qui="+idquiz,true);
 		        xmlhttp.send();
 		    }
 		}
@@ -74,7 +52,7 @@
 	}
 	?>
 
-	
+	<!-- Ajouter une question -->
 	<div class="modal fade" id="modalAjout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -149,24 +127,44 @@
 				VALUES ('".$tags[$i]."', '".$newid."', '".$_GET["idquiz"]."')");
 			$addtag->execute();
 		}
-		
-
 	}
 	?>
 
+	<!-- Modifier une question -->
 	<div class="modal fade" id="modalModif" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content" id="modifTag">
+			<div class="modal-content" id="modifQuest">
 				<div class="modal-header">
-					<div class="modal-title" id="exampleModalLabel"><b>Modifier le tag nom_tag</b></div>
+					<div class="modal-title" id="exampleModalLabel"><b>Modifier la question n°0</b></div>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<?php echo '<form action="tags.php?idquiz='.$_GET["idquiz"].'" method="post">'; ?>
+					<form <?php echo 'action="questions.php?idquiz='.$_GET["idquiz"].'"'; ?> method="post">
 						<p style="display:none">id : <input type="text" name="id" required value="0"></p>
-						<p>Nom : <input type="text" name="nom" required maxlength="45" value="nom_tag"></p>
+						<p>Question : <input type="text" name="quest" required maxlength="255"></p>
+						<p>Réponse 1 : <input type="text" name="rep1" required maxlength="255"></p>
+						<p>Réponse 2 : <input type="text" name="rep2" required maxlength="255"></p>
+						<p>Réponse 3 : <input type="text" name="rep3" required maxlength="255"></p>
+						<p>Réponse 4 : <input type="text" name="rep4" required maxlength="255"></p>
+						<p>Bonne réponse : <input type="radio" name="bonnerep" required value="1" checked>1   
+							<input type="radio" name="bonnerep" required value="2">2   
+							<input type="radio" name="bonnerep" required value="3">3   
+							<input type="radio" name="bonnerep" required value="4">4</p>
+						<p>Tags : 
+							<?php
+								$sth = $bdd->prepare("SELECT * FROM tags ORDER BY nom");
+								$sth->execute();
+								$result = $sth->fetchAll();
+								if($sth->rowCount()) {
+									foreach($result as $row){
+										echo '#'.$row['nom'].' <input type="checkbox" name="tags[]" value="'.$row['idtags'].'"><br>';
+									}
+								}
+								else {echo "Il n'existe pas encore de tag.";}
+							?>
+						</p>
 						<input type="submit" name="update" value="Modifier" class="btn btn-info">
 					</form>
 				</div>
@@ -174,45 +172,49 @@
 		</div>
 	</div>
 	<?php
-	// Code pour modifier un tag
+	// Code pour modifier une question
 	if (isset($_POST['update']) && $_POST['update'] == 'Modifier') {
 
+		// Requête envoyée à la table 'questions'
 		$id = $_POST['id'];
-		$nom = $_POST['nom'];
+		$quest = $_POST['quest'];
+		$rep1 = $_POST['rep1'];
+		$rep2 = $_POST['rep2'];
+		$rep3 = $_POST['rep3'];
+		$rep4 = $_POST['rep4'];
+		$bon = $_POST['rep'.$_POST['bonnerep']];
 
-		$sth = $bdd->prepare("UPDATE tags SET nom = '".$nom."' WHERE idtags = '".$id."';");
-		$sth->execute();
-	}
-	?>
+		$upquest = $bdd->prepare("UPDATE questions 
+			SET question = '".$quest."', reponse1 = '".$rep1."', reponse2 = '".$rep2."', reponse3 = '".$rep3."', reponse4 = '".$rep4."', bonnerep = '".$bon."'
+			WHERE idquestions = '".$id."';");
+		$upquest->execute();
 
-	<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<div class="modal-title" id="exampleModalLabel"><b>ATTENTION</b></div>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" id="supprTag">
-					<p>Voulez-vous vraiment supprimer définitivement le tag nom_tag ?</p>
-					<?php echo '<form action="tags.php?idquiz='.$_GET["idquiz"].'" method="post">'; ?>
-						<p style="display:none">id : <input type="text" name="idSupp" required value="0"></p>
-						<input type="submit" name="delete" value="Oui" class="btn btn-info">
-						<button type="button" class="btn btn-info" data-dismiss="modal" style="margin: auto;">Non</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php
-	// Code pour supprimer un tag
-	if (isset($_POST['delete']) && $_POST['delete'] == 'Oui') {
-
-		$id = $_POST['idSupp'];
-
-		$sth = $bdd->prepare("DELETE FROM tags WHERE idtags = '".$id."' ");
-		$sth->execute();
+		// Requêtes envoyées à la table 'tags_has_questions'
+		$tagschecked = $_POST['tags'];
+		$searchtags = $bdd->prepare("SELECT * FROM tags");
+		$searchtags->execute();
+		$restags = $searchtags->fetchAll();
+		if($searchtags->rowCount()) {
+			foreach($restags as $atag){
+				$ithasthetag = $bdd->prepare("SELECT * FROM tags_has_questions 
+					WHERE tags_idtags = '".$atag['idtags']."' AND questions_idquestions = '".$id."' ");
+				$ithasthetag->execute();
+				if ($ithasthetag->rowCount()) {
+					if (!in_array($atag['idtags'], $tagschecked)) {
+						$delete = $bdd->prepare("DELETE FROM tags_has_questions 
+							WHERE tags_idtags = '".$atag['idtags']."' AND questions_idquestions = '".$id."' ");
+						$delete->execute();
+					}
+				}
+				else {
+					if (in_array($atag['idtags'], $tagschecked)) {
+						$insert = $bdd->prepare("INSERT INTO tags_has_questions (tags_idtags, questions_idquestions, questions_quiz_idquiz) 
+							VALUES ('".$atag['idtags']."', '".$id."', '".$_GET["idquiz"]."')");
+						$insert->execute();
+					}
+				}
+			}
+		}
 	}
 	?>
 
@@ -255,7 +257,8 @@
 				echo '<p>Tags : ';
 				$sth2 = $bdd->prepare("SELECT tags.nom FROM tags, tags_has_questions
 					WHERE tags.idtags = tags_has_questions.tags_idtags
-					AND tags_has_questions.questions_idquestions = '".$row['idquestions']."';");
+					AND tags_has_questions.questions_idquestions = '".$row['idquestions']."' 
+					ORDER BY tags.nom;");
 				$sth2->execute();
 				$result2 = $sth2->fetchAll();
 				if($sth2->rowCount()) {
@@ -263,7 +266,7 @@
 				}
 				else {echo "Cette question n'a pas encore de tag.";}
 				echo '</p>
-		<button class="btn btn-info" data-toggle="modal" data-target="#modalModif">Modifier</button>';
+		<button class="btn btn-info" data-toggle="modal" data-target="#modalModif" onclick="modifQuest('.$row['idquestions'].', '.$_GET["idquiz"].')">Modifier</button>';
 			}
 		}
 		else {echo "Ce quiz n'a pas encore de question.";}
