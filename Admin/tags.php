@@ -69,7 +69,7 @@
 	<?php
 	require_once '../database.php';
 	if(!$_SESSION['Admin']){
-		header('location:../log.php');
+		header('location:../index.php');
 	}
 	?>
 

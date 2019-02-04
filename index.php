@@ -77,8 +77,8 @@
     <div class="bienvenue">
       <p>Bienvenue aux quiz de la prochaine<br>session de la Code Académie</p>
       <div>
-        <form class="formulaires" action='log.php' method='POST'>
-          <input type="text" name='username' value="adresse mail"><br>
+        <form class="formulaires" action='index.php' method='POST'>
+          <input type="text" name='username' value="mail"><br>
           <input type="password" name="password" value="mot de passe"><br>
           <button>Connexion</button>
         </form>

@@ -22,7 +22,7 @@
 	<?php
 	require_once '../database.php';
 	if(!$_SESSION['Admin']){
-		header('location:../log.php');
+		header('location:../index.php');
 	}
 	?>
 
@@ -95,7 +95,7 @@
 
 
 	<h2>Liste des utilisateurs :</h2>
-	<a class="btn btn-info" href="index.php">Retour à la page d'accueil</a>
+	<a class="btn btn-info" href="homepage_admin.php">Retour à la page d'accueil</a>
 
 	<div id="listeusers">
 		<?php
@@ -110,9 +110,6 @@
 		}
 		else {echo "Ce quiz n'a pas encore de question.";}
 		?>
-
-
-
 	</div>
 	<button class="btn btn-info" data-toggle="modal" data-target="#modalAjout">Ajouter un utilisateur</button>
 
