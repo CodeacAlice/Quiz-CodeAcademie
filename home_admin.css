@@ -1,7 +1,7 @@
 body {
 	width: 100%;
 	margin: auto;
-	background-color: #EEEEEE;
+	background-color: white;
 }
 
 header {
@@ -27,12 +27,13 @@ header {
 .face {
 	float: right;
 	text-align: right;
-	margin-top: -5px;
-	margin-right: 10px;
+	margin-right: -190px;
 }
 
 .face img {
 	background-color: white;
+	margin-top: -5px;
+	margin-right: 10px;
 }
 
 section {
@@ -46,31 +47,40 @@ section {
 }
 
 .bienvenue {
-	background-color: white;
-	text-align: center;
-	width: 800px;
-	height: 450px;
-	margin: auto;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin-bottom: 100px;
+	margin-top: 75px;
+}
+
+.bienvenue img {
+	height: 50px;
+	width: 50px;
+	float: right;
+	margin-top: -140px;
+	margin-right: 15px;
 }
 
 .bienvenue p {
-	padding-top: 70px;
-	padding-bottom: 40px;
 	font-size: 35px;
+	text-align: center;
 }
 
-.formulaires {
-	text-align: center;
-	padding-bottom: 20px;
+.row {
+	margin-left: 130px;
+	margin-right: 100px;
+	padding-left: 45px;
 }
 
-input {
-	border-radius: 10px;
-	padding: 10px 75px 10px 75px;
+span {
+	margin-right: 110px;
+	display: inline-grid;
 	text-align: center;
-	background-color: #EEEEEE;
+}
+
+.row img {
+	height: 100px;
+	width: 100px;
+	margin-top: 20px;
+	margin-left: 60px;
 }
 
 button {
