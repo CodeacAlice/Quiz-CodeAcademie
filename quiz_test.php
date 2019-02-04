@@ -12,7 +12,7 @@ session_start();
 
 <?php
 
-include 'quiz_construct.php';
+include 'quiz_construct2.php';
 
 ?>
 </div>

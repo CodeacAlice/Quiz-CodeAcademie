@@ -2,6 +2,8 @@
 include 'infosconnect.php';
 include 'database.php';
 
+echo $_GET['idquiz'];
+
 // On créer les fonctions pour les boutons
 
 if(isset($_POST['submit']))

@@ -159,7 +159,7 @@
 				<button class="btn btn-info" data-toggle="modal" data-target="#modalDetails" onclick="showDetails(' . $row['idquiz'] . ')">Détails</button> 
 				<a href="questions.php?idquiz='.$row['idquiz'].'" class="btn btn-info">Questions</a> 
 				<a href="tags.php?idquiz='.$row['idquiz'].'" class="btn btn-info">Tags</a> 
-				<a href="test.php?idquiz='.$row['idquiz'].'" class="btn btn-info">Tester</a>
+				<a href="../quiz_test.php?idquiz='.$row['idquiz'].'&nq=1" class="btn btn-info">Tester</a>
 				<button class="btn btn-info" data-toggle="modal" data-target="#modalModif" onclick="modifQuiz(' . $row['idquiz'] . ')">Modifier</button> ';
 			}
 		}
