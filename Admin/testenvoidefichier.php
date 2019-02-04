@@ -8,10 +8,10 @@
 </form>
 
 <?php
-	// Code pour modifier un quiz
+	
 	if (isset($_POST['envoi']) && $_POST['envoi'] == 'Envoyer le fichier') {
 
-		$uploaddir = './assets/';
+		$uploaddir = '/Téléchargements/';
 		$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
 
 		echo '<pre>';
