@@ -94,6 +94,12 @@ section {
 
 .tag_example {
 	text-align: left;
+	padding-top: 20px;
+}
+
+.tag_example p {
+	margin-left: 40px;
+	display: inline;
 }
 
 .question_concerned {
@@ -105,5 +111,5 @@ section {
 .poubelle {
 	float: right;
 	margin-top: -47px;
-	margin-right: -80px;
+	margin-right: -70px;
 }
