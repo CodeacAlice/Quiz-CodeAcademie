@@ -11,3 +11,9 @@ version 0.2
 Mardi 29 Janvier:
 Matin -> continuation du maquettage, base de données au format papier puis conversion en sql
 Après-midi -> finition du maquettage et détails à revoir (icône du menu burger), codage de la page demandant la connexion, vérification email/admin.
+
+Version 0.3
+
+Jeudi 31 Janvier:
+Matin->  Intégration de la maquette (en cours), création de la page affichant les quiz, recherche de code permettant de faire fonctionner le quiz
+Après-midi -> Finition de l'intégration de la page de base de la maquette, possibilité pour le quiz de soumettre une réponse et de la vérifier, affichage des détails des quiz et formulaire d'ajout de quiz
