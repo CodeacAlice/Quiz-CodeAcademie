@@ -64,9 +64,7 @@
 				</div>
 				<div class="modal-body">
 					<?php echo '<form action="questions.php?idquiz='.$_GET["idquiz"].'" method="post">'; ?>
-						<p>Question : <input type="text" name="quest" maxlength="255"> ou 
-							<input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-							<input name="userfile" type="file" /></p>
+						<p>Question : <input type="text" name="quest" required maxlength="255">
 						<p>Réponse 1 : <input type="text" name="rep1" required maxlength="255"></p>
 						<p>Réponse 2 : <input type="text" name="rep2" required maxlength="255"></p>
 						<p>Réponse 3 : <input type="text" name="rep3" required maxlength="255"></p>
@@ -106,13 +104,6 @@
 		$rep4 = str_replace("'", "\'", $_POST['rep4']);
 		$bon = str_replace("'", "\'", $_POST['rep'.$_POST['bonnerep']]);
 
-		if ($quest == '') {
-			$uploaddir = './assets/';
-			$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
-			if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
-				$quest = $_FILES['userfile']['name'];
-			}
-		}
 
 		$searchmax = $bdd->prepare("SELECT MAX(numero) FROM questions WHERE quiz_idquiz = '".$_GET["idquiz"]."'");
 		$searchmax->execute();
