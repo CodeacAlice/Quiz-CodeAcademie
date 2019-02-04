@@ -2,145 +2,81 @@
 include 'infosconnect.php';
 include 'database.php';
 
-echo $_GET['idquiz'];
+$idquiz = $_GET['idquiz'];
+$nbquest = $_GET['nq'];
+$nbnext = $nbquest +1;
 
-// On créer les fonctions pour les boutons
 
-if(isset($_POST['submit']))
-{
-  $choix=htmlspecialchars($_POST['choix']);
-  $sql = $bdd->prepare("UPDATE questions
-    SET userans = '$choix'
-    WHERE nowques = numero
-    ;");
-  $sql->execute();
-  $sql2 = $bdd->query("SELECT bonnerep, userans
-    FROM questions
-    WHERE numero = nowques;
-  ");
-  $compare = $sql2->fetch();
-    if($compare['bonnerep']===$compare['userans']){
-        echo 'bonne réponse';
-    }
-    else{
-        echo 'mauvaise réponse';
-      }
+$sth = $bdd->prepare("SELECT * FROM questions 
+	WHERE quiz_idquiz = '".$idquiz."' 
+	AND numero = '".$nbquest."'");
+$sth->execute();
+$result = $sth->fetch();
 
+if (isset($_POST['submit']) && $_POST['submit'] == 'submit') {
+	$nbprev = $nbquest -1;
+	$answer = $_POST['choix'];
+
+
+	$searchgoodans = $bdd->prepare("SELECT * FROM questions 
+		WHERE quiz_idquiz = '".$idquiz."' 
+		AND numero = '".$nbprev."'");
+	$searchgoodans->execute();
+	$resultans = $searchgoodans->fetch();
+	$correctans = $resultans['bonnerep'];
+
+	if ($answer == $correctans) {
+		echo 'Exact !';
+		$itscorrect = 1;
+	}
+	else {
+		echo 'Erreur, la bonne réponse était '.$correctans;
+		$itscorrect = 0;
+	}
+	$addscore = $bdd->prepare("INSERT INTO scores (userans,	temps, users_idusers, questions_idquestions, questions_quiz_idquiz, correct)
+		VALUES ('".str_replace("'", "\'", $answer)."', '0', '".$_SESSION['iduser']."', '".$resultans['idquestions']."', '".$idquiz."', '".$itscorrect."')");
+	$addscore->execute();
 }
 
 
-if(isset($_POST['next']))
-{
+$countquest = $bdd->prepare("SELECT COUNT(*) FROM questions WHERE quiz_idquiz = '".$idquiz."'");
+$countquest->execute();
+$rescount = $countquest->fetch(PDO::FETCH_ASSOC);
+$totquest = $rescount['COUNT(*)'];
 
-$sql = $bdd->prepare("UPDATE questions
-  SET nowques = nowques + 1
-  ;");
-$sql->execute();
-
+if ($nbquest > $totquest) {
+	echo '<p>Le quiz est terminé !</p>
+	<a class="btn btn-info" href="./Admin/mesquiz.php">Retour aux quiz</a>';
 }
+else {
+	echo '
+<form action="quiz_test.php?idquiz='.$idquiz.'&nq='.$nbnext.'" method="post">
+	<table align="center">
+		<tr>
+			<td>'.$result['question'].'</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="radio" name="choix" value="'.$result['reponse1'].'">'.$result['reponse1'].'</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="radio" name="choix" value="'.$result['reponse2'].'">'.$result['reponse2'].'</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="radio" name="choix" value="'.$result['reponse3'].'">'.$result['reponse3'].'</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="radio" name="choix" value="'.$result['reponse4'].'">'.$result['reponse4'].'</td>
+		</tr>
+		<tr>
+			<td><input type="submit" name="submit" value="submit"></td>
+		</tr>
 
-
-
-?>
-<h2>Choisissez un quiz.</h2>
-<form action="" method="post">
-<td>
-  <input type="text" name="numquiz">
-  <input type="submit" name="envoie" value="envoie">
-</td>
-</form>
-<?php
-
-if(isset($_POST['envoie'])){
-
-$idquiz = htmlspecialchars($_POST['numquiz']);
-echo $idquiz;
-$monquiz = $bdd->prepare("UPDATE quiz
-SET userquiz = 1
-WHERE idquiz = '$idquiz';");
-
-$pasmonquiz = $bdd->prepare("UPDATE quiz
-SET userquiz = 0
-WHERE NOT idquiz ='$idquiz';");
-
-$monquiz->execute();
-$pasmonquiz->execute();
+	</table>
+</form>';
 }
-
-$reponse = $bdd->query('SELECT * FROM questions INNER JOIN quiz ON questions.quiz_idquiz = quiz.idquiz Where userquiz = 1 AND numero = nowques; ');
-
-
-// On affiche chaque entrée une à une
-
-while ($donnees = $reponse->fetch())
-
-{
-
-?>
-
-<div>
-  <p>idquiz:
-    <?php echo $donnees['quiz_idquiz']; ?>
-  </p>
-  <p> Question :
-    <?php echo $donnees['question']; ?>
-  </p>
-  <p> Réponse 1 :
-    <?php echo $donnees['reponse1']; ?>
-  </p>
-  <p> Réponse 2 :
-    <?php echo $donnees['reponse2']; ?>
-  </p>
-  <p> Réponse 3 :
-    <?php echo $donnees['reponse3']; ?>
-  </p>
-  <p> Réponse 4 :
-    <?php echo $donnees['reponse4']; ?>
-  </p>
-  <p> Bonne réponse :
-    <?php echo $donnees['bonnerep']; ?>
-  </p>
-  <p> Ta réponse :
-    <?php echo $donnees['userans']; ?>
-  </p>
-</div>
-
-<form action="" method="post">
-<table align="center">
-<tr>
-<td><?php echo $donnees['question']; ?></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="radio" name="choix" value="<?php echo $donnees['reponse1']; ?>"><?php echo $donnees['reponse1']; ?></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="radio" name="choix" value="<?php echo $donnees['reponse2']; ?>"><?php echo $donnees['reponse2']; ?></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="radio" name="choix" value="<?php echo $donnees['reponse3']; ?>"><?php echo $donnees['reponse3']; ?></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="radio" name="choix" value="<?php echo $donnees['reponse4']; ?>"><?php echo $donnees['reponse4']; ?></td>
-</tr>
-<tr>
-<td><input type="submit" name="submit" value="submit"></td>
-<td><input type="submit" name="next" value="next"></td>
-</tr>
-
-</table>
-</form>
-
-<?php
-
-
-}
-
-
-$reponse->closeCursor(); // Termine le traitement de la requête
-
 
 ?>

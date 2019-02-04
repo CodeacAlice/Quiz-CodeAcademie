@@ -42,14 +42,14 @@
                 ]);
                 $user = $req->fetch();
                 if($user){
-                  if($user[10]==0){
+                  $_SESSION['iduser'] = $user[0];
 
+                  if($user[10]==0){
                     $_SESSION['Loger'] = $user[2] . " " . $user[1];
                     header('location:homepage.php');
 
                   }
                 elseif($user[10]==1){
-                  $_SESSION['Loger'] = $user[2] . " " . $user[1];
                   $_SESSION['Admin'] = $user[2] . " " . $user[1];
                   header('location:Admin/index.php');
 

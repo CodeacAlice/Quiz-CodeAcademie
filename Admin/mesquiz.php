@@ -143,12 +143,7 @@
 	?>
 
 	<div id="listedesquiz">
-		<h4>Quiz 1</h4>
-		<button class="btn btn-info" data-toggle="modal"  data-target="#modalDetails">Détails</button>
-		<a href="questions.php?idquiz=0" class="btn btn-info">Questions</a>
-		<a href="tags.php?idquiz=0" class="btn btn-info">Tags</a>
-		<a href="test.php?idquiz=0" class="btn btn-info">Tester</a>
-
+		
 		<?php
 		$sth = $bdd->prepare('SELECT * FROM quiz ORDER BY titre');
 		$sth->execute();
