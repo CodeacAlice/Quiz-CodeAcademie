@@ -39,7 +39,7 @@
   <h3>bienvenue Maître <?= $_SESSION['Admin']?></h3>
   <a href="mesquiz.php" class='btn btn-info' role='button'>Quiz</a>
   <a href="users.php" class='btn btn-info' role='button'>Utilisateurs</a>
-  <a href="../deconnexion.php" class='btn btn-info' role='button'>Déconnexion</a>
+  <a href="deconnexion.php" class='btn btn-info' role='button'>Déconnexion</a>
 </div>
 
 <script type="text/javascript" src="../script.js"></script>
