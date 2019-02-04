@@ -1,0 +1,3 @@
+Avant de lancer l'application, il faut importer le fichier NewBDD.sql dans phpmyadmin. Il faut également modifier les informations pour se connecter à la base de données dans le fichier infosconnect.php. 
+Une fois cela fait, il suffit de lancer la page index.php. Il est possible de se connecter en tant qu'admin avec les identifiants suivants : admin@mail.com, password (pour le mot de passe). A partir de là, il est possible de rajouter et de tester des quiz ainsi que d'ajouter des utilisateurs ou administrateurs à la base de données.
+Lorsqu'un quiz est testé, les scores sont automatiquement enregistrés dans la table "scores". Il n'y a pas encore de chrono et il est possible de rejouer plusieurs fois un quiz.
