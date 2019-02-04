@@ -9,12 +9,12 @@ if(isset($_POST['submit']))
   $choix=htmlspecialchars($_POST['choix']);
   $sql = $bdd->prepare("UPDATE questions
     SET userans = '$choix'
-    WHERE nowques = num_question
+    WHERE nowques = numero
     ;");
   $sql->execute();
   $sql2 = $bdd->query("SELECT bonnerep, userans
     FROM questions
-    WHERE num_question = nowques;
+    WHERE numero = nowques;
   ");
   $compare = $sql2->fetch();
     if($compare['bonnerep']===$compare['userans']){
@@ -65,7 +65,7 @@ $monquiz->execute();
 $pasmonquiz->execute();
 }
 
-$reponse = $bdd->query('SELECT * FROM questions INNER JOIN quiz ON questions.quiz_idquiz = quiz.idquiz Where userquiz = 1 AND num_question = nowques; ');
+$reponse = $bdd->query('SELECT * FROM questions INNER JOIN quiz ON questions.quiz_idquiz = quiz.idquiz Where userquiz = 1 AND numero = nowques; ');
 
 
 // On affiche chaque entrée une à une
