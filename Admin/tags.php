@@ -16,6 +16,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<title>[Code Academie] Promo #3 - Liste des tags</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/tags.css">
 
 	<script type="text/javascript">
 		function modifTag(idtag, idquiz) {
@@ -62,8 +63,6 @@
 		    }
 		}
 	</script>
-
-	
 </head>
 
 <body>
@@ -169,20 +168,33 @@
 	}
 	?>
 
+	<header>
+		<div class="banner">
+			<span class="code_ac">
+				<img src="./assets/images/Logo-code-academie.jpg" alt="Logo de la Code Académie" style="width:30%;">
+			</span>
+			<span class="face">
+				<img src="./assets/images/RENNES_PNG.png" alt="Logo de FACE Rennes" style="width:35%;">
+			</span>
+		</div>
+	</header>
 
-	<h2>Liste des tags du quiz 
-		<?php 
-		// Code pour afficher le nom du quiz
-		$sth = $bdd->prepare("SELECT * FROM quiz WHERE idquiz ='".$_GET["idquiz"]."'");
-		$sth->execute();
-		$result = $sth->fetch();
-		echo $result['titre'];
-		?> :
-	</h2>
-	<button class="btn btn-info" data-toggle="modal"  data-target="#modalAjout">Ajouter</button>
-	<a class="btn btn-info" href="mesquiz.php">Retour</a>
-
-	<div id="listedestags">
+	<section class="page">
+		<div class="list">
+			<p>Liste des tags et présence dans le quiz "
+				<?php 
+				// Code pour afficher le nom du quiz
+				$sth = $bdd->prepare("SELECT * FROM quiz WHERE idquiz ='".$_GET["idquiz"]."'");
+				$sth->execute();
+				$result = $sth->fetch();
+				echo $result['titre'];
+				?>
+			" :
+			</p>
+			<button class="add" data-toggle="modal" data-target="#modalAjout">Ajouter un tag</button>
+			<a class="btn btn-info" href="mesquiz.php">Retour aux quiz</a>
+		</div>
+		<div class="bienvenue">
 		<?php
 		// Code pour afficher tous les tags ainsi que les questions associées
 		$sth = $bdd->prepare('SELECT * FROM tags ORDER BY nom');
@@ -190,6 +202,11 @@
 		$result = $sth->fetchAll();
 		if($sth->rowCount()) {
 			foreach($result as $row){
+				echo '
+			<div class="tag_name">
+				<div class="tag_example">
+					 <p>';
+
 				$sth2 = $bdd->prepare("SELECT questions.numero FROM tags, tags_has_questions, questions
 					WHERE tags.idtags = tags_has_questions.tags_idtags
 					AND tags_has_questions.questions_idquestions = questions.idquestions
@@ -199,27 +216,39 @@
 				$result2 = $sth2->fetchAll();
 
 				if($sth2->rowCount()) {
-					echo '(yes) ';
+					echo '<i class="far fa-check-circle"></i> ';
 				}
 
-				echo $row['nom'];
+				echo $row['nom'].'</p>
+				</div>';
 
 				if($sth2->rowCount()) {
-					echo '   Question ';
+					echo '
+				<div class="question_concerned">
+					<p>Questions concernées : ';
 					foreach($result2 as $row2){
-						echo $row2['numero'].', ';
+						echo $row2['numero'].' ';
 					}
+					echo '</p>
+				</div>';
 				}
 
-				echo '<button class="btn btn-info" onclick="modifTag('.$row['idtags'].', '.$_GET["idquiz"].')" data-toggle="modal" data-target="#modalModif">Modifier</button>
-				<button class="btn btn-info" onclick="deleteTag('.$row['idtags'].', '.$_GET["idquiz"].')" data-toggle="modal" data-target="#modalDelete">Supprimer</button>
-				<br>';
+				echo '
+				<div>
+					<button class="btn btn-info" onclick="modifTag('.$row['idtags'].', '.$_GET["idquiz"].')" data-toggle="modal" data-target="#modalModif">Modifier</button>
+					<button class="poubelle" onclick="deleteTag('.$row['idtags'].', '.$_GET["idquiz"].')" data-toggle="modal" data-target="#modalDelete">
+						<i class="fas fa-trash-alt"></i>
+					</button>
+				</div>
+			</div>';
 			}
 		}
 		else {echo "Il n'y a pas encore de tag.";}
 		?>
 
-	</div>
+		</div>
+	</section>
+
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

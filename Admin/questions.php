@@ -17,6 +17,8 @@
 
 	<title>[Code Academie] Promo #3 - Liste des questions</title>
 
+	<link rel="stylesheet" type="text/css" href="./assets/css/questions.css">
+
 	<script type="text/javascript">
 		function modifQuest(idquest, idquiz) {
 			if (idquest == 0) {
@@ -52,6 +54,17 @@
 	}
 	?>
 
+	<header>
+		<div class="banner">
+			<span class="code_ac">
+				<img src="./assets/images/Logo-code-academie.jpg" alt="Logo de la Code Académie" style="width:30%;">
+			</span>
+			<span class="face">
+				<img src="./assets/images/RENNES_PNG.png" alt="Logo de FACE Rennes" style="width:35%;">
+			</span>
+		</div>
+	</header>
+
 	<!-- Ajouter une question -->
 	<div class="modal fade" id="modalAjout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
@@ -63,8 +76,8 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<?php echo '<form action="questions.php?idquiz='.$_GET["idquiz"].'" method="post">'; ?>
-						<p>Question : <input type="text" name="quest" required maxlength="255">
+					<form <?php echo 'action="questions.php?idquiz='.$_GET["idquiz"].'"'; ?> method="post">
+						<p>Question : <input type="text" name="quest" maxlength="255"></p>
 						<p>Réponse 1 : <input type="text" name="rep1" required maxlength="255"></p>
 						<p>Réponse 2 : <input type="text" name="rep2" required maxlength="255"></p>
 						<p>Réponse 3 : <input type="text" name="rep3" required maxlength="255"></p>
@@ -75,15 +88,15 @@
 							<input type="radio" name="bonnerep" required value="4">4</p>
 						<p>Tags : 
 							<?php
-								$sth = $bdd->prepare("SELECT * FROM tags ORDER BY nom");
-								$sth->execute();
-								$result = $sth->fetchAll();
-								if($sth->rowCount()) {
-									foreach($result as $row){
-										echo '#'.$row['nom'].' <input type="checkbox" name="tags[]" value="'.$row['idtags'].'"><br>';
-									}
+							$sth = $bdd->prepare("SELECT * FROM tags ORDER BY nom");
+							$sth->execute();
+							$result = $sth->fetchAll();
+							if($sth->rowCount()) {
+								foreach($result as $row){
+									echo '#'.$row['nom'].' <input type="checkbox" name="tags[]" value="'.$row['idtags'].'"><br>';
 								}
-								else {echo "Il n'existe pas encore de tag.";}
+							}
+							else {echo "Il n'existe pas encore de tag.";}
 							?>
 						</p>
 						<input type="submit" name="add" value="Ajouter" class="btn btn-info">
@@ -117,16 +130,22 @@
 		$addquest->execute();
 
 		// Requête envoyée à la table 'tags_has_questions'
-		$tags = $_POST['tags'];
-		for ($i = 0; $i < count($tags); $i++) {
-			$searchid = $bdd->prepare("SELECT MAX(idquestions) FROM questions");
-			$searchid->execute();
-			$maxid = $searchid->fetch();
-			$newid = $maxid['MAX(idquestions)'];
+		$aretheretags = $bdd->prepare("SELECT COUNT(*) FROM tags");
+		$aretheretags->execute();
+		$nbtags = $aretheretags->fetch();
 
-			$addtag = $bdd->prepare("INSERT INTO tags_has_questions (tags_idtags, questions_idquestions, questions_quiz_idquiz) 
-				VALUES ('".$tags[$i]."', '".$newid."', '".$_GET["idquiz"]."')");
-			$addtag->execute();
+		if ($nbtags['COUNT(*)'] > 0) {
+			$tags = $_POST['tags'];
+			for ($i = 0; $i < count($tags); $i++) {
+				$searchid = $bdd->prepare("SELECT MAX(idquestions) FROM questions");
+				$searchid->execute();
+				$maxid = $searchid->fetch();
+				$newid = $maxid['MAX(idquestions)'];
+
+				$addtag = $bdd->prepare("INSERT INTO tags_has_questions (tags_idtags, questions_idquestions, questions_quiz_idquiz) 
+					VALUES ('".$tags[$i]."', '".$newid."', '".$_GET["idquiz"]."')");
+				$addtag->execute();
+			}
 		}
 	}
 	?>
@@ -152,18 +171,19 @@
 						<p>Bonne réponse : <input type="radio" name="bonnerep" required value="1" checked>1   
 							<input type="radio" name="bonnerep" required value="2">2   
 							<input type="radio" name="bonnerep" required value="3">3   
-							<input type="radio" name="bonnerep" required value="4">4</p>
+							<input type="radio" name="bonnerep" required value="4">4
+						</p>
 						<p>Tags : 
 							<?php
-								$sth = $bdd->prepare("SELECT * FROM tags ORDER BY nom");
-								$sth->execute();
-								$result = $sth->fetchAll();
-								if($sth->rowCount()) {
-									foreach($result as $row){
-										echo '#'.$row['nom'].' <input type="checkbox" name="tags[]" value="'.$row['idtags'].'"><br>';
-									}
+							$sth = $bdd->prepare("SELECT * FROM tags ORDER BY nom");
+							$sth->execute();
+							$result = $sth->fetchAll();
+							if($sth->rowCount()) {
+								foreach($result as $row){
+									echo '#'.$row['nom'].' <input type="checkbox" name="tags[]" value="'.$row['idtags'].'"><br>';
 								}
-								else {echo "Il n'existe pas encore de tag.";}
+							}
+							else {echo "Il n'existe pas encore de tag.";}
 							?>
 						</p>
 						<input type="submit" name="update" value="Modifier" class="btn btn-info">
@@ -220,64 +240,65 @@
 	?>
 
 
-	<h2>Liste des questions du quiz 
+	<h2>Liste des questions du quiz " 
 		<?php 
 		// Code pour afficher le nom du quiz
 		$sth = $bdd->prepare("SELECT * FROM quiz WHERE idquiz ='".$_GET["idquiz"]."'");
 		$sth->execute();
 		$result = $sth->fetch();
 		echo $result['titre'];
-		?> :
+		?>" :
 	</h2>
-	<a class="btn btn-info" href="mesquiz.php">Retour</a>
+	<a class="modif" href="mesquiz.php">Retour à la liste des quiz</a>
 
-	<div id="listedesquestions">
-		<?php
-		// Code pour afficher tous les tags ainsi que les questions associées
-		$sth = $bdd->prepare("SELECT * FROM questions WHERE quiz_idquiz = '".$_GET["idquiz"]."' ORDER BY numero");
-		$sth->execute();
-		$result = $sth->fetchAll();
-		if($sth->rowCount()) {
-			foreach($result as $row){
-				echo '<p>Q. n°'.$row['numero'].' : '.$row['question'].'</p>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-3">
-					'.$row['reponse1'].'
-				</div>
-				<div class="col-3">
-					'.$row['reponse2'].'
-				</div>
-				<div class="col-3">
-					'.$row['reponse3'].'
-				</div>
-				<div class="col-3">
-					'.$row['reponse4'].'
-				</div>
-			</div>
-		</div>';
-				echo '<p>Tags : ';
-				$sth2 = $bdd->prepare("SELECT tags.nom FROM tags, tags_has_questions
-					WHERE tags.idtags = tags_has_questions.tags_idtags
-					AND tags_has_questions.questions_idquestions = '".$row['idquestions']."' 
-					ORDER BY tags.nom;");
-				$sth2->execute();
-				$result2 = $sth2->fetchAll();
-				if($sth2->rowCount()) {
-					foreach($result2 as $row2){echo '#'.$row2['nom'].', ';}
+	<section class="page">
+		<div class="bienvenue">
+			<?php
+					// Code pour afficher tous les tags ainsi que les questions associées
+			$sth = $bdd->prepare("SELECT * FROM questions WHERE quiz_idquiz = '".$_GET["idquiz"]."' ORDER BY numero");
+			$sth->execute();
+			$result = $sth->fetchAll();
+			if($sth->rowCount()) {
+				foreach($result as $row){
+					echo '
+					<div class="question">
+					<p><b>Question n°'.$row['numero'].' : '.$row['question'].'</b></p>
+					</div>
+					<div class="question_list">
+					<ul>
+					<li class="first_choice">'.$row['reponse1'].'</li>
+					<li class="second_choice">'.$row['reponse2'].'</li>
+					<li class="third_choice">'.$row['reponse3'].'</li>
+					<li class="fourth_choice">'.$row['reponse4'].'</li>
+					</ul>
+					</div>';
+					echo '
+					<div class="tags">
+					<p>Tags : ';
+
+
+					$sth2 = $bdd->prepare("SELECT tags.nom FROM tags, tags_has_questions
+						WHERE tags.idtags = tags_has_questions.tags_idtags
+						AND tags_has_questions.questions_idquestions = '".$row['idquestions']."' 
+						ORDER BY tags.nom;");
+					$sth2->execute();
+					$result2 = $sth2->fetchAll();
+					if($sth2->rowCount()) {
+						foreach($result2 as $row2){echo '#'.$row2['nom'].' ';}
+					}
+					else {echo "Cette question n'a pas encore de tag.";}
+					echo '</p>
+					<button class="modif" data-toggle="modal" data-target="#modalModif" onclick="modifQuest('.$row['idquestions'].', '.$_GET["idquiz"].')">modifier</button>
+					</div>';
 				}
-				else {echo "Cette question n'a pas encore de tag.";}
-				echo '</p>
-		<button class="btn btn-info" data-toggle="modal" data-target="#modalModif" onclick="modifQuest('.$row['idquestions'].', '.$_GET["idquiz"].')">Modifier</button>';
 			}
-		}
-		else {echo "Ce quiz n'a pas encore de question.";}
-		?>
-		
-
-
-	</div>
-	<button class="btn btn-info" data-toggle="modal" data-target="#modalAjout">Ajouter une question</button>
+			else {echo "Ce quiz n'a pas encore de question.";}
+			?>
+		</div>
+		<div>
+			<button class="add" data-toggle="modal" data-target="#modalAjout">Ajouter une question</button>
+		</div>
+	</section>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
