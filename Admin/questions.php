@@ -200,7 +200,7 @@
 		</div>
 	</div>
 	<?php
-			// Code pour modifier une question
+	// Code pour modifier une question
 	if (isset($_POST['update']) && $_POST['update'] == 'Modifier') {
 
 		// Requête envoyée à la table 'questions'
@@ -249,7 +249,7 @@
 
 	<h2>Liste des questions du quiz 
 		<?php 
-				// Code pour afficher le nom du quiz
+		// Code pour afficher le nom du quiz
 		$sth = $bdd->prepare("SELECT * FROM quiz WHERE idquiz ='".$_GET["idquiz"]."'");
 		$sth->execute();
 		$result = $sth->fetch();
