@@ -42,7 +42,7 @@
           }
           elseif($user[10]==1){
             $_SESSION['Admin'] = $user[2] . " " . $user[1];
-            header('location:Admin/index.php');
+            header('location:Admin/homepage_admin.php');
           }
 
         }
