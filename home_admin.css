@@ -1,0 +1,86 @@
+body {
+	width: 100%;
+	margin: auto;
+	background-color: #EEEEEE;
+}
+
+header {
+	width: auto;
+	height: auto;
+}
+
+.banner {
+	background-color: #3c8b94;
+	display: inline-block;
+	width: 100%;
+	height: 75px;
+	padding-bottom: 15px;
+	padding-top: 15px;
+}
+
+.code_ac {
+	float: left;
+	margin-top: -5px;
+	margin-left: 8px;
+}
+
+.face {
+	float: right;
+	text-align: right;
+	margin-top: -5px;
+	margin-right: 10px;
+}
+
+.face img {
+	background-color: white;
+}
+
+section {
+	margin-top: 45px;
+	margin-bottom: 40px;
+}
+
+.page {
+	width: auto;
+	height: auto;
+}
+
+.bienvenue {
+	background-color: white;
+	text-align: center;
+	width: 800px;
+	height: 450px;
+	margin: auto;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.bienvenue p {
+	padding-top: 70px;
+	padding-bottom: 40px;
+	font-size: 35px;
+}
+
+.formulaires {
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+input {
+	border-radius: 10px;
+	padding: 10px 75px 10px 75px;
+	text-align: center;
+	background-color: #EEEEEE;
+}
+
+button {
+	background-color: #3c8b94;
+	border-radius: 18px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-right: 50px;
+	padding-left: 50px;
+	margin-top: 10px;
+	color: #FFFFFF;
+	font-size: 20px;
+}

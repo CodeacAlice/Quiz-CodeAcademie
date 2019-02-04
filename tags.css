@@ -1,0 +1,115 @@
+body {
+	width: 100%;
+	margin: auto;
+	background-color: #EEEEEE;
+}
+
+header {
+	width: auto;
+	height: auto;
+}
+
+.banner {
+	background-color: #3c8b94;
+	display: inline-block;
+	width: 100%;
+	height: 75px;
+	padding-bottom: 15px;
+	padding-top: 15px;
+}
+
+.code_ac {
+	float: left;
+	margin-top: -5px;
+	margin-left: 8px;
+}
+
+.face {
+	float: right;
+	text-align: right;
+	margin-top: -5px;
+	margin-right: 10px;
+}
+
+.face img {
+	background-color: white;
+}
+
+section {
+	margin-top: 45px;
+	margin-bottom: 40px;
+	display: block;
+}
+
+.page {
+
+}
+
+.list {
+	margin-left: 110px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+.list p {
+	font-size: 25px;
+	float: left;
+	margin-top: -40px;
+	margin-left: 50px;
+	margin-bottom: 0px;
+	padding-bottom: 30px;
+	padding-top: 0px;
+}
+
+.add {
+	background-color: #3c8b94;
+	border-radius: 18px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-right: 25px;
+	padding-left: 25px;
+	margin-right: 100px;
+	margin-top: -50px;
+	color: #FFFFFF;
+	font-size: 16px;
+	float: right;
+}
+
+.bienvenue {
+	background-color: white;
+	width: 1000px;
+	height: 450px;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	margin-left: 130px;
+	font-size: 20px;
+}
+
+.tag_name {
+	padding-top: 1px;
+	margin-left: 35px;
+	margin-right: 100px;
+	border-bottom: solid;
+}
+
+.tag_example {
+	text-align: left;
+	padding-top: 20px;
+}
+
+.tag_example p {
+	margin-left: 40px;
+	display: inline;
+}
+
+.question_concerned {
+	text-align: right;
+	margin-top: -43px;
+	margin-right: 90px;
+}
+
+.poubelle {
+	float: right;
+	margin-top: -47px;
+	margin-right: -70px;
+}
