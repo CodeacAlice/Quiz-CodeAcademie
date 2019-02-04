@@ -2,7 +2,6 @@
 include 'infosconnect.php';
 include 'database.php';
 
-$numero = 1 ;
 // On créer les fonctions pour les boutons
 
 if(isset($_POST['submit']))
@@ -30,7 +29,7 @@ if(isset($_POST['submit']))
 
 if(isset($_POST['next']))
 {
-$numero++;
+
 $sql = $bdd->prepare("UPDATE questions
   SET nowques = nowques + 1
   ;");
