@@ -1,49 +1,74 @@
 <?php
 include 'infosconnect.php';
-
-
 include 'database.php';
 
-// Si tout va bien, on peut continuer
-
-
-// On récupère tout le contenu de la table apprenant
-
-
-
+$numero = 1 ;
 // On créer les fonctions pour les boutons
-
-//if(isset($_POST['submit'])){
-//$choix=$_POST['choix'];
-//$query=mysqli_prepare($bdd, "INSERT INTO `questions`(`userans`) VALUES (?)");
-//mysqli_stmt_bind_param($query,'s',$choix);
-//$result=mysqli_stmt_execute($query);
 
 if(isset($_POST['submit']))
 {
-
   $choix=htmlspecialchars($_POST['choix']);
   $sql = $bdd->prepare("UPDATE questions
-SET userans = '$choix'
-WHERE idquestions = 1;");
+    SET userans = '$choix'
+    WHERE nowques = num_question
+    ;");
   $sql->execute();
+  $sql2 = $bdd->query("SELECT bonnerep, userans
+    FROM questions
+    WHERE num_question = nowques;
+  ");
+  $compare = $sql2->fetch();
+    if($compare['bonnerep']===$compare['userans']){
+        echo 'bonne réponse';
+    }
+    else{
+        echo 'mauvaise réponse';
+      }
 
 }
 
-if(isset($_POST['check'])){
-$sql2 = $bdd->query("SELECT bonnerep, userans FROM questions");
-$compare = $sql2->fetch();
-  if($compare['bonnerep']==$compare['userans']){
 
-      echo 'bonne réponse';
-  }
-  else{
-    echo 'mauvaise réponse';
-  }
+if(isset($_POST['next']))
+{
+$numero++;
+$sql = $bdd->prepare("UPDATE questions
+  SET nowques = nowques + 1
+  ;");
+$sql->execute();
 
 }
 
-$reponse = $bdd->query('SELECT * FROM questions');
+
+
+?>
+<h2>Choisissez un quiz.</h2>
+<form action="" method="post">
+<td>
+  <input type="text" name="numquiz">
+  <input type="submit" name="envoie" value="envoie">
+</td>
+</form>
+<?php
+
+if(isset($_POST['envoie'])){
+
+$idquiz = htmlspecialchars($_POST['numquiz']);
+echo $idquiz;
+$monquiz = $bdd->prepare("UPDATE quiz
+SET userquiz = 1
+WHERE idquiz = '$idquiz';");
+
+$pasmonquiz = $bdd->prepare("UPDATE quiz
+SET userquiz = 0
+WHERE NOT idquiz ='$idquiz';");
+
+$monquiz->execute();
+$pasmonquiz->execute();
+}
+
+$reponse = $bdd->query('SELECT * FROM questions INNER JOIN quiz ON questions.quiz_idquiz = quiz.idquiz Where userquiz = 1 AND num_question = nowques; ');
+
+
 // On affiche chaque entrée une à une
 
 while ($donnees = $reponse->fetch())
@@ -51,13 +76,11 @@ while ($donnees = $reponse->fetch())
 {
 
 ?>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
-<body>
-	<div>
+
 <div>
+  <p>idquiz:
+    <?php echo $donnees['quiz_idquiz']; ?>
+  </p>
   <p> Question :
     <?php echo $donnees['question']; ?>
   </p>
@@ -85,7 +108,6 @@ while ($donnees = $reponse->fetch())
 <table align="center">
 <tr>
 <td><?php echo $donnees['question']; ?></td>
-
 </tr>
 <tr>
 <td></td>
@@ -105,15 +127,14 @@ while ($donnees = $reponse->fetch())
 </tr>
 <tr>
 <td><input type="submit" name="submit" value="submit"></td>
-<td><input type="submit" name="check" value="check result"></td>
+<td><input type="submit" name="next" value="next"></td>
 </tr>
 
 </table>
 </form>
 
-</div>
-</body>
 <?php
+
 
 }
 

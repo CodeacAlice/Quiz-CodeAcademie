@@ -14,7 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema quizcodac
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `quizcodac` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `quizcodac` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `quizcodac` ;
 
 -- -----------------------------------------------------
@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `quizcodac`.`questions` (
   `reponse3` VARCHAR(255) NOT NULL,
   `reponse4` VARCHAR(255) NOT NULL,
   `bonnerep` VARCHAR(255) NOT NULL,
+	`userans` TEXT NOT NULL,
   `quiz_idquiz` INT NOT NULL,
   PRIMARY KEY (`idquestions`, `quiz_idquiz`),
   INDEX `fk_questions_quiz1_idx` (`quiz_idquiz` ASC),
