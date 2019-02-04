@@ -13,7 +13,6 @@ header {
 	background-color: #3c8b94;
 	display: inline-block;
 	width: 100%;
-	height: 75px;
 	padding-bottom: 15px;
 	padding-top: 15px;
 }
@@ -39,6 +38,10 @@ section {
 	margin-top: 45px;
 	margin-bottom: 40px;
 	display: block;
+}
+
+p {
+	margin-top: 1rem;
 }
 
 .page {
