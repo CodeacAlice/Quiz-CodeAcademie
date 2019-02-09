@@ -29,8 +29,4 @@ $row2 = $sth2->fetch(PDO::FETCH_ASSOC);
 		</div>
 		</div>';
 
-
-
-
-//mysqli_close($con);
 ?>

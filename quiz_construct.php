@@ -1,124 +1,82 @@
 <?php
 include 'infosconnect.php';
-
-
 include 'database.php';
 
-// Si tout va bien, on peut continuer
+$idquiz = $_GET['idquiz'];
+$nbquest = $_GET['nq'];
+$nbnext = $nbquest +1;
 
 
-// On récupère tout le contenu de la table apprenant
+$sth = $bdd->prepare("SELECT * FROM questions 
+	WHERE quiz_idquiz = '".$idquiz."' 
+	AND numero = '".$nbquest."'");
+$sth->execute();
+$result = $sth->fetch();
+
+if (isset($_POST['submit']) && $_POST['submit'] == 'submit') {
+	$nbprev = $nbquest -1;
+	$answer = $_POST['choix'];
 
 
+	$searchgoodans = $bdd->prepare("SELECT * FROM questions 
+		WHERE quiz_idquiz = '".$idquiz."' 
+		AND numero = '".$nbprev."'");
+	$searchgoodans->execute();
+	$resultans = $searchgoodans->fetch();
+	$correctans = $resultans['bonnerep'];
 
-// On créer les fonctions pour les boutons
-
-//if(isset($_POST['submit'])){
-//$choix=$_POST['choix'];
-//$query=mysqli_prepare($bdd, "INSERT INTO `questions`(`userans`) VALUES (?)");
-//mysqli_stmt_bind_param($query,'s',$choix);
-//$result=mysqli_stmt_execute($query);
-
-if(isset($_POST['submit']))
-{
-
-  $choix=htmlspecialchars($_POST['choix']);
-  $sql = $bdd->prepare("UPDATE questions
-SET userans = '$choix'
-WHERE idquestions = 1;");
-  $sql->execute();
-
-}
-
-if(isset($_POST['check'])){
-$sql2 = $bdd->query("SELECT bonnerep, userans FROM questions");
-$compare = $sql2->fetch();
-  if($compare['bonnerep']==$compare['userans']){
-
-      echo 'bonne réponse';
-  }
-  else{
-    echo 'mauvaise réponse';
-  }
-
-}
-
-$reponse = $bdd->query('SELECT * FROM questions');
-// On affiche chaque entrée une à une
-
-while ($donnees = $reponse->fetch())
-
-{
-
-?>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-</head>
-<body>
-	<div>
-<div>
-  <p> Question :
-    <?php echo $donnees['question']; ?>
-  </p>
-  <p> Réponse 1 :
-    <?php echo $donnees['reponse1']; ?>
-  </p>
-  <p> Réponse 2 :
-    <?php echo $donnees['reponse2']; ?>
-  </p>
-  <p> Réponse 3 :
-    <?php echo $donnees['reponse3']; ?>
-  </p>
-  <p> Réponse 4 :
-    <?php echo $donnees['reponse4']; ?>
-  </p>
-  <p> Bonne réponse :
-    <?php echo $donnees['bonnerep']; ?>
-  </p>
-  <p> Ta réponse :
-    <?php echo $donnees['userans']; ?>
-  </p>
-</div>
-
-<form action="" method="post">
-<table align="center">
-<tr>
-<td><?php echo $donnees['question']; ?></td>
-
-</tr>
-<tr>
-<td></td>
-<td><input type="radio" name="choix" value="<?php echo $donnees['reponse1']; ?>"><?php echo $donnees['reponse1']; ?></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="radio" name="choix" value="<?php echo $donnees['reponse2']; ?>"><?php echo $donnees['reponse2']; ?></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="radio" name="choix" value="<?php echo $donnees['reponse3']; ?>"><?php echo $donnees['reponse3']; ?></td>
-</tr>
-<tr>
-<td></td>
-<td><input type="radio" name="choix" value="<?php echo $donnees['reponse4']; ?>"><?php echo $donnees['reponse4']; ?></td>
-</tr>
-<tr>
-<td><input type="submit" name="submit" value="submit"></td>
-<td><input type="submit" name="check" value="check result"></td>
-</tr>
-
-</table>
-</form>
-
-</div>
-</body>
-<?php
-
+	if ($answer == $correctans) {
+		echo 'Exact !';
+		$itscorrect = 1;
+	}
+	else {
+		echo 'Erreur, la bonne réponse était '.$correctans;
+		$itscorrect = 0;
+	}
+	$addscore = $bdd->prepare("INSERT INTO scores (userans,	temps, users_idusers, questions_idquestions, questions_quiz_idquiz, correct)
+		VALUES ('".str_replace("'", "\'", $answer)."', '0', '".$_SESSION['iduser']."', '".$resultans['idquestions']."', '".$idquiz."', '".$itscorrect."')");
+	$addscore->execute();
 }
 
 
-$reponse->closeCursor(); // Termine le traitement de la requête
+$countquest = $bdd->prepare("SELECT COUNT(*) FROM questions WHERE quiz_idquiz = '".$idquiz."'");
+$countquest->execute();
+$rescount = $countquest->fetch(PDO::FETCH_ASSOC);
+$totquest = $rescount['COUNT(*)'];
 
+if ($nbquest > $totquest) {
+	echo '<p>Le quiz est terminé !</p>
+	<a class="btn btn-info" href="./Admin/mesquiz.php">Retour aux quiz</a>';
+}
+else {
+	echo '
+<form action="quiz_test.php?idquiz='.$idquiz.'&nq='.$nbnext.'" method="post">
+	<table align="center">
+		<tr>
+			<td>'.$result['question'].'</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="radio" name="choix" value="'.$result['reponse1'].'">'.$result['reponse1'].'</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="radio" name="choix" value="'.$result['reponse2'].'">'.$result['reponse2'].'</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="radio" name="choix" value="'.$result['reponse3'].'">'.$result['reponse3'].'</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type="radio" name="choix" value="'.$result['reponse4'].'">'.$result['reponse4'].'</td>
+		</tr>
+		<tr>
+			<td><input type="submit" name="submit" value="submit"></td>
+		</tr>
+
+	</table>
+</form>';
+}
 
 ?>

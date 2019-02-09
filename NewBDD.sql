@@ -14,7 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema quizcodac
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `quizcodac` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `quizcodac` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `quizcodac` ;
 
 -- -----------------------------------------------------
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `quizcodac`.`users` (
   `idusers` INT NOT NULL AUTO_INCREMENT,
   `nom` VARCHAR(50) NOT NULL,
   `prenom` VARCHAR(50) NOT NULL,
-  `genre` VARCHAR(45) NOT NULL,
+  `genre` VARCHAR(45) NULL,
   `mail` VARCHAR(50) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `QPV` TINYINT(1) NULL,
@@ -41,9 +41,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `quizcodac`.`quiz` (
   `idquiz` INT NOT NULL AUTO_INCREMENT,
+  `titre` VARCHAR(50) NOT NULL,
   `duree` VARCHAR(45) NOT NULL,
   `description` VARCHAR(255) NOT NULL,
-  `titre` VARCHAR(50) NOT NULL,
   `userquiz` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`idquiz`))
 ENGINE = InnoDB;
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `quizcodac`.`scores` (
   `users_idusers` INT NOT NULL,
   `questions_idquestions` INT NOT NULL,
   `questions_quiz_idquiz` INT NOT NULL,
-  `correct` VARCHAR(45) NOT NULL,
+  `correct` TINYINT(1) NOT NULL,
   PRIMARY KEY (`idscores`, `users_idusers`, `questions_idquestions`, `questions_quiz_idquiz`),
   INDEX `fk_scores_users1_idx` (`users_idusers` ASC),
   INDEX `fk_scores_questions1_idx` (`questions_idquestions` ASC, `questions_quiz_idquiz` ASC),
@@ -184,3 +184,11 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+
+-- -----------------------------------------------------
+-- Ajout d'un admin
+-- -----------------------------------------------------
+INSERT INTO `users` (`nom`, `prenom`, `mail`, `password`, `is_admin`)
+VALUES ('Rennes', 'FACE', 'admin@mail.com', 'password', '1');
