@@ -49,7 +49,7 @@
         <img src="./assets/images/test-quiz.svg">
       </span>
       <span>
-        <a>Mon compte</a>
+        <a href="moncompte_admin.php">Mon compte</a>
         <img src="./assets/images/user.svg">
       </span>
       <span>
