@@ -5,8 +5,6 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!--css-->
-  <link rel="stylesheet" type="text/css" href="style.css">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -43,20 +41,21 @@
   <section class="page">
     <div class="bienvenue">
       <p>Bienvenue "<?= $_SESSION['Loger']?>"!</p>
+      <img src="./assets/images/deconnexion.svg">
     </div>
     <div class="row">
       <span>
         <a href="mesquiz.php">Mes quiz</a>
         <img src="./assets/images/test-quiz.svg">
       </span>
-      <!-- <span>
-        <button>Mon compte</button>
-        <img src="./assets/images/user.svg">
-      </span> -->
       <span>
+        <a>Mon compte</a>
+        <img src="./assets/images/user.svg">
+      </span>
+      <!-- <span>
         <a href="deconnexion.php">Déconnexion</a>
         <img src="./assets/images/exit.svg">
-      </span>
+      </span> -->
     </div>    
   </section>
 

@@ -41,6 +41,7 @@
   <section class="page">
     <div class="bienvenue">
       <p>Bienvenue Maître <?= $_SESSION['Admin']?> !</p>
+        <img src="./assets/images/deconnexion.svg">
     </div>
     <div class="row">
       <span>
@@ -48,13 +49,17 @@
         <img src="./assets/images/test-quiz.svg">
       </span>
       <span>
+        <a>Mon compte</a>
+        <img src="./assets/images/user.svg">
+      </span>
+      <span>
         <a href="users.php">Utilisateurs</a>
         <img src="./assets/images/multiple-users.svg">
       </span>
-      <span>
+      <!-- <span>
         <a href="../deconnexion.php">Déconnexion</a>
         <img src="./assets/images/exit.svg">
-      </span>
+      </span> -->
     </div>    
   </section>
 
