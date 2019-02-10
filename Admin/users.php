@@ -100,15 +100,18 @@
 	<div id="listeusers">
 		<?php
 		// Code pour afficher tous les tags ainsi que les questions associées
-		$sth = $bdd->prepare("SELECT * FROM users ORDER BY nom, prenom");
+		$sth = $bdd->prepare("SELECT * FROM users WHERE is_admin = 0 ORDER BY nom, prenom");
 		$sth->execute();
 		$result = $sth->fetchAll();
 		if($sth->rowCount()) {
 			foreach($result as $row){
-				echo $row['prenom'].' '.$row['nom'].'<br>';
-			}
+				?>
+				<p><?=$row['prenom']?> <span style="text-transform: uppercase;"><?=$row['nom']?></span>
+					<a href="compte_user.php?user=<?=$row['idusers']?>" class="btn btn-info">Voir profil</a>
+				</p>
+			<?php ;}
 		}
-		else {echo "Ce quiz n'a pas encore de question.";}
+		else {echo "Il n'y a pas encore d'utilisateurs.";}
 		?>
 	</div>
 	<button class="btn btn-info" data-toggle="modal" data-target="#modalAjout">Ajouter un utilisateur</button>
