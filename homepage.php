@@ -14,7 +14,7 @@
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-  <title>[Code Academie] Promo #3 - Quiz</title>
+  <title>[Code Academie] Promo #3 - Accueil</title>
 
   <link rel="stylesheet" type="text/css" href="assets/css/home.css">
 </head>
@@ -49,7 +49,7 @@
         <img src="./assets/images/test-quiz.svg">
       </span>
       <span>
-        <a>Mon compte</a>
+        <a href="moncompte.php">Mon compte</a>
         <img src="./assets/images/user.svg">
       </span>
       <!-- <span>

@@ -15,7 +15,7 @@
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-	<title>[Code Academie] Promo #3 - Liste des questions</title>	
+	<title>[Code Academie] Promo #3 - Liste des utilisateurs</title>	
 </head>
 
 <body>
@@ -43,8 +43,8 @@
 						</p>
 						<p>Nom : <input type="text" name="nom" required maxlength="50"></p>
 						<p>Prénom : <input type="text" name="prenom" required maxlength="50"></p>
-						<p>Genre : <input type="radio" name="genre" required value="masculin" checked>Homme   
-							<input type="radio" name="genre" required value="feminin">Femme   
+						<p>Genre : <input type="radio" name="genre" required value="homme" checked>Homme   
+							<input type="radio" name="genre" required value="femme">Femme   
 							<input type="radio" name="genre" required value="autre">Autre
 						</p>
 						<p>Email : <input type="email" name="mail" required maxlength="50"></p>
