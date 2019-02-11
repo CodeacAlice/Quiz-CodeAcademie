@@ -4,23 +4,39 @@
 	<title>Quiz de la Code Académie</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="home_admin.css">
 </head>
 <body>
-	<header>
-		<div class="banner">
-			<span class="code_ac">
-				<img src="./assets/images/Logo-code-academie.jpg" alt="Logo de la Code Académie" style="width:30%;">
-			</span>
-			<span class="face">
-				<img src="./assets/images/RENNES_PNG.png" alt="Logo de FACE Rennes" style="width:35%;">
-			</span>
-		</div>
-	</header>
+	<section>
+		<header>
+			<div class="banner">
+				<span class="code_ac">
+					<img src="./assets/images/Logo-code-academie.jpg" alt="Logo de la Code Académie" style="width:30%;">
+				</span>
+				<span class="face">
+					<img src="./assets/images/RENNES_PNG.png" alt="Logo de FACE Rennes" style="width:35%;">
+				</span>
+			</div>
+		</header>
+	</section>
 	<section class="page">
+		<nav role="navigation">
+  					<div id="menuToggle">
+  						<input type="checkbox"/>
+							<span></span>
+						    <span></span>
+						    <span></span>
+    							<ul id="menu">
+								    <a href="#"><li><?= $_SESSION['Loger']?></li></a>
+								    <a href="#"><li>Accueil</li></a>
+								    <a href="#"><li>Mon compte</li></a>
+								    <a href="Admin/deconnexion.php"><li>Déconnexion</li></a>
+    							</ul>
+  					</div>
+		</nav>
 		<div class="bienvenue">
 			<p>Bienvenue "admin"!</p>
-			<img src="./assets/images/deconnexion.svg">
 		</div>
 		<div class="row">
 			<span>
