@@ -56,15 +56,20 @@
 
 
 	<div id="listedesquiz">
-		
+
 		<?php
-		$sth = $bdd->prepare('SELECT * FROM quiz ORDER BY titre');
+		$sth = $bdd->prepare('SELECT quiz.* FROM quiz
+			Inner Join users_has_quiz On quiz.idquiz = users_has_quiz.quiz_idquiz
+			Inner Join users ON users.idusers = users_has_quiz.users_idusers
+			Where users.idusers = '.$_SESSION['iduser'].'
+			ORDER BY titre');
+			
 		$sth->execute();
 		$result = $sth->fetchAll();
 		if($sth->rowCount()) {
 			foreach($result as $row){
 				echo '<h4>'.$row['titre'].'</h4>
-				<button class="btn btn-info" data-toggle="modal" data-target="#modalDetails" onclick="showDetails(' . $row['idquiz'] . ')">Détails</button> 
+				<button class="btn btn-info" data-toggle="modal" data-target="#modalDetails" onclick="showDetails(' . $row['idquiz'] . ')">Détails</button>
 				<a href="quiz_test.php?idquiz='.$row['idquiz'].'&nq=1" class="btn btn-info">Faire le quiz</a>
 				';
 			}
@@ -108,5 +113,3 @@
 
 
 </body>
-
-
