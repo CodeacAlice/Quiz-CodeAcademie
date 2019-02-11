@@ -14,6 +14,7 @@ $row = $sth->fetch(PDO::FETCH_ASSOC);
 				</div>
 				<div class="modal-body">
 					<form action="mesquiz.php" method="post">
+						<p style="display:none;">id : <input type="text" name="id" required value="'.$row['idquiz'].'"></p>
 						<p>Titre : <input type="text" name="titre" required maxlength="50" value="'.$row['titre'].'"></p>
 						<p>Durée : <input type="text" name="duree" required maxlength="45" value="'.$row['duree'].'"></p>
 						<p>Description : <textarea rows="2" name="description" required maxlength="255">'.$row['description'].'</textarea></p>

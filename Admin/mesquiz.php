@@ -137,8 +137,11 @@
 		$titre = str_replace("'", "\'", $_POST['titre']);
 		$duree = str_replace("'", "\'", $_POST['duree']);
 		$desc = str_replace("'", "\'", $_POST['description']);
+		$id = $_POST['id'];
 
-		$sth = $bdd->prepare("UPDATE quiz SET titre = '".$titre."', duree = '".$duree."', description = '".$desc."'");
+		$sth = $bdd->prepare("UPDATE quiz 
+			SET titre = '".$titre."', duree = '".$duree."', description = '".$desc."'
+			WHERE idquiz = '".$id."'");
 		$sth->execute();
 	}
 	?>
@@ -166,6 +169,7 @@
 
 	<button class="btn btn-info" data-toggle="modal"  data-target="#modalAjout">Ajouter</button>
 
+	<!-- Modal pour afficher les détails d'un quiz  -->
 	<div class="modal fade" id="modalDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content" id="infosQuiz">
