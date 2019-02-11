@@ -99,7 +99,7 @@
 
 	<div id="listeusers">
 		<?php
-		// Code pour afficher tous les tags ainsi que les questions associées
+		// Code pour afficher tous les utilisateurs
 		$sth = $bdd->prepare("SELECT * FROM users WHERE is_admin = 0 ORDER BY nom, prenom");
 		$sth->execute();
 		$result = $sth->fetchAll();
@@ -108,6 +108,7 @@
 				?>
 				<p><?=$row['prenom']?> <span style="text-transform: uppercase;"><?=$row['nom']?></span>
 					<a href="compte_user.php?user=<?=$row['idusers']?>" class="btn btn-info">Voir profil</a>
+					<a href="statistiques.php?user=<?=$row['idusers']?>" class="btn btn-info">Statistiques</a>
 				</p>
 			<?php ;}
 		}
