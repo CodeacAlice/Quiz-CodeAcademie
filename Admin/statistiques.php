@@ -59,12 +59,25 @@
     $getuser->execute();
     $infosuser = $getuser->fetch(PDO::FETCH_ASSOC);
     ?>
-
     <h2>
     	Statistiques de l'utilisateur 
     	<?=$infosuser['prenom']?> 
     	<span style="text-transform: uppercase;"><?=$infosuser['nom']?></span>
     </h2>
+
+
+
+	<?php
+	// Code pour aller chercher le nombre de questions totales et réussies
+	$getquest = $bdd->prepare("SELECT COUNT(*) FROM scores WHERE users_idusers = '".$_GET['user']."'");
+    $getquest->execute();
+    $nbquest = $getquest->fetch(PDO::FETCH_ASSOC);
+
+    $getquestr = $bdd->prepare("SELECT COUNT(*) FROM scores WHERE users_idusers = '".$_GET['user']."' AND correct = 1");
+    $getquestr->execute();
+    $nbquestr = $getquestr->fetch(PDO::FETCH_ASSOC);
+    ?>
+    <h3>Questions réussies :<?=$nbquestr['COUNT(*)']?> / <?=$nbquest['COUNT(*)']?></h3>
 
     <h3>Quiz attribués : <button class="btn btn-info" data-toggle="modal" data-target="#modalQ">Modifier</button></h3>
 
