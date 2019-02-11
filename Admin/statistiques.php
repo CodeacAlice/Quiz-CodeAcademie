@@ -77,20 +77,25 @@
     $getquestr->execute();
     $nbquestr = $getquestr->fetch(PDO::FETCH_ASSOC);
     ?>
-    <h3>Questions réussies :<?=$nbquestr['COUNT(*)']?> / <?=$nbquest['COUNT(*)']?></h3>
+    <h3>Questions réussies : <?=$nbquestr['COUNT(*)']?> / <?=$nbquest['COUNT(*)']?></h3>
 
     <h3>Quiz attribués : <button class="btn btn-info" data-toggle="modal" data-target="#modalQ">Modifier</button></h3>
 
     <?php
 	// Code pour aller chercher les quiz de l'utilisateur
-	$gettheirquiz = $bdd->prepare("SELECT quiz.titre FROM quiz, users_has_quiz
+	$gettheirquiz = $bdd->prepare("SELECT titre, quiz_done FROM quiz, users_has_quiz
 									WHERE users_has_quiz.quiz_idquiz = quiz.idquiz
 									AND users_has_quiz.users_idusers = '".$_GET['user']."'
 									ORDER BY quiz.titre");
     $gettheirquiz->execute();
     $theirquiz = $gettheirquiz->fetchAll();
     if($gettheirquiz->rowCount()) {
-		foreach($theirquiz as $rowq){ echo '<p>'.$rowq['titre'].'</p>';
+		foreach($theirquiz as $rowq){
+			?><p><?=$rowq['titre']?>
+			<?php if ($rowq['quiz_done']==1) {
+				?> (fait) <button class="btn btn-info">Détails</button>
+			<?php ;}
+			?></p><?php
 		}
 	}
 	else {echo "Cet utilisateur n'a pas encore de quiz.";}
