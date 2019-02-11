@@ -7,8 +7,8 @@ $nbquest = $_GET['nq'];
 $nbnext = $nbquest +1;
 
 
-$sth = $bdd->prepare("SELECT * FROM questions 
-	WHERE quiz_idquiz = '".$idquiz."' 
+$sth = $bdd->prepare("SELECT * FROM questions
+	WHERE quiz_idquiz = '".$idquiz."'
 	AND numero = '".$nbquest."'");
 $sth->execute();
 $result = $sth->fetch();
@@ -18,8 +18,8 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'submit') {
 	$answer = $_POST['choix'];
 
 
-	$searchgoodans = $bdd->prepare("SELECT * FROM questions 
-		WHERE quiz_idquiz = '".$idquiz."' 
+	$searchgoodans = $bdd->prepare("SELECT * FROM questions
+		WHERE quiz_idquiz = '".$idquiz."'
 		AND numero = '".$nbprev."'");
 	$searchgoodans->execute();
 	$resultans = $searchgoodans->fetch();
@@ -46,7 +46,7 @@ $totquest = $rescount['COUNT(*)'];
 
 if ($nbquest > $totquest) {
 	echo '<p>Le quiz est terminé !</p>
-	<a class="btn btn-info" href="./Admin/mesquiz.php">Retour aux quiz</a>';
+	<a class="btn btn-info" href="./mesquiz.php">Retour aux quiz</a>';
 }
 else {
 	echo '

@@ -42,6 +42,7 @@
     <div class="bienvenue">
       <p>Bienvenue Maître <?= $_SESSION['Admin']?> !</p>
         <img src="./assets/images/deconnexion.svg">
+        	<a href="deconnexion.php" class="btn btn-info">deconnexion</a>
     </div>
     <div class="row">
       <span>
@@ -60,7 +61,7 @@
         <a href="../deconnexion.php">Déconnexion</a>
         <img src="./assets/images/exit.svg">
       </span> -->
-    </div>    
+    </div>
   </section>
 
 
