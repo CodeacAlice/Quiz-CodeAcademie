@@ -32,12 +32,11 @@
 		        }
 		        xmlhttp.onreadystatechange = function() {
 		        	if (this.readyState == 4 && this.status == 200) {
-		        		//document.getElementById("modifQuest").innerHTML = this.responseText;
+		        		location.reload();
 		        	}
 		        };
 		        xmlhttp.open("GET","assets/php/addQuizToUser.php?user="+iduser+"&quiz="+idquiz,true);
 		        xmlhttp.send();
-		        location.reload();
 		    }
 		}
 	</script>
