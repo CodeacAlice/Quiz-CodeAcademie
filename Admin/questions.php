@@ -117,34 +117,40 @@
 		$rep4 = str_replace("'", "\'", $_POST['rep4']);
 		$bon = str_replace("'", "\'", $_POST['rep'.$_POST['bonnerep']]);
 
+		$doesthequestexist = $bdd->prepare("SELECT COUNT(*) FROM questions 
+											WHERE question = '".$quest."' and quiz_idquiz = '".$_GET["idquiz"]."'");
+		$doesthequestexist->execute();
+		$questalreadyexists = $doesthequestexist->fetch();
+		if ($questalreadyexists['COUNT(*)'] == 0) {
 
-		$searchmax = $bdd->prepare("SELECT MAX(numero) FROM questions WHERE quiz_idquiz = '".$_GET["idquiz"]."'");
-		$searchmax->execute();
-		$max = $searchmax->fetch();
-		$num = $max['MAX(numero)']+1;
+			$searchmax = $bdd->prepare("SELECT MAX(numero) FROM questions WHERE quiz_idquiz = '".$_GET["idquiz"]."'");
+			$searchmax->execute();
+			$max = $searchmax->fetch();
+			$num = $max['MAX(numero)']+1;
 
-		$addquest = $bdd->prepare("INSERT INTO questions (question, reponse1, reponse2, reponse3, reponse4, 
-			bonnerep, quiz_idquiz, numero) 
-			VALUES ('".$quest."', '".$rep1."', '".$rep2."', '".$rep3."', '".$rep4."', 
-			'".$bon."', '".$_GET["idquiz"]."', '".$num."')");
-		$addquest->execute();
+			$addquest = $bdd->prepare("INSERT INTO questions (question, reponse1, reponse2, reponse3, reponse4, 
+				bonnerep, quiz_idquiz, numero) 
+				VALUES ('".$quest."', '".$rep1."', '".$rep2."', '".$rep3."', '".$rep4."', 
+				'".$bon."', '".$_GET["idquiz"]."', '".$num."')");
+			$addquest->execute();
 
-		// Requête envoyée à la table 'tags_has_questions'
-		$aretheretags = $bdd->prepare("SELECT COUNT(*) FROM tags");
-		$aretheretags->execute();
-		$nbtags = $aretheretags->fetch();
+			// Requête envoyée à la table 'tags_has_questions'
+			$aretheretags = $bdd->prepare("SELECT COUNT(*) FROM tags");
+			$aretheretags->execute();
+			$nbtags = $aretheretags->fetch();
 
-		if ($nbtags['COUNT(*)'] > 0) {
-			$tags = $_POST['tags'];
-			for ($i = 0; $i < count($tags); $i++) {
-				$searchid = $bdd->prepare("SELECT MAX(idquestions) FROM questions");
-				$searchid->execute();
-				$maxid = $searchid->fetch();
-				$newid = $maxid['MAX(idquestions)'];
+			if ($nbtags['COUNT(*)'] > 0) {
+				$tags = $_POST['tags'];
+				for ($i = 0; $i < count($tags); $i++) {
+					$searchid = $bdd->prepare("SELECT MAX(idquestions) FROM questions");
+					$searchid->execute();
+					$maxid = $searchid->fetch();
+					$newid = $maxid['MAX(idquestions)'];
 
-				$addtag = $bdd->prepare("INSERT INTO tags_has_questions (tags_idtags, questions_idquestions, questions_quiz_idquiz) 
-					VALUES ('".$tags[$i]."', '".$newid."', '".$_GET["idquiz"]."')");
-				$addtag->execute();
+					$addtag = $bdd->prepare("INSERT INTO tags_has_questions (tags_idtags, questions_idquestions, questions_quiz_idquiz) 
+						VALUES ('".$tags[$i]."', '".$newid."', '".$_GET["idquiz"]."')");
+					$addtag->execute();
+				}
 			}
 		}
 	}
