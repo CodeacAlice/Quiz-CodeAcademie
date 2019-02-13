@@ -49,7 +49,7 @@
                     <span></span>
                     <span></span>
                       <ul id="menu">
-                        <a href="#"><li><?= $_SESSION['Loger']?></li></a>
+                        <a href="#"><li><?= $_SESSION['Admin']?></li></a>
                         <a href="#"><li>Accueil</li></a>
                         <a href="#"><li>Mon compte</li></a>
                         <a href="deconnexion.php"><li>Déconnexion</li></a>

@@ -1,6 +1,12 @@
 <?php
+session_start();
+
 include 'infosconnect.php';
 include 'database.php';
+
+if(!$_SESSION['Admin'] && !$_SESSION['Loger']){
+    header('location:../index.php');
+  }
 
 $idquiz = $_GET['idquiz'];
 $nbquest = $_GET['nq'];
@@ -45,8 +51,10 @@ $rescount = $countquest->fetch(PDO::FETCH_ASSOC);
 $totquest = $rescount['COUNT(*)'];
 
 if ($nbquest > $totquest) {
+	if($_SESSION['Loger']) {$retour = './mesquiz.php';}
+	else if ($_SESSION['Admin']) {$retour = './Admin/mesquiz.php';}
 	echo '<p>Le quiz est terminé !</p>
-	<a class="btn btn-info" href="./mesquiz.php">Retour aux quiz</a>';
+	<a class="btn btn-info" href="'.$retour.'">Retour aux quiz</a>';
 }
 else {
 	echo '
