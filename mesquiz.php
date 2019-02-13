@@ -53,7 +53,7 @@
 
 
 	<h2>Liste des quiz</h2>
-
+<a href="homepage.php" class="btn btn-info">Retour à l'accueil</a>
 
 	<div id="listedesquiz">
 
@@ -63,7 +63,7 @@
 			Inner Join users ON users.idusers = users_has_quiz.users_idusers
 			Where users.idusers = '.$_SESSION['iduser'].'
 			ORDER BY titre');
-			
+
 		$sth->execute();
 		$result = $sth->fetchAll();
 		if($sth->rowCount()) {

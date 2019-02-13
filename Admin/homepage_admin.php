@@ -29,52 +29,53 @@
   ?>
   <header>
     <div class="banner">
-      <span class="code_ac">
-        <img src="./assets/images/Logo-code-academie.jpg" alt="Logo de la Code Académie" style="width:30%;">
-      </span>
-      <span class="face">
-        <img src="./assets/images/RENNES_PNG.png" alt="Logo de FACE Rennes" style="width:35%;">
-      </span>
+
+        <img class="logos1" src="./assets/images/Logo-code-academie.jpg" alt="Logo de la Code Académie">
+        <img class="logos2" src="./assets/images/RENNES_PNG.png" alt="Logo de FACE Rennes">
+
     </div>
   </header>
 
   <section class="page">
+  <nav role="navigation">
+          <div id="menuToggle">
+            <input type="checkbox"/>
+            <span></span>
+              <span></span>
+              <span></span>
+                <ul id="menu">
+                  <li><?= $_SESSION['Admin']?></li>
+                  <a href="homepage_admin.php"><li>Accueil</li></a>
+                  <a href="moncompte_admin.php"><li>Mon compte</li></a>
+                  <a href="./deconnexion.php"><li>Déconnexion</li></a>
+                </ul>
+          </div>
+  </nav>
     <div class="bienvenue">
       <p>Bienvenue Maître <?= $_SESSION['Admin']?> !</p>
         <img src="./assets/images/deconnexion.svg">
-        <nav role="navigation">
-                <div id="menuToggle">
-                  <input type="checkbox"/>
-                  <span></span>
-                    <span></span>
-                    <span></span>
-                      <ul id="menu">
-                        <a href="#"><li><?= $_SESSION['Loger']?></li></a>
-                        <a href="#"><li>Accueil</li></a>
-                        <a href="#"><li>Mon compte</li></a>
-                        <a href="deconnexion.php"><li>Déconnexion</li></a>
-                      </ul>
-                </div>
-        </nav>
     </div>
-    <div class="row">
-      <span>
-        <a href="mesquiz.php" >Quiz</a>
-        <img src="./assets/images/test-quiz.svg">
-      </span>
-      <span>
-        <a href="moncompte_admin.php">Mon compte</a>
-        <img src="./assets/images/user.svg">
-      </span>
-      <span>
-        <a href="users.php">Utilisateurs</a>
-        <img src="./assets/images/multiple-users.svg">
-      </span>
-      <!-- <span>
-        <a href="../deconnexion.php">Déconnexion</a>
-        <img src="./assets/images/exit.svg">
-      </span> -->
-    </div>
+    <section class="container-fluid">
+      <div class="row">
+        <div class="liens col-sm-4 text-center">
+          <a href="mesquiz.php" >Quiz</a>
+          <img src="./assets/images/test-quiz.svg">
+        </div>
+        <div class="liens col-sm-4">
+          <a href="moncompte_admin.php">Mon compte</a>
+          <img src="./assets/images/user.svg">
+        </div>
+        <div class="liens col-sm-4">
+          <a href="users.php">Utilisateurs</a>
+          <img src="./assets/images/multiple-users.svg">
+        </div>
+        <!-- <span>
+          <a href="../deconnexion.php">Déconnexion</a>
+          <img src="./assets/images/exit.svg">
+        </span> -->
+      </div>
+    </section>
+
   </section>
 
 
