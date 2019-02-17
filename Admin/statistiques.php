@@ -39,6 +39,7 @@
 		        xmlhttp.send();
 		    }
 		}
+		// Fonction qui affiche les détails des stats pour un quiz
 		function showDetails(iduser, idquiz) {
 			if (iduser == 0 || idquiz == 0) {
 				document.getElementById("detQuiz").innerHTML = "";
@@ -54,6 +55,7 @@
 		        xmlhttp.onreadystatechange = function() {
 		        	if (this.readyState == 4 && this.status == 200) {
 		        		document.getElementById("detQuiz").innerHTML = this.responseText;
+		        		$('#modalDetails').modal('show');
 		        	}
 		        };
 		        xmlhttp.open("GET","assets/php/showDetailsScores.php?user="+iduser+"&quiz="+idquiz,true);
@@ -116,7 +118,7 @@
 		foreach($theirquiz as $rowq){
 			?><p><?=$rowq['titre']?>
 			<?php if ($rowq['quiz_done']==1) {
-				?> (fait) <button class="btn btn-info" onclick="showDetails(<?=$_GET['user']?>, <?=$rowq['idquiz']?>)" data-toggle="modal" data-target="#modalDetails">Détails</button>
+				?> (fait) <button class="btn btn-info" onclick="showDetails(<?=$_GET['user']?>, <?=$rowq['idquiz']?>)" >Détails</button>
 			<?php ;}
 			?></p><?php
 		}
@@ -124,6 +126,41 @@
 	else {echo "Cet utilisateur n'a pas encore de quiz.";}
     ?>
 
+
+    <h3>Scores par tags</h3>
+    <!-- Code pour afficher les scores par catégories. Oh ça va être drôle à faire -->
+    <?php
+    	$gettags = $bdd->prepare("SELECT * FROM tags");
+	    $gettags->execute();
+	    $tags = $gettags->fetchAll();
+	    if($gettags->rowCount()) {
+			foreach($tags as $rowtag){
+				// Compter le total de questions
+				$totq = $bdd->prepare("SELECT COUNT(questions.numero) FROM questions, users_has_quiz, tags_has_questions
+											WHERE questions.quiz_idquiz = users_has_quiz.quiz_idquiz
+											AND tags_has_questions.questions_idquestions = questions.idquestions
+											AND users_has_quiz.quiz_done = 1
+											AND users_has_quiz.users_idusers = ".$_GET['user']."
+											AND tags_has_questions.tags_idtags = ".$rowtag['idtags'].";
+					");
+			    $totq->execute();
+			    $nbqut = $totq->fetch(PDO::FETCH_ASSOC);
+
+			    // Compter les questions réussies
+			    $reuq = $bdd->prepare("SELECT COUNT(scores.correct) FROM scores, tags_has_questions
+										WHERE scores.questions_idquestions = tags_has_questions.questions_idquestions
+										AND scores.correct = 1
+										AND scores.users_idusers = ".$_GET['user']."
+										AND tags_has_questions.tags_idtags = ".$rowtag['idtags'].";
+					");
+			    $reuq->execute();
+			    $nbrt = $reuq->fetch(PDO::FETCH_ASSOC);
+
+			    ?><p><?=$rowtag['nom']?> : <?=$nbrt['COUNT(scores.correct)']?> questions réussies sur <?=$nbqut['COUNT(questions.numero)']?> essayées.</p>
+			<?php ;}
+		}
+		else {echo "<p>Il n'existe pas encore de tag.</p>";}
+    ?>
 
     <!-- Modal pour rajouter des quiz à l'utilisateur -->
     <div class="modal fade" id="modalQ" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
