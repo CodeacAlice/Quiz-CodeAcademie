@@ -67,7 +67,7 @@
     if ($result['QPV'] == 1) {
       $qpv = 'Oui';
       $inputqpv = '<input type="radio" name="qpv" value="1" checked>Oui   <input type="radio" name="qpv" value="0">Non';
-    } 
+    }
     else {
       $qpv = 'Non';
       $inputqpv = '<input type="radio" name="qpv" value="1">Oui   <input type="radio" name="qpv" value="0" checked>Non';
@@ -75,7 +75,7 @@
     if ($result['RQTH'] == 1) {
       $rqth = 'Oui';
       $inputrqth = '<input type="radio" name="rqth" value="1" checked>Oui   <input type="radio" name="rqth" value="0">Non';
-    } 
+    }
     else {
       $rqth = 'Non';
       $inputrqth = '<input type="radio" name="rqth" value="1">Oui   <input type="radio" name="rqth" value="0" checked>Non';
@@ -83,7 +83,7 @@
     if ($result['actif'] == 1) {
       $actif = 'Oui';
       $inputactif = '<input type="radio" name="actif" value="1" checked>Oui   <input type="radio" name="actif" value="0">Non';
-    } 
+    }
     else {
       $actif = 'Non';
       $inputactif = '<input type="radio" name="actif" value="1">Oui   <input type="radio" name="actif" value="0" checked>Non';
@@ -91,7 +91,7 @@
     if ($result['tiers_temps'] == 1) {
       $tierst = 'Oui';
       $inputtiers = '<input type="radio" name="tierstps" value="1" checked>Oui   <input type="radio" name="tierstps" value="0">Non';
-    } 
+    }
     else {
       $tierst = 'Non';
       $inputtiers = '<input type="radio" name="tierstps" value="1">Oui   <input type="radio" name="tierstps" value="0" checked>Non';
@@ -145,7 +145,6 @@
       </div>
     </div>
   </div>
-
 
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
