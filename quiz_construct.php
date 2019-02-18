@@ -5,7 +5,7 @@ include 'infosconnect.php';
 include 'database.php';
 
 if(!$_SESSION['Admin'] && !$_SESSION['Loger']){
-    header('location:../index.php');
+    header('location:index.php');
   }
 
 // Récupérer le numéro du quiz et le numéro de la question
@@ -59,6 +59,10 @@ if ($nbquest > $totquest) {
 	if($_SESSION['Loger']) {$retour = './mesquiz.php';}
 	else if ($_SESSION['Admin']) {$retour = './Admin/mesquiz.php';}
 	echo '<p>Le quiz est terminé !</p>
+  <form action="commentaire.php?idquiz='.$idquiz.'" method="post">
+  <p>Laissez un commentaire <br><textarea rows="2" name="commentaire" required></textarea></p>
+  <input type="submit" name="add" value="Ajouter" class="btn btn-info">
+  </form>
 	<a class="btn btn-info" href="'.$retour.'">Retour aux quiz</a>';
 }
 // Sinon, afficher la question et les réponses
