@@ -15,7 +15,7 @@
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-	<title>[Code Academie] Promo #3 - Liste des utilisateurs</title>	
+	<title>[Code Academie] Promo #3 - Liste des utilisateurs</title>
 </head>
 
 <body>
@@ -38,28 +38,28 @@
 				</div>
 				<div class="modal-body">
 					<form action="users.php" method="post">
-						<p>Statut : <input type="radio" name="stat" required value="0" checked>Utilisateur   
-							<input type="radio" name="stat" required value="1">Administrateur
+						<p>Statut : <input type="radio" name="stat" required value="0" onclick="user()" checked>Utilisateur
+							<input type="radio" name="stat" required value="1" onclick="Adm()">Administrateur
 						</p>
 						<p>Nom : <input type="text" name="nom" required maxlength="50"></p>
 						<p>Prénom : <input type="text" name="prenom" required maxlength="50"></p>
-						<p>Genre : <input type="radio" name="genre" required value="homme" checked>Homme   
-							<input type="radio" name="genre" required value="femme">Femme   
-							<input type="radio" name="genre" required value="autre">Autre
+						<p class="userth">Genre : <input class="checker" type="radio" name="genre" required value="homme" checked>Homme
+							<input class="checker" type="radio" name="genre" required value="femme">Femme
+							<input class="checker" type="radio" name="genre" required value="autre">Autre
 						</p>
 						<p>Email : <input type="email" name="mail" required maxlength="50"></p>
 						<p>Mot de passe : <input type="password" name="pwd" required maxlength="100"></p>
-						<p>QPV : <input type="radio" name="qpv" value="1">Oui   
-							<input type="radio" name="qpv" value="0">Non
+						<p class="userth">QPV : <input class="checker" type="radio" name="qpv" value="1">Oui
+							<input class="checker" type="radio" name="qpv" value="0">Non
 						</p>
-						<p>RQTH : <input type="radio" name="rqth" value="1">Oui   
-							<input type="radio" name="rqth" value="0">Non
+						<p class="userth">RQTH : <input class="checker" type="radio" name="rqth" onclick="andi()" value="1">Oui
+							<input class="checker" type="radio" name="rqth" onclick="norqth()" value="0">Non
 						</p>
-						<p>Actif : <input type="radio" name="actif" value="1">Oui   
-							<input type="radio" name="actif" value="0">Non
+						<p class="userth">Actif : <input class="checker" type="radio" name="actif" value="1">Oui
+							<input class="checker" type="radio" name="actif" value="0">Non
 						</p>
-						<p>Requiert un tiers-temps : <input type="radio" name="tierstps" value="1">Oui   
-							<input type="radio" name="tierstps" value="0">Non
+						<p class="tiers">Requiert un tiers-temps : <input class="checker tiert" type="radio" name="tierstps" value="1">Oui
+							<input class="checker tiert" type="radio" name="tierstps" value="0">Non
 						</p>
 						<input type="submit" name="add" value="Ajouter" class="btn btn-info">
 					</form>
@@ -74,21 +74,27 @@
 		// Requête envoyée à la table 'questions'
 		$nom = str_replace("'", "\'", $_POST['nom']);
 		$prenom = str_replace("'", "\'", $_POST['prenom']);
-		$genre = $_POST['genre'];
 		$mail = $_POST['mail'];
 		$password = $_POST['pwd'];
-		$qpv = $_POST['qpv'];
-		$rqth = $_POST['rqth'];
-		$actif = $_POST['actif'];
-		$tierstps = $_POST['tierstps'];
 		$stat = $_POST['stat'];
-
-
-		$adduser = $bdd->prepare("INSERT INTO users 
-			(nom, prenom, genre, mail, password, QPV, RQTH, actif, tiers_temps, is_admin) 
-			VALUES ('".$nom."', '".$prenom."', '".$genre."', '".$mail."', '".$password."', '".$qpv."', 
-			'".$rqth."', '".$actif."', '".$tierstps."', '".$stat."')");
-		$adduser->execute();
+if($stat == 0){
+	$genre = $_POST['genre'];
+	$qpv = $_POST['qpv'];
+	$rqth = $_POST['rqth'];
+	$actif = $_POST['actif'];
+	$tierstps = $_POST['tierstps'];
+	$adduser = $bdd->prepare("INSERT INTO users
+		(nom, prenom, genre, mail, password, QPV, RQTH, actif, tiers_temps, is_admin)
+		VALUES ('".$nom."', '".$prenom."', '".$genre."', '".$mail."', '".$password."', '".$qpv."',
+		'".$rqth."', '".$actif."', '".$tierstps."', '".$stat."')");
+	$adduser->execute();
+}
+else{
+	$adduser = $bdd->prepare("INSERT INTO users
+		(nom, prenom, mail, password, is_admin)
+		VALUES ('".$nom."', '".$prenom."', '".$mail."', '".$password."', '".$stat."')");
+	$adduser->execute();
+}
 
 	}
 	?>
@@ -117,6 +123,7 @@
 	</div>
 	<button class="btn btn-info" data-toggle="modal" data-target="#modalAjout">Ajouter un utilisateur</button>
 
+	<script src="./assets/js/fonction.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

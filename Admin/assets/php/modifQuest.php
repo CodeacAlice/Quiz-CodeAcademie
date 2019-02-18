@@ -24,31 +24,25 @@ echo '<div class="modal-header">
 		<p>Réponse 4 : <input type="text" name="rep4" required maxlength="255" value="'.$row['reponse4'].'"></p>
 		<p>Bonne réponse : ';
 
-if ($row['bonnerep'] == $row['reponse1']) {
-	echo '<input type="radio" name="bonnerep" required value="1" checked>1   
-	<input type="radio" name="bonnerep" required value="2">2   
-	<input type="radio" name="bonnerep" required value="3">3   
-	<input type="radio" name="bonnerep" required value="4">4</p>';
+if(strpos($row['bonnerep'], $row['reponse1'])!== false){
+	echo '<input type="checkbox" name="bonnerep[]" value="1" checked>1';
 }
-elseif ($row['bonnerep'] == $row['reponse2']) {
-	echo '<input type="radio" name="bonnerep" required value="1">1   
-	<input type="radio" name="bonnerep" required value="2" checked>2   
-	<input type="radio" name="bonnerep" required value="3">3   
-	<input type="radio" name="bonnerep" required value="4">4</p>';
-}
-elseif ($row['bonnerep'] == $row['reponse3']) {
-	echo '<input type="radio" name="bonnerep" required value="1">1   
-	<input type="radio" name="bonnerep" required value="2">2   
-	<input type="radio" name="bonnerep" required value="3" checked>3   
-	<input type="radio" name="bonnerep" required value="4">4</p>';
-}
-else {
-	echo '<input type="radio" name="bonnerep" required value="1">1   
-	<input type="radio" name="bonnerep" required value="2">2   
-	<input type="radio" name="bonnerep" required value="3">3   
-	<input type="radio" name="bonnerep" required value="4" checked>4</p>';
-}
+else{echo '<input type="checkbox" name="bonnerep[]" value="1">1';}
 
+if(strpos($row['bonnerep'], $row['reponse2'])!== false){
+	echo '<input type="checkbox" name="bonnerep[]" value="2" checked>2';
+}
+else{echo '<input type="checkbox" name="bonnerep[]" value="2">2';}
+
+if(strpos($row['bonnerep'], $row['reponse3'])!== false){
+	echo '<input type="checkbox" name="bonnerep[]" value="3" checked>3';
+}
+else{echo '<input type="checkbox" name="bonnerep[]" value="3">3';}
+
+if(strpos($row['bonnerep'], $row['reponse4'])!== false){
+	echo '<input type="checkbox" name="bonnerep[]" value="4" checked>4';
+}
+else{echo '<input type="checkbox" name="bonnerep[]" value="4">4';}
 
 echo '<p>Tags :' ;
 

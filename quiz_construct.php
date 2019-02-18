@@ -23,7 +23,8 @@ $result = $sth->fetch();
 // Si une question a été répondue
 if (isset($_POST['submit']) && $_POST['submit'] == 'submit') {
 	$nbprev = $nbquest -1;
-	$answer = $_POST['choix'];
+	$answe = $_POST['check_list'];
+  $answer = implode(', ', $answe);
 
 
 	$searchgoodans = $bdd->prepare("SELECT * FROM questions
@@ -75,19 +76,19 @@ else {
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="radio" name="choix" value="'.$result['reponse1'].'">'.$result['reponse1'].'</td>
+			<td><input type="checkbox" name="check_list[]" value="'.$result['reponse1'].'">'.$result['reponse1'].'</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="radio" name="choix" value="'.$result['reponse2'].'">'.$result['reponse2'].'</td>
+			<td><input type="checkbox" name="check_list[]" value="'.$result['reponse2'].'">'.$result['reponse2'].'</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="radio" name="choix" value="'.$result['reponse3'].'">'.$result['reponse3'].'</td>
+			<td><input type="checkbox" name="check_list[]" value="'.$result['reponse3'].'">'.$result['reponse3'].'</td>
 		</tr>
 		<tr>
 			<td></td>
-			<td><input type="radio" name="choix" value="'.$result['reponse4'].'">'.$result['reponse4'].'</td>
+			<td><input type="checkbox" name="check_list[]" value="'.$result['reponse4'].'">'.$result['reponse4'].'</td>
 		</tr>
 		<tr>
 			<td><input type="submit" name="submit" value="submit"></td>
