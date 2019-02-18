@@ -181,3 +181,9 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+-- -----------------------------------------------------
+-- Ajout d'un admin
+-- -----------------------------------------------------
+INSERT INTO users (nom, prenom, mail, password, is_admin)
+VALUES ('Rennes', 'FACE', 'admin@mail.com', 'password', '1');
