@@ -10,6 +10,6 @@ function andi(){
   $( ".tiers" ).show();
 }
 function norqth(){
-  $( ".tiert" ).prop( "checked", false );
+  $( ".tiert" ).prop( "checked", true );
   $( ".tiers" ).hide();
 }

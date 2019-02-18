@@ -43,9 +43,9 @@
 						</p>
 						<p>Nom : <input type="text" name="nom" required maxlength="50"></p>
 						<p>Prénom : <input type="text" name="prenom" required maxlength="50"></p>
-						<p>Genre : <input type="radio" name="genre" required value="homme" checked>Homme
-							<input type="radio" name="genre" required value="femme">Femme
-							<input type="radio" name="genre" required value="autre">Autre
+						<p class="userth">Genre : <input class="checker" type="radio" name="genre" required value="homme" checked>Homme
+							<input class="checker" type="radio" name="genre" required value="femme">Femme
+							<input class="checker" type="radio" name="genre" required value="autre">Autre
 						</p>
 						<p>Email : <input type="email" name="mail" required maxlength="50"></p>
 						<p>Mot de passe : <input type="password" name="pwd" required maxlength="100"></p>
@@ -74,21 +74,27 @@
 		// Requête envoyée à la table 'questions'
 		$nom = str_replace("'", "\'", $_POST['nom']);
 		$prenom = str_replace("'", "\'", $_POST['prenom']);
-		$genre = $_POST['genre'];
 		$mail = $_POST['mail'];
 		$password = $_POST['pwd'];
-		$qpv = $_POST['qpv'];
-		$rqth = $_POST['rqth'];
-		$actif = $_POST['actif'];
-		$tierstps = $_POST['tierstps'];
 		$stat = $_POST['stat'];
-
-
-		$adduser = $bdd->prepare("INSERT INTO users
-			(nom, prenom, genre, mail, password, QPV, RQTH, actif, tiers_temps, is_admin)
-			VALUES ('".$nom."', '".$prenom."', '".$genre."', '".$mail."', '".$password."', '".$qpv."',
-			'".$rqth."', '".$actif."', '".$tierstps."', '".$stat."')");
-		$adduser->execute();
+if($stat == 0){
+	$genre = $_POST['genre'];
+	$qpv = $_POST['qpv'];
+	$rqth = $_POST['rqth'];
+	$actif = $_POST['actif'];
+	$tierstps = $_POST['tierstps'];
+	$adduser = $bdd->prepare("INSERT INTO users
+		(nom, prenom, genre, mail, password, QPV, RQTH, actif, tiers_temps, is_admin)
+		VALUES ('".$nom."', '".$prenom."', '".$genre."', '".$mail."', '".$password."', '".$qpv."',
+		'".$rqth."', '".$actif."', '".$tierstps."', '".$stat."')");
+	$adduser->execute();
+}
+else{
+	$adduser = $bdd->prepare("INSERT INTO users
+		(nom, prenom, mail, password, is_admin)
+		VALUES ('".$nom."', '".$prenom."', '".$mail."', '".$password."', '".$stat."')");
+	$adduser->execute();
+}
 
 	}
 	?>

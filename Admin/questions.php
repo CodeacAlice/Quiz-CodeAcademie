@@ -43,7 +43,7 @@
 		}
 	</script>
 
-	
+
 </head>
 
 <body>
@@ -56,7 +56,7 @@
 
 	<header>
 		<div class="banner">
-			<span class="code_ac">
+			<span clabonnerepss="code_ac">
 				<img src="./assets/images/Logo-code-academie.jpg" alt="Logo de la Code Académie" style="width:30%;">
 			</span>
 			<span class="face">
@@ -82,11 +82,11 @@
 						<p>Réponse 2 : <input type="text" name="rep2" required maxlength="255"></p>
 						<p>Réponse 3 : <input type="text" name="rep3" required maxlength="255"></p>
 						<p>Réponse 4 : <input type="text" name="rep4" required maxlength="255"></p>
-						<p>Bonne réponse : <input type="radio" name="bonnerep" required value="1">1   
-							<input type="radio" name="bonnerep" required value="2">2   
-							<input type="radio" name="bonnerep" required value="3">3   
-							<input type="radio" name="bonnerep" required value="4">4</p>
-						<p>Tags : 
+						<p>Bonne réponse : <input type="checkbox" name="bonnerep[]" value="1">1
+							<input type="checkbox" name="bonnerep[]" value="2">2
+							<input type="checkbox" name="bonnerep[]" value="3">3
+							<input type="checkbox" name="bonnerep[]" value="4">4</p>
+						<p>Tags :
 							<?php
 							$sth = $bdd->prepare("SELECT * FROM tags ORDER BY nom");
 							$sth->execute();
@@ -106,18 +106,24 @@
 		</div>
 	</div>
 	<?php
+
 	// Code pour ajouter une question
 	if (isset($_POST['add']) && $_POST['add'] == 'Ajouter') {
-
+		$bonn = $_POST['bonnerep'];
+		$bonnerp1 = [];
+		for ($i=0; $i<count($bonn); $i++){
+			array_push($bonnerp1, $_POST['rep'.$bonn[$i]]);
+		}
+	  $bonnerp = implode(', ',$bonnerp1);
 		// Requête envoyée à la table 'questions'
 		$quest = str_replace("'", "\'", $_POST['quest']);
 		$rep1 = str_replace("'", "\'", $_POST['rep1']);
 		$rep2 = str_replace("'", "\'", $_POST['rep2']);
 		$rep3 = str_replace("'", "\'", $_POST['rep3']);
 		$rep4 = str_replace("'", "\'", $_POST['rep4']);
-		$bon = str_replace("'", "\'", $_POST['rep'.$_POST['bonnerep']]);
+		$bon = str_replace("'", "\'", $bonnerp);
 
-		$doesthequestexist = $bdd->prepare("SELECT COUNT(*) FROM questions 
+		$doesthequestexist = $bdd->prepare("SELECT COUNT(*) FROM questions
 											WHERE question = '".$quest."' and quiz_idquiz = '".$_GET["idquiz"]."'");
 		$doesthequestexist->execute();
 		$questalreadyexists = $doesthequestexist->fetch();
@@ -128,9 +134,9 @@
 			$max = $searchmax->fetch();
 			$num = $max['MAX(numero)']+1;
 
-			$addquest = $bdd->prepare("INSERT INTO questions (question, reponse1, reponse2, reponse3, reponse4, 
-				bonnerep, quiz_idquiz, numero) 
-				VALUES ('".$quest."', '".$rep1."', '".$rep2."', '".$rep3."', '".$rep4."', 
+			$addquest = $bdd->prepare("INSERT INTO questions (question, reponse1, reponse2, reponse3, reponse4,
+				bonnerep, quiz_idquiz, numero)
+				VALUES ('".$quest."', '".$rep1."', '".$rep2."', '".$rep3."', '".$rep4."',
 				'".$bon."', '".$_GET["idquiz"]."', '".$num."')");
 			$addquest->execute();
 
@@ -147,7 +153,7 @@
 					$maxid = $searchid->fetch();
 					$newid = $maxid['MAX(idquestions)'];
 
-					$addtag = $bdd->prepare("INSERT INTO tags_has_questions (tags_idtags, questions_idquestions, questions_quiz_idquiz) 
+					$addtag = $bdd->prepare("INSERT INTO tags_has_questions (tags_idtags, questions_idquestions, questions_quiz_idquiz)
 						VALUES ('".$tags[$i]."', '".$newid."', '".$_GET["idquiz"]."')");
 					$addtag->execute();
 				}
@@ -174,12 +180,12 @@
 						<p>Réponse 2 : <input type="text" name="rep2" required maxlength="255"></p>
 						<p>Réponse 3 : <input type="text" name="rep3" required maxlength="255"></p>
 						<p>Réponse 4 : <input type="text" name="rep4" required maxlength="255"></p>
-						<p>Bonne réponse : <input type="radio" name="bonnerep" required value="1" checked>1   
-							<input type="radio" name="bonnerep" required value="2">2   
-							<input type="radio" name="bonnerep" required value="3">3   
-							<input type="radio" name="bonnerep" required value="4">4
+						<p>Bonne réponse : <input type="checkbox" name="bonnerep[]" value="1">1
+							<input type="checkbox" name="bonnerep[]" value="2">2
+							<input type="checkbox" name="bonnerep[]" value="3">3
+							<input type="checkbox" name="bonnerep[]" value="4">4
 						</p>
-						<p>Tags : 
+						<p>Tags :
 							<?php
 							$sth = $bdd->prepare("SELECT * FROM tags ORDER BY nom");
 							$sth->execute();
@@ -201,7 +207,12 @@
 	<?php
 	// Code pour modifier une question
 	if (isset($_POST['update']) && $_POST['update'] == 'Modifier') {
-
+		$bonn = $_POST['bonnerep'];
+		$bonnerp1 = [];
+		for ($i=0; $i<count($bonn); $i++){
+			array_push($bonnerp1, $_POST['rep'.$bonn[$i]]);
+		}
+	  $bonnerp = implode(', ',$bonnerp1);
 		// Requête envoyée à la table 'questions'
 		$id = $_POST['id'];
 		$quest = str_replace("'", "\'", $_POST['quest']);
@@ -209,9 +220,9 @@
 		$rep2 = str_replace("'", "\'", $_POST['rep2']);
 		$rep3 = str_replace("'", "\'", $_POST['rep3']);
 		$rep4 = str_replace("'", "\'", $_POST['rep4']);
-		$bon = str_replace("'", "\'", $_POST['rep'.$_POST['bonnerep']]);
+		$bon = str_replace("'", "\'", $bonnerp);
 
-		$upquest = $bdd->prepare("UPDATE questions 
+		$upquest = $bdd->prepare("UPDATE questions
 			SET question = '".$quest."', reponse1 = '".$rep1."', reponse2 = '".$rep2."', reponse3 = '".$rep3."', reponse4 = '".$rep4."', bonnerep = '".$bon."'
 			WHERE idquestions = '".$id."';");
 		$upquest->execute();
@@ -223,19 +234,19 @@
 		$restags = $searchtags->fetchAll();
 		if($searchtags->rowCount()) {
 			foreach($restags as $atag){
-				$ithasthetag = $bdd->prepare("SELECT * FROM tags_has_questions 
+				$ithasthetag = $bdd->prepare("SELECT * FROM tags_has_questions
 					WHERE tags_idtags = '".$atag['idtags']."' AND questions_idquestions = '".$id."' ");
 				$ithasthetag->execute();
 				if ($ithasthetag->rowCount()) {
 					if (!in_array($atag['idtags'], $tagschecked)) {
-						$delete = $bdd->prepare("DELETE FROM tags_has_questions 
+						$delete = $bdd->prepare("DELETE FROM tags_has_questions
 							WHERE tags_idtags = '".$atag['idtags']."' AND questions_idquestions = '".$id."' ");
 						$delete->execute();
 					}
 				}
 				else {
 					if (in_array($atag['idtags'], $tagschecked)) {
-						$insert = $bdd->prepare("INSERT INTO tags_has_questions (tags_idtags, questions_idquestions, questions_quiz_idquiz) 
+						$insert = $bdd->prepare("INSERT INTO tags_has_questions (tags_idtags, questions_idquestions, questions_quiz_idquiz)
 							VALUES ('".$atag['idtags']."', '".$id."', '".$_GET["idquiz"]."')");
 						$insert->execute();
 					}
@@ -246,8 +257,8 @@
 	?>
 
 
-	<h2>Liste des questions du quiz " 
-		<?php 
+	<h2>Liste des questions du quiz "
+		<?php
 		// Code pour afficher le nom du quiz
 		$sth = $bdd->prepare("SELECT * FROM quiz WHERE idquiz ='".$_GET["idquiz"]."'");
 		$sth->execute();
@@ -285,7 +296,7 @@
 
 					$sth2 = $bdd->prepare("SELECT tags.nom FROM tags, tags_has_questions
 						WHERE tags.idtags = tags_has_questions.tags_idtags
-						AND tags_has_questions.questions_idquestions = '".$row['idquestions']."' 
+						AND tags_has_questions.questions_idquestions = '".$row['idquestions']."'
 						ORDER BY tags.nom;");
 					$sth2->execute();
 					$result2 = $sth2->fetchAll();
