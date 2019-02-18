@@ -57,6 +57,13 @@ $nbquestr = $countquestr->fetch(PDO::FETCH_ASSOC);
 		}
 	}
 	?>
+	<?php
+	$getcomment = $bdd->prepare("SELECT * FROM commentaires WHERE commentaires.users_idusers = '".$_GET['user']."' AND commentaires.quiz_idquiz = '".$idquiz."'");
+			$getcomment->execute();
+			$commentaire = $getcomment->fetch(PDO::FETCH_ASSOC);
+	?>
+	<p>Commentaire :</p>
+		<p><?=$commentaire['commentaire']?></p>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-info" data-dismiss="modal" style="margin: auto;">Fermer</button>
 	</div>
