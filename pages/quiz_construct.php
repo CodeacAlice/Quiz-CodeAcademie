@@ -12,7 +12,12 @@ $idquiz = $_GET['idquiz'];
 $nbquest = $_GET['nq'];
 $nbnext = $nbquest +1;
 
-// Si on est à la première question, 
+// Si on est à la première question, indiquer que le quiz est fait dans la bdd
+if (isset($_SESSION['Loger']) && $nbquest == 1) {
+	$upd = $bdd->prepare("UPDATE users_has_quiz SET quiz_done = 1 
+		WHERE users_idusers = '".$_SESSION['iduser']."' AND quiz_idquiz = '".$idquiz."'");
+    $upd->execute();
+}
 
 // Chercher la question à afficher
 $sth = $bdd->prepare("SELECT * FROM questions
@@ -31,7 +36,6 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'submit') {
 	else {$answer = '';}
 	
 
-
 	$searchgoodans = $bdd->prepare("SELECT * FROM questions
 		WHERE quiz_idquiz = '".$idquiz."'
 		AND numero = '".$nbprev."'");
@@ -44,10 +48,10 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'submit') {
 		if ($answer == $correctans) {echo 'Exact !';}
 		else {echo 'Erreur, la bonne réponse était '.$correctans;}
 	}
+	// Sinon, on n'afficher rien et on enregistre le score
 	else if (isset($_SESSION['Loger'])) {
 		if ($answer == $correctans) {$itscorrect = 1;}
 		else {$itscorrect = 0;}
-		// Envoyer à la table score
 		$addscore = $bdd->prepare("INSERT INTO scores (userans,	temps, users_idusers, questions_idquestions, questions_quiz_idquiz, correct)
 			VALUES ('".str_replace("'", "\'", $answer)."', '0', '".$_SESSION['iduser']."', '".$resultans['idquestions']."', '".$idquiz."', '".$itscorrect."')");
 		$addscore->execute();
