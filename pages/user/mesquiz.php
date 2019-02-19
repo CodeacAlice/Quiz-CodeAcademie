@@ -60,7 +60,7 @@
 	<div id="listedesquiz">
 
 		<?php
-		$sth = $bdd->prepare('SELECT quiz.* FROM quiz
+		$sth = $bdd->prepare('SELECT quiz.*, quiz_done FROM quiz
 			Inner Join users_has_quiz On quiz.idquiz = users_has_quiz.quiz_idquiz
 			Inner Join users ON users.idusers = users_has_quiz.users_idusers
 			Where users.idusers = '.$_SESSION['iduser'].'
@@ -70,10 +70,10 @@
 		$result = $sth->fetchAll();
 		if($sth->rowCount()) {
 			foreach($result as $row){
+				if ($row['quiz_done']) {$doquiz = '<button class="btn" disabled>Fini</button>';}
+				else {$doquiz = '<a href="../quiz_test.php?idquiz='.$row['idquiz'].'&nq=1" class="btn btn-info" disabled="'.$row['quiz_done'].'">Faire le quiz</a>';}
 				echo '<h4>'.$row['titre'].'</h4>
-				<button class="btn btn-info" onclick="showDetails(' . $row['idquiz'] . ')">Détails</button>
-				<a href="../quiz_test.php?idquiz='.$row['idquiz'].'&nq=1" class="btn btn-info">Faire le quiz</a>
-				';
+				<button class="btn btn-info" onclick="showDetails(' . $row['idquiz'] . ')">Détails</button> '.$doquiz;
 			}
 		}
 		else {echo "Vous n'avez pas encore de quiz.";}
