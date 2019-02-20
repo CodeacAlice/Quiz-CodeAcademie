@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `quizcodac`.`users` (
   `idusers` INT NOT NULL AUTO_INCREMENT,
   `nom` VARCHAR(50) NOT NULL,
   `prenom` VARCHAR(50) NOT NULL,
-  `genre` VARCHAR(45) NOT NULL,
+  `genre` VARCHAR(45),
   `mail` VARCHAR(50) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
   `QPV` TINYINT(1) NULL,
