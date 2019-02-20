@@ -75,11 +75,11 @@
     }
     if ($result['RQTH'] == 1) {
       $rqth = 'Oui';
-      $inputrqth = '<input type="radio" name="rqth" value="1" checked>Oui   <input type="radio" name="rqth" value="0">Non';
+      $inputrqth = '<input type="radio" name="rqth" onclick="andi()" value="1" checked>Oui   <input type="radio" name="rqth" onclick="norqth()" value="0">Non';
     }
     else {
       $rqth = 'Non';
-      $inputrqth = '<input type="radio" name="rqth" value="1">Oui   <input type="radio" name="rqth" value="0" checked>Non';
+      $inputrqth = '<input type="radio" name="rqth" onclick="andi()" value="1">Oui   <input type="radio" name="rqth" onclick="norqth()" value="0" checked>Non';
     }
     if ($result['actif'] == 1) {
       $actif = 'Oui';
@@ -91,11 +91,11 @@
     }
     if ($result['tiers_temps'] == 1) {
       $tierst = 'Oui';
-      $inputtiers = '<input type="radio" name="tierstps" value="1" checked>Oui   <input type="radio" name="tierstps" value="0">Non';
+      $inputtiers = '<input class="checker tiert" type="radio" name="tierstps" value="1" checked>Oui   <input class="checker tiert" type="radio" name="tierstps" value="0">Non';
     }
     else {
       $tierst = 'Non';
-      $inputtiers = '<input type="radio" name="tierstps" value="1">Oui   <input type="radio" name="tierstps" value="0" checked>Non';
+      $inputtiers = '<input class="checker tiert" type="radio" name="tierstps" value="1">Oui   <input class="checker tiert" type="radio" name="tierstps" value="0" checked>Non';
     }
 
     if ($result['genre'] == 'homme') {
@@ -139,7 +139,7 @@
             <p>QPV : <?=$inputqpv?></p>
             <p>RQTH : <?=$inputrqth?></p>
             <p>Actif : <?=$inputactif?></p>
-            <p>Requiert un tiers-temps : <?=$inputtiers?></p>
+            <p class="tiers">Requiert un tiers-temps : <?=$inputtiers?></p>
             <input type="submit" name="update" value="Modifier" class="btn btn-info">
           </form>
         </div>
@@ -147,7 +147,7 @@
     </div>
   </div>
 
-
+  <script src="../../assets/js/fonction.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

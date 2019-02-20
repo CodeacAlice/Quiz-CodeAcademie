@@ -14,7 +14,7 @@ $nbnext = $nbquest +1;
 
 // Si on est à la première question, indiquer que le quiz est fait dans la bdd
 if (isset($_SESSION['Loger']) && $nbquest == 1) {
-	$upd = $bdd->prepare("UPDATE users_has_quiz SET quiz_done = 1 
+	$upd = $bdd->prepare("UPDATE users_has_quiz SET quiz_done = 1
 		WHERE users_idusers = '".$_SESSION['iduser']."' AND quiz_idquiz = '".$idquiz."'");
     $upd->execute();
 }
@@ -34,7 +34,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == 'submit') {
 		$answer = implode(', ', $answe);
 	}
 	else {$answer = '';}
-	
+
 
 	$searchgoodans = $bdd->prepare("SELECT * FROM questions
 		WHERE quiz_idquiz = '".$idquiz."'
@@ -66,8 +66,8 @@ $totquest = $rescount['COUNT(*)'];
 
 // Si oui, afficher fin et lien de retour
 if ($nbquest > $totquest) {
-	if(isset($_SESSION['Loger'])) {$retour = './mesquiz.php';}
-	else if (isset($_SESSION['Admin'])) {$retour = './Admin/mesquiz.php';}
+	if(isset($_SESSION['Loger'])) {$retour = './user/mesquiz.php';}
+	else if (isset($_SESSION['Admin'])) {$retour = './admin/mesquiz.php';}
 	echo '<p>Le quiz est terminé !</p>
   <form action="commentaire.php?idquiz='.$idquiz.'" method="post">
   <p>Laissez un commentaire <br><textarea rows="2" name="commentaire" required></textarea></p>
