@@ -33,16 +33,16 @@
         ]);
         $user = $req->fetch();
         if($user){
-          $_SESSION['iduser'] = $user[0];
+          $_SESSION['iduser'] = $user['idusers'];
 
-          if($user[10]==0){
-            $_SESSION['Loger'] = $user[2] . " " . $user[1];
-            header('location:homepage.php');
+          if($user['is_admin']==0){
+            $_SESSION['Loger'] = $user['prenom'] . " " . $user['nom'];
+            header('location:pages/user/homepage.php');
 
           }
-          elseif($user[10]==1){
-            $_SESSION['Admin'] = $user[2] . " " . $user[1];
-            header('location:Admin/homepage_admin.php');
+          elseif($user['is_admin']==1){
+            $_SESSION['Admin'] = $user['prenom'] . " " . $user['nom'];
+            header('location:pages/admin/homepage_admin.php');
           }
 
         }
