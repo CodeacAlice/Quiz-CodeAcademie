@@ -173,7 +173,7 @@
 	}
 	?>
 
-	<header>
+	<!-- <header>
 		<div class="banner">
 			<span class="code_ac">
 				<img src="../../assets/images/Logo-code-academie.jpg" alt="Logo de la Code Académie" style="width:30%;">
@@ -182,7 +182,8 @@
 				<img src="../../assets/images/RENNES_PNG.png" alt="Logo de FACE Rennes" style="width:35%;">
 			</span>
 		</div>
-	</header>
+	</header> -->
+	<?php $path = '../..'; include($path."/assets/views/header.php"); ?>
 
 	<section class="page">
 		<div class="list">
