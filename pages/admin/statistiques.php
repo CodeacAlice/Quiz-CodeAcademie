@@ -80,7 +80,7 @@
 
 	<?php include($path."/assets/views/header.php"); ?>
 
-	<a href="homepage_admin.php" class="btn btn-info">Retour à l'accueil</a>
+	<a href="homepage.php" class="btn btn-info">Retour à l'accueil</a>
 	<a href="users.php" class="btn btn-info">Retour à la liste</a>
 
 	<?php

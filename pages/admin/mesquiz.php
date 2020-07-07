@@ -81,7 +81,7 @@
 	<?php include($path."/assets/views/header.php"); ?>
 
 	<h2>Liste des quiz</h2>
-	<a href="homepage_admin.php" class="btn btn-info">Retour à l'accueil</a>
+	<a href="homepage.php" class="btn btn-info">Retour à l'accueil</a>
 	<!-- Modal pour ajouter un quiz -->
 	<div class="modal fade" id="modalAjout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">

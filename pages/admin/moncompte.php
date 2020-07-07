@@ -59,7 +59,7 @@
   <?php include($path."/assets/views/header.php"); ?>
 
   <h2>Mon compte</h2>
-  <a href="homepage_admin.php" class="btn btn-info">Retour à l'accueil</a>
+  <a href="homepage.php" class="btn btn-info">Retour à l'accueil</a>
   <?php
     $sth = $bdd->prepare("SELECT * FROM users WHERE idusers = '".$_SESSION['iduser']."'");
     $sth->execute();
@@ -82,7 +82,7 @@
           </button>
         </div>
         <div class="modal-body" id="modifInfos">
-          <form action="moncompte_admin.php" method="post">
+          <form action="moncompte.php" method="post">
             <p>Nom : <input type="text" name="nom" required maxlength="50" value="<?= $result['nom']?>"></p>
             <p>Prénom : <input type="text" name="prenom" required maxlength="50" value="<?= $result['prenom']?>"></p>
             <p>Ancien mot de passe (obligatoire) : <input type="password" name="oldpwd" required maxlength="100"></p>

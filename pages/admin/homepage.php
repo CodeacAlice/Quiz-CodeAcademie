@@ -44,8 +44,8 @@
               <span></span>
                 <ul id="menu">
                   <li><?= $_SESSION['Admin']?></li>
-                  <a href="homepage_admin.php"><li>Accueil</li></a>
-                  <a href="moncompte_admin.php"><li>Mon compte</li></a>
+                  <a href="homepage.php"><li>Accueil</li></a>
+                  <a href="moncompte.php"><li>Mon compte</li></a>
                   <a href="../deconnexion.php"><li>Déconnexion</li></a>
                 </ul>
           </div>
@@ -60,7 +60,7 @@
           <img src="../../assets/images/test-quiz.svg">
         </div>
         <div class="liens col-sm-4">
-          <a href="moncompte_admin.php">Mon compte</a>
+          <a href="moncompte.php">Mon compte</a>
           <img src="../../assets/images/user.svg">
         </div>
         <div class="liens col-sm-4">

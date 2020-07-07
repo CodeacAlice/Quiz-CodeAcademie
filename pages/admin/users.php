@@ -107,7 +107,7 @@ else{
 	<?php include($path."/assets/views/header.php"); ?>
 
 	<h2>Liste des utilisateurs :</h2>
-	<a class="btn btn-info" href="homepage_admin.php">Retour à la page d'accueil</a>
+	<a class="btn btn-info" href="homepage.php">Retour à la page d'accueil</a>
 
 	<div id="listeusers">
 		<?php
