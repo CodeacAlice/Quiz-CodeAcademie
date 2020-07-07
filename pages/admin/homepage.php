@@ -36,20 +36,7 @@
   <?php include($path."/assets/views/header.php"); ?>
 
   <section class="page">
-  <nav role="navigation">
-          <div id="menuToggle">
-            <input type="checkbox"/>
-            <span></span>
-              <span></span>
-              <span></span>
-                <ul id="menu">
-                  <li><?= $_SESSION['Admin']?></li>
-                  <a href="homepage.php"><li>Accueil</li></a>
-                  <a href="moncompte.php"><li>Mon compte</li></a>
-                  <a href="../deconnexion.php"><li>Déconnexion</li></a>
-                </ul>
-          </div>
-  </nav>
+    
     <div class="bienvenue">
       <p>Bienvenue Maître <?= $_SESSION['Admin']?> !</p>
     </div>
