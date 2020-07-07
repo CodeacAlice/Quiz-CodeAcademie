@@ -1,4 +1,4 @@
-<?php session_start() ?><!doctype html>
+<?php session_start(); $path = "../.."; ?><!doctype html>
 <html lang="fr">
 
 <head>
@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!--css-->
   <link rel="stylesheet" type="text/css" href="../../assets/css/home_admin.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -28,14 +29,8 @@
   else {
     ?>
   
-    <header>
-    <div class="banner">
-
-        <img class="logos1" src="../../assets/images/Logo-code-academie.jpg" alt="Logo de la Code Académie">
-        <img class="logos2" src="../../assets/images/RENNES_PNG.png" alt="Logo de FACE Rennes">
-
-    </div>
-  </header>
+    
+    <?php include($path."/assets/views/header.php"); ?>
 
     <section class="page">
       <nav role="navigation">

@@ -1,4 +1,4 @@
-<?php session_start() ?>
+<?php session_start(); $path = "../.."; ?>
 <!doctype html>
 <html lang="fr">
 
@@ -6,6 +6,9 @@
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -57,16 +60,7 @@
 	else {
 	?>
 
-	<header>
-		<div class="banner">
-			<span clabonnerepss="code_ac">
-				<img src="../../assets/images/Logo-code-academie.jpg" alt="Logo de la Code Académie" style="width:30%;">
-			</span>
-			<span class="face">
-				<img src="../../assets/images/RENNES_PNG.png" alt="Logo de FACE Rennes" style="width:35%;">
-			</span>
-		</div>
-	</header>
+	<?php include($path."/assets/views/header.php"); ?>
 
 	<!-- Ajouter une question -->
 	<div class="modal fade" id="modalAjout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

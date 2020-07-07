@@ -1,4 +1,4 @@
-<?php session_start() ?><!doctype html>
+<?php session_start(); $path = '.'; ?><!doctype html>
 <html lang="fr">
 
 <head>
@@ -15,6 +15,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <title>[Code Academie] Promo #3 - Quiz - Connexion</title>
+
+  <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="./assets/css/base.css">
   <link rel="stylesheet" type="text/css" href="./assets/css/stylesheet.css">
 </head>
@@ -62,7 +64,7 @@
     }
     ?>
 
-  <?php $path = '.'; include($path."/assets/views/header.php"); ?>
+  <?php include($path."/assets/views/header.php"); ?>
 
   <section class="page">
     <div class="bienvenue">
