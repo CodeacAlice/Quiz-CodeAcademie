@@ -4,36 +4,6 @@ body {
 	background-color: #EEEEEE;
 }
 
-header {
-	width: auto;
-	height: auto;
-}
-
-.banner {
-	background-color: #3c8b94;
-	display: inline-block;
-	width: 100%;
-	padding-bottom: 15px;
-	padding-top: 15px;
-}
-
-.code_ac {
-	float: left;
-	margin-top: -5px;
-	margin-left: 8px;
-}
-
-.face {
-	float: right;
-	text-align: right;
-	margin-top: -5px;
-	margin-right: 10px;
-}
-
-.face img {
-	background-color: white;
-}
-
 section {
 	margin-top: 45px;
 	margin-bottom: 40px;

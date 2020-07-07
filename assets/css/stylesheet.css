@@ -1,0 +1,17 @@
+/******* Header *******/
+
+header {
+    background-color: #3c8b94;
+	width: 100%;
+    padding: 15px;
+}
+
+#logo_codeac {
+    width: 160px;
+}
+
+#logo_face {
+    width: 105px;
+    background-color: white;
+    float: right;
+}
