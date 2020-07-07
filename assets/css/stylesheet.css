@@ -4,14 +4,28 @@ header {
     background-color: #3c8b94;
 	width: 100%;
     padding: 15px;
+    display: flex !important;
 }
 
 #logo_codeac {
-    width: 160px;
+    height: 80px;
 }
 
 #logo_face {
-    width: 105px;
+    height: 50px;
     background-color: white;
     float: right;
+    margin-top: 15px;
+}
+
+header div:nth-child(2) {
+    padding: 15px;
+    padding-left: 30px;
+}
+
+header svg {
+    width: 50px;
+    height: 50px;
+    fill: white;
+    cursor: pointer;
 }
