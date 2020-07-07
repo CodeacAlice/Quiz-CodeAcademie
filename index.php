@@ -37,16 +37,15 @@
         $user = $req->fetch();
         if($user){
           $_SESSION['iduser'] = $user['idusers'];
+          $name = $user['prenom'] . " " . $user['nom'];
 
-          if($user['is_admin']==0){
-            $_SESSION['Loger'] = $user['prenom'] . " " . $user['nom'];
-            header('location:pages/user/homepage.php');
-
+          if($user['is_admin']){
+            $_SESSION['Admin'] = $name; $page = "admin";
           }
-          elseif($user['is_admin']==1){
-            $_SESSION['Admin'] = $user['prenom'] . " " . $user['nom'];
-            header('location:pages/admin/homepage_admin.php');
+          else {
+            $_SESSION['Loger'] = $name; $page = "user";
           }
+          header('location:pages/'.$page.'/homepage.php');
 
         }
         else{

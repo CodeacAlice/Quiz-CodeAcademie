@@ -24,12 +24,10 @@ if (isset($_POST['add']) && $_POST['add'] == 'Ajouter') {
 <body>
 	<p>Votre commentaire a bien été enregistré!</p>
 <?php
-	if(isset($_SESSION['Loger'])) {$retour = './user/mesquiz.php';}
-	else if (isset($_SESSION['Admin'])) {$retour = './admin/mesquiz.php';}
-	echo '<a href="'.$retour.'">Retour aux quiz</a><br>';
-	if(isset($_SESSION['Loger'])) {$accueil = './user/homepage.php';}
-	else if (isset($_SESSION['Admin'])) {$accueil = './admin/homepage_admin.php';}
-	echo '<a href="'.$accueil.'">Retour à l\'accueil</a>';
+	if (isset($_SESSION['Admin'])) {$page = 'admin';}
+	else {$page = 'user';}
 ?>
+<a href="./<?= $page ?>/mesquiz.php">Retour aux quiz</a><br>
+<a href="./<?= $page ?>/homepage.php">Retour à l'accueil</a>
 </body>
 </html>
