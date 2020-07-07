@@ -6,6 +6,14 @@
     <?php if ($_SESSION) { ?>
     <div>
         <?php include($path."/assets/images/accountbutton.svg"); ?>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <h6 class="dropdown-header"><?= $_SESSION['Loger'] ?></h6>
+            <a class="dropdown-item" href="homepage.php">Accueil</a>
+            <a class="dropdown-item" href="moncompte.php">Mon compte</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="../deconnexion.php">Déconnexion</a>
+        </div>
     </div>
     <?php } ?>
 </header>
