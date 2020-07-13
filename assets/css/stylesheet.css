@@ -1,3 +1,13 @@
+
+body {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 100px;
+}
+
+
+
+
 /******* Header *******/
 
 header {
@@ -28,4 +38,26 @@ header svg {
     height: 50px;
     fill: white;
     cursor: pointer;
+}
+
+
+
+/******* Footer *******/
+
+footer {
+    background-color: #3c8b94;
+    color: white;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.2);
+
+    height: 70px;
+    font-size: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
