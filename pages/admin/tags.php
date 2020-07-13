@@ -181,15 +181,13 @@
 
 	<section class="page">
 		<div class="list">
-			<p>Liste des tags et présence dans le quiz "
-				<?php 
+			<p>Liste des tags et présence dans le quiz « <?php 
 				// Code pour afficher le nom du quiz
 				$sth = $bdd->prepare("SELECT * FROM quiz WHERE idquiz ='".$_GET["idquiz"]."'");
 				$sth->execute();
 				$result = $sth->fetch();
 				echo $result['titre'];
-				?>
-			" :
+				?> » :
 			</p>
 			<button class="add" data-toggle="modal" data-target="#modalAjout">Ajouter un tag</button>
 			<a class="btn btn-info" href="mesquiz.php">Retour aux quiz</a>

@@ -262,14 +262,14 @@
 	?>
 
 
-	<h2>Liste des questions du quiz "
-		<?php
+	<h2>Liste des questions du quiz « <?php
+		
 		// Code pour afficher le nom du quiz
 		$sth = $bdd->prepare("SELECT * FROM quiz WHERE idquiz ='".$_GET["idquiz"]."'");
 		$sth->execute();
 		$result = $sth->fetch();
 		echo $result['titre'];
-		?>" :
+		?> » :
 	</h2>
 	<a class="modif" href="mesquiz.php">Retour à la liste des quiz</a>
 
