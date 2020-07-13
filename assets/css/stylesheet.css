@@ -52,7 +52,7 @@ footer {
     height: 70px;
     font-size: 14px;
 
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     text-align: center;
