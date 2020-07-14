@@ -6,9 +6,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
-
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -20,7 +17,9 @@
   <title>[Code Academie] Promo #3 - Accueil</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="../../assets/css/home_admin.css">
+  
+  <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/homepage.css">
 </head>
 
 <body>
@@ -35,29 +34,28 @@
 
   <?php include($path."/assets/views/header.php"); ?>
 
-  <section class="page">
     
-    <div class="bienvenue">
-      <p>Bienvenue Maître <?= $_SESSION['Admin']?> !</p>
-    </div>
-    <section class="container-fluid">
-      <div class="row">
-        <div class="liens col-sm-4 text-center">
-          <a href="mesquiz.php" >Quiz</a>
-          <img src="../../assets/images/test-quiz.svg">
-        </div>
-        <div class="liens col-sm-4">
-          <a href="moncompte.php">Mon compte</a>
-          <img src="../../assets/images/user.svg">
-        </div>
-        <div class="liens col-sm-4">
-          <a href="users.php">Utilisateurs</a>
-          <img src="../../assets/images/multiple-users.svg">
+    <div class="conteneur">
+      <h1>Bienvenue Maître <?= $_SESSION['Admin']?> !</h1>
+    
+      <div class="container-fluid">
+        <div class="row">
+          <div class="liens col-sm-4">
+            <a href="mesquiz.php" >Quiz</a>
+            <?php include($path."/assets/images/test-quiz.svg"); ?>
+          </div>
+          <div class="liens col-sm-4">
+            <a href="moncompte.php">Mon compte</a>
+            <?php include($path."/assets/images/user.svg"); ?>
+          </div>
+          <div class="liens col-sm-4">
+            <a href="users.php">Utilisateurs</a>
+            <?php include($path."/assets/images/multiple-users.svg"); ?>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
 
-  </section>
 
   <?php include($path."/assets/views/footer.php"); ?>
 

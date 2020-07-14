@@ -5,9 +5,6 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!--css-->
-  <link rel="stylesheet" type="text/css" href="../../assets/css/home_admin.css">
-  <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -18,6 +15,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <title>[Code Academie] Promo #3 - Accueil</title>
+
+  <!--css-->
+  <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="../../assets/css/homepage.css">
+
 </head>
 
 <body>
@@ -32,21 +34,22 @@
     
     <?php include($path."/assets/views/header.php"); ?>
 
-      <div class="bienvenue">
-        <p>Bienvenue "<?= $_SESSION['Loger']?>"!</p>
-      </div>
-      <section class="container-fluid">
-      <div class="row">
-        <div class="liens col-sm-6 text-center">
-          <a href="mesquiz.php">Mes quiz</a>
-          <img src="../../assets/images/test-quiz.svg">
+      <div class="conteneur">
+        <h1>Bienvenue <?= $_SESSION['Loger']?> !</h1>
+      
+        <div class="container-fluid">
+          <div class="row">
+            <div class="liens col-sm-6">
+              <a href="mesquiz.php">Mes quiz</a>
+              <?php include($path."/assets/images/test-quiz.svg"); ?>
+            </div>
+            <div class="liens col-sm-6">
+              <a href="moncompte.php">Mon compte</a>
+              <?php include($path."/assets/images/user.svg"); ?>
+            </div>
+          </div>
         </div>
-        <div class="liens col-sm-6">
-          <a href="moncompte.php">Mon compte</a>
-          <img src="../../assets/images/user.svg">
-        </div>
       </div>
-    </section>
 
     <?php include($path."/assets/views/footer.php"); ?>
 
