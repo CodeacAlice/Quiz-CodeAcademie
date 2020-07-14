@@ -88,7 +88,7 @@
             <p>Prénom : <input type="text" name="prenom" required maxlength="50" value="<?= $result['prenom']?>"></p>
             <p>Ancien mot de passe (obligatoire) : <input type="password" name="oldpwd" required maxlength="100"></p>
             <p>Nouveau mot de passe (non obligatoire) : <input type="password" name="newpwd" maxlength="100"></p>
-            <input type="submit" name="update" value="Modifier" class="btnface">
+            <input type="submit" name="update" value="Modifier" class="btnface-small">
           </form>
         </div>
       </div>

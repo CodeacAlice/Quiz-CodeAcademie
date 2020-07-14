@@ -14,7 +14,8 @@ body {
 	padding: 15px 50px;
 	margin: 10px 0;
 	color: #FFFFFF;
-	font-size: 20px;
+    font-size: 20px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 svg {
