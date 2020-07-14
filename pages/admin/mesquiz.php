@@ -161,14 +161,16 @@
 			$sth->execute();
 			$result = $sth->fetchAll();
 			if($sth->rowCount()) {
-				foreach($result as $row){
-					echo '<h4>'.$row['titre'].'</h4>
-					<button class="btnface-small" onclick="showDetails(' . $row['idquiz'] . ')">Détails</button> 
-					<a href="questions.php?idquiz='.$row['idquiz'].'" class="btnface-small">Questions</a> 
-					<a href="tags.php?idquiz='.$row['idquiz'].'" class="btnface-small">Tags</a> 
-					<a href="../quiz_test.php?idquiz='.$row['idquiz'].'&nq=1" class="btnface-small">Tester</a>
-					<button class="btnface-small" onclick="modifQuiz(' . $row['idquiz'] . ')">Modifier</button> ';
-				}
+				foreach($result as $row){ ?>
+					<div class="my-4">
+						<h4><?=$row['titre']?></h4>
+						<button class="btnface-small" onclick="showDetails(<?=$row['idquiz']?>)">Détails</button> 
+						<a href="questions.php?idquiz=<?=$row['idquiz']?>" class="btnface-small">Questions</a> 
+						<a href="tags.php?idquiz=<?=$row['idquiz']?>" class="btnface-small">Tags</a> 
+						<a href="../quiz_test.php?idquiz=<?=$row['idquiz']?>&nq=1" class="btnface-small">Tester</a>
+						<button class="btnface-small" onclick="modifQuiz(<?=$row['idquiz']?>)">Modifier</button>
+					</div>
+				<?php }
 			}
 			else {echo "Il n'y a pas encore de quiz.";}
 			?>
