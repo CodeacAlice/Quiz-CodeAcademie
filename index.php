@@ -17,7 +17,7 @@
   <title>[Code Academie] Promo #3 - Quiz - Connexion</title>
 
   <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="./assets/css/base.css">
+  <!-- <link rel="stylesheet" type="text/css" href="./assets/css/base.css"> -->
   <link rel="stylesheet" type="text/css" href="./assets/css/stylesheet.css">
 </head>
 
@@ -65,18 +65,16 @@
 
   <?php include($path."/assets/views/header.php"); ?>
 
-  <section class="page">
-    <div class="bienvenue">
-      <p>Bienvenue aux quiz de la prochaine<br>session de la Code Académie</p>
-      <div>
-        <form class="formulaires" action='index.php' method='POST'>
-          <input type="text" name='username' placeholder="mail"><br>
-          <input type="password" name="password" placeholder="mot de passe"><br>
-          <button>Connexion</button>
-        </form>
-      </div>      
+  <section>
+    <h1>Bienvenue aux quiz de la prochaine<br>session de la Code Académie</h1>
+    <div>
+      <form class="formulaires" action='index.php' method='POST'>
+        <input type="text" name='username' placeholder="mail"><br>
+        <input type="password" name="password" placeholder="mot de passe"><br><br>
+        <button>Connexion</button>
+      </form>
+    </div>      
       
-    </div>
   </section>
 
 
