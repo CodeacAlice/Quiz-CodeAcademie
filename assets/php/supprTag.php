@@ -10,8 +10,8 @@ $row = $sth->fetch(PDO::FETCH_ASSOC);
 		echo '<p>Voulez-vous vraiment supprimer définitivement le tag '.$row['nom'].' ?</p>
 					<form action="tags.php?idquiz='.$idquiz.'" method="post">
 						<p style="display:none">id : <input type="text" name="idSupp" required value="'.$idtag.'"></p>
-						<input type="submit" name="delete" value="Oui" class="btn btn-info">
-						<button type="button" class="btn btn-info" data-dismiss="modal" style="margin: auto;">Non</button>
+						<input type="submit" name="delete" value="Oui" class="btnface-small">
+						<button type="button" class="btnface-small" data-dismiss="modal" style="margin: auto;">Non</button>
 					</form>';
 
 ?>

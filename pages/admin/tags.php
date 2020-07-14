@@ -7,9 +7,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
-
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -21,6 +18,7 @@
 	<title>[Code Academie] Promo #3 - Liste des tags</title>
 
 	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
 	<link rel="stylesheet" type="text/css" href="../../assets/css/tags.css">
 
 	<script type="text/javascript">
@@ -94,7 +92,7 @@
 				<div class="modal-body">
 					<?php echo '<form action="tags.php?idquiz='.$_GET["idquiz"].'" method="post">'; ?>
 						<p>Nom : <input type="text" name="nom" required maxlength="45"></p>
-						<input type="submit" name="add" value="Ajouter" class="btn btn-info">
+						<input type="submit" name="add" value="Ajouter" class="btnface">
 					</form>
 				</div>
 			</div>
@@ -125,7 +123,7 @@
 					<?php echo '<form action="tags.php?idquiz='.$_GET["idquiz"].'" method="post">'; ?>
 						<p style="display:none">id : <input type="text" name="id" required value="0"></p>
 						<p>Nom : <input type="text" name="nom" required maxlength="45" value="nom_tag"></p>
-						<input type="submit" name="update" value="Modifier" class="btn btn-info">
+						<input type="submit" name="update" value="Modifier" class="btnface-small">
 					</form>
 				</div>
 			</div>
@@ -157,8 +155,8 @@
 					<p>Voulez-vous vraiment supprimer définitivement le tag nom_tag ?</p>
 					<?php echo '<form action="tags.php?idquiz='.$_GET["idquiz"].'" method="post">'; ?>
 						<p style="display:none">id : <input type="text" name="idSupp" required value="0"></p>
-						<input type="submit" name="delete" value="Oui" class="btn btn-info">
-						<button type="button" class="btn btn-info" data-dismiss="modal" style="margin: auto;">Non</button>
+						<input type="submit" name="delete" value="Oui" class="btnface-small">
+						<button type="button" class="btnface-small" data-dismiss="modal" style="margin: auto;">Non</button>
 					</form>
 				</div>
 			</div>
@@ -179,72 +177,63 @@
 
 	<?php include($path."/assets/views/header.php"); ?>
 
-	<section class="page">
-		<div class="list">
-			<p>Liste des tags et présence dans le quiz « <?php 
-				// Code pour afficher le nom du quiz
-				$sth = $bdd->prepare("SELECT * FROM quiz WHERE idquiz ='".$_GET["idquiz"]."'");
-				$sth->execute();
-				$result = $sth->fetch();
-				echo $result['titre'];
-				?> » :
-			</p>
-			<button class="add" data-toggle="modal" data-target="#modalAjout">Ajouter un tag</button>
-			<a class="btn btn-info" href="mesquiz.php">Retour aux quiz</a>
-		</div>
-		<div class="bienvenue">
+	<section>
+		<h2>Liste des tags et présence dans le quiz « <?php 
+			// Code pour afficher le nom du quiz
+			$sth = $bdd->prepare("SELECT * FROM quiz WHERE idquiz ='".$_GET["idquiz"]."'");
+			$sth->execute();
+			$result = $sth->fetch();
+			echo $result['titre'];
+			?> » :
+		</h2>
 		<?php
-		// Code pour afficher tous les tags ainsi que les questions associées
-		$sth = $bdd->prepare('SELECT * FROM tags ORDER BY nom');
-		$sth->execute();
-		$result = $sth->fetchAll();
-		if($sth->rowCount()) {
-			foreach($result as $row){
-				echo '
-			<div class="tag_name">
-				<div class="tag_example">
-					 <p>';
+			// Code pour afficher tous les tags ainsi que les questions associées
+			$sth = $bdd->prepare('SELECT * FROM tags ORDER BY nom');
+			$sth->execute();
+			$result = $sth->fetchAll();
+			if($sth->rowCount()) {
+				foreach($result as $row){
+					$sth2 = $bdd->prepare("SELECT questions.numero FROM tags, tags_has_questions, questions
+						WHERE tags.idtags = tags_has_questions.tags_idtags
+						AND tags_has_questions.questions_idquestions = questions.idquestions
+						AND questions.quiz_idquiz = '".$_GET["idquiz"]."'
+						AND tags.idtags = '".$row['idtags']."';");
+					$sth2->execute();
+					$result2 = $sth2->fetchAll();
 
-				$sth2 = $bdd->prepare("SELECT questions.numero FROM tags, tags_has_questions, questions
-					WHERE tags.idtags = tags_has_questions.tags_idtags
-					AND tags_has_questions.questions_idquestions = questions.idquestions
-					AND questions.quiz_idquiz = '".$_GET["idquiz"]."'
-					AND tags.idtags = '".$row['idtags']."';");
-				$sth2->execute();
-				$result2 = $sth2->fetchAll();
-
-				if($sth2->rowCount()) {
-					echo '<i class="far fa-check-circle"></i> ';
-				}
-
-				echo $row['nom'].'</p>
-				</div>';
-
-				if($sth2->rowCount()) {
-					echo '
-				<div class="question_concerned">
-					<p>Questions concernées : ';
-					foreach($result2 as $row2){
-						echo $row2['numero'].' ';
+					if($sth2->rowCount()) {
+						$check = '<i class="far fa-check-circle"></i> ';
+						$quests = '<span>Questions concernées : ';
+						foreach($result2 as $row2){
+							$quests .= $row2['numero'].' ';
+						}
+						$quests .= '</span>';
 					}
-					echo '</p>
-				</div>';
-				}
+					else {$check = ''; $quests = '';}
+					?>
 
-				echo '
-				<div>
-					<button class="btn btn-info" onclick="modifTag('.$row['idtags'].', '.$_GET["idquiz"].')">Modifier</button>
-					<button class="poubelle" onclick="deleteTag('.$row['idtags'].', '.$_GET["idquiz"].')">
-						<i class="fas fa-trash-alt"></i>
-					</button>
-				</div>
-			</div>';
+					<div class="tag_name">
+						<div class="tag_example">
+							<div>
+								<?php echo $check.$row['nom']; ?>
+							</div>
+							<?= $quests ?>
+							<div>
+								<button class="btnface-small" onclick="modifTag(<?=$row['idtags']?>, <?=$_GET['idquiz']?>)">Modifier</button>
+								<button onclick="deleteTag(<?=$row['idtags']?>, <?=$_GET['idquiz']?>)">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				<?php }
 			}
-		}
-		else {echo "Il n'y a pas encore de tag.";}
+			else {echo "Il n'y a pas encore de tag.";}
 		?>
+		
 
-		</div>
+		<div class="my-5"><button data-toggle="modal" data-target="#modalAjout">Ajouter un tag</button></div>
+		<a class="btnface-small" href="mesquiz.php">Retour aux quiz</a>
 	</section>
 
 	<?php include($path."/assets/views/footer.php"); ?>
