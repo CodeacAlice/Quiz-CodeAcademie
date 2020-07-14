@@ -7,9 +7,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
-
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -21,6 +18,7 @@
 	<title>[Code Academie] Promo #3 - Liste des questions</title>
 
 	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
 	<link rel="stylesheet" type="text/css" href="../../assets/css/questions.css">
 
 	<script type="text/javascript">
@@ -79,10 +77,10 @@
 						<p>Réponse 2 : <input type="text" name="rep2" required maxlength="255"></p>
 						<p>Réponse 3 : <input type="text" name="rep3" required maxlength="255"></p>
 						<p>Réponse 4 : <input type="text" name="rep4" required maxlength="255"></p>
-						<p>Bonne réponse : <input type="checkbox" name="bonnerep[]" value="1">1
-							<input type="checkbox" name="bonnerep[]" value="2">2
-							<input type="checkbox" name="bonnerep[]" value="3">3
-							<input type="checkbox" name="bonnerep[]" value="4">4</p>
+						<p>Bonne réponse : <input type="checkbox" name="bonnerep[]" value="1"> 1
+							<input type="checkbox" name="bonnerep[]" value="2"> 2
+							<input type="checkbox" name="bonnerep[]" value="3"> 3
+							<input type="checkbox" name="bonnerep[]" value="4"> 4</p>
 						<p>Tags :
 							<?php
 							$sth = $bdd->prepare("SELECT * FROM tags ORDER BY nom");
@@ -96,7 +94,9 @@
 							else {echo "Il n'existe pas encore de tag.";}
 							?>
 						</p>
-						<input type="submit" name="add" value="Ajouter" class="btn btn-info">
+						<div class="text-center">
+							<input type="submit" name="add" value="Ajouter" class="btnface">
+						</div>
 					</form>
 				</div>
 			</div>
@@ -196,7 +196,7 @@
 							else {echo "Il n'existe pas encore de tag.";}
 							?>
 						</p>
-						<input type="submit" name="update" value="Modifier" class="btn btn-info">
+						<input type="submit" name="update" value="Modifier" class="btnface-small">
 					</form>
 				</div>
 			</div>
@@ -262,21 +262,18 @@
 	?>
 
 
-	<h2>Liste des questions du quiz « <?php
-		
-		// Code pour afficher le nom du quiz
-		$sth = $bdd->prepare("SELECT * FROM quiz WHERE idquiz ='".$_GET["idquiz"]."'");
-		$sth->execute();
-		$result = $sth->fetch();
-		echo $result['titre'];
-		?> » :
-	</h2>
-	<a class="modif" href="mesquiz.php">Retour à la liste des quiz</a>
+	<section>
+		<h2>Liste des questions du quiz « <?php
+			
+			// Code pour afficher le nom du quiz
+			$sth = $bdd->prepare("SELECT * FROM quiz WHERE idquiz ='".$_GET["idquiz"]."'");
+			$sth->execute();
+			$result = $sth->fetch();
+			echo $result['titre'];
+			?> » :
+		</h2>
 
-	<section class="page">
-		<div class="bienvenue">
-			<?php
-					// Code pour afficher tous les tags ainsi que les questions associées
+		<?php // Code pour afficher tous les tags ainsi que les questions associées
 			$sth = $bdd->prepare("SELECT * FROM questions WHERE quiz_idquiz = '".$_GET["idquiz"]."' ORDER BY numero");
 			$sth->execute();
 			$result = $sth->fetchAll();
@@ -310,15 +307,17 @@
 					}
 					else {echo "Cette question n'a pas encore de tag.";}
 					echo '</p>
-					<button class="modif" onclick="modifQuest('.$row['idquestions'].', '.$_GET["idquiz"].')">modifier</button>
+					<button class="btnface-small modif" onclick="modifQuest('.$row['idquestions'].', '.$_GET["idquiz"].')">Modifier</button>
 					</div>';
 				}
 			}
 			else {echo "Ce quiz n'a pas encore de question.";}
-			?>
+		?>
+		<div class="my-5">
+			<button data-toggle="modal" data-target="#modalAjout">Ajouter une question</button>
 		</div>
 		<div>
-			<button class="add" data-toggle="modal" data-target="#modalAjout">Ajouter une question</button>
+			<a class="btnface-small" href="mesquiz.php">Retour à la liste des quiz</a>
 		</div>
 	</section>
 

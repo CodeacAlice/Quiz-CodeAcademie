@@ -63,7 +63,7 @@ if($searchtags->rowCount()) {
 else {echo "Il n'existe pas encore de tag.";}
 
 echo '</p>
-<input type="submit" name="update" value="Modifier" class="btn btn-info">
+<input type="submit" name="update" value="Modifier" class="btnface-small">
 </form>
 </div>';
 
