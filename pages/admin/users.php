@@ -65,7 +65,7 @@
 						<p class="tiers">Requiert un tiers-temps : <input class="checker tiert" type="radio" name="tierstps" value="1"> Oui
 							<input class="checker tiert" type="radio" name="tierstps" value="0"> Non
 						</p>
-						<input type="submit" name="add" value="Ajouter" class="btn btn-info">
+						<input type="submit" name="add" value="Ajouter" class="btnface">
 					</form>
 				</div>
 			</div>

@@ -223,7 +223,7 @@
 					<p>Question 1 : (vrai) Un.e inconnu.e</p>
 					<p>Question 2 : (faux) mauvaise réponse</p>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-info" data-dismiss="modal" style="margin: auto;">Fermer</button>
+						<button type="button" class="btnface-small" data-dismiss="modal" style="margin: auto;">Fermer</button>
 					</div>
 				</div>
 			</div>

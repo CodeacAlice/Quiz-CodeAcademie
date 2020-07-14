@@ -71,9 +71,9 @@ if ($nbquest > $totquest) {
 	echo '<p>Le quiz est terminé !</p>
   <form action="commentaire.php?idquiz='.$idquiz.'" method="post">
   <p>Laissez un commentaire <br><textarea rows="2" name="commentaire" required></textarea></p>
-  <input type="submit" name="add" value="Ajouter" class="btn btn-info">
+  <input type="submit" name="add" value="Ajouter" class="btnface-small">
   </form>
-	<a class="btn btn-info" href="'.$retour.'">Retour aux quiz</a>';
+	<a class="btnface-small" href="'.$retour.'">Retour aux quiz</a>';
 }
 // Sinon, afficher la question et les réponses
 else {
