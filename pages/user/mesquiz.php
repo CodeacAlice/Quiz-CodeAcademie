@@ -7,9 +7,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
-
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -19,6 +16,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<title>[Code Academie] Promo #3 - Liste des quiz</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
 
 	<script type="text/javascript">
 		function showDetails(idQuiz) {
@@ -58,32 +58,39 @@
 
 	<?php include($path."/assets/views/header.php"); ?>
 
-	<h2>Liste des quiz</h2>
-	<a href="homepage.php" class="btn btn-info">Retour à l'accueil</a>
+	<section>
 
-	<div id="listedesquiz">
+		<h2>Liste des quiz</h2>
 
-		<?php
-		$sth = $bdd->prepare('SELECT quiz.*, quiz_done FROM quiz
-			Inner Join users_has_quiz On quiz.idquiz = users_has_quiz.quiz_idquiz
-			Inner Join users ON users.idusers = users_has_quiz.users_idusers
-			Where users.idusers = '.$_SESSION['iduser'].'
-			ORDER BY titre');
+		<div id="listedesquiz">
 
-		$sth->execute();
-		$result = $sth->fetchAll();
-		if($sth->rowCount()) {
-			foreach($result as $row){
-				if ($row['quiz_done']) {$doquiz = '<button class="btn" disabled>Fini</button>';}
-				else {$doquiz = '<a href="../quiz_test.php?idquiz='.$row['idquiz'].'&nq=1" class="btn btn-info" disabled="'.$row['quiz_done'].'">Faire le quiz</a>';}
-				echo '<h4>'.$row['titre'].'</h4>
-				<button class="btn btn-info" onclick="showDetails(' . $row['idquiz'] . ')">Détails</button> '.$doquiz;
+			<?php
+			$sth = $bdd->prepare('SELECT quiz.*, quiz_done FROM quiz
+				Inner Join users_has_quiz On quiz.idquiz = users_has_quiz.quiz_idquiz
+				Inner Join users ON users.idusers = users_has_quiz.users_idusers
+				Where users.idusers = '.$_SESSION['iduser'].'
+				ORDER BY titre');
+
+			$sth->execute();
+			$result = $sth->fetchAll();
+			if($sth->rowCount()) {
+				foreach($result as $row){ ?>
+					<p>
+						<?=$row['titre']?> 
+						<button class="btnface-small" onclick="showDetails(<?=$row['idquiz']?>)">Détails</button>
+						<?php if ($row['quiz_done']) {?>
+							<button class="btnface-small" disabled>Fini</button>
+						<?php ;} else {?>
+							<a href="../quiz_test.php?idquiz=<?=$row['idquiz']?>&nq=1" class="btnface-small">Faire le quiz</a>
+						<?php ;} ?>
+					</p>
+				<?php }
 			}
-		}
-		else {echo "Vous n'avez pas encore de quiz.";}
-		?>
+			else {echo "Vous n'avez pas encore de quiz.";}
+			?>
 
-	</div>
+		</div>
+	</section>
 
 
 	<div class="modal fade" id="modalDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -103,7 +110,7 @@
 						<p class="py-2 px-3">Lorem ipsum</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-info" data-dismiss="modal" style="margin: auto;">Fermer</button>
+						<button class="btnface-small" data-dismiss="modal" style="margin: auto;">Fermer</button>
 					</div>
 				</div>
 			</div>

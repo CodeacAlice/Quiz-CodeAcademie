@@ -25,7 +25,7 @@ $row2 = $sth2->fetch(PDO::FETCH_ASSOC);
 		<p class="py-2 px-3">'.$row['description'].'</p>
 		</div>
 		<div class="modal-footer">
-		<button type="button" class="btn btn-info" data-dismiss="modal" style="margin: auto;">Fermer</button>
+		<button class="btnface-small" data-dismiss="modal" style="margin: auto;">Fermer</button>
 		</div>
 		</div>';
 

@@ -16,7 +16,24 @@ button, .btnface {
 	padding: 10px 40px;
     cursor: pointer;
 	color: #FFFFFF;
-	font-size: 20px;
+    font-size: 20px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    border: 0;
+}
+.btnface-small {
+	background-color: #3c8b94;
+	border-radius: 10px;
+	padding: 7px 20px;
+    cursor: pointer;
+	color: #FFFFFF;
+    font-size: 16px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    border: 0;
+}
+button[disabled] {
+    background-color: rgba(60, 139, 148, 0.5);
+    box-shadow: none;
+    cursor: default;
 }
 
 svg {
@@ -95,4 +112,10 @@ footer {
 footer a {
     color: #EEEEEE;
     font-weight: bold;
+}
+
+
+/******* Modals *******/
+.modal-header button {
+    box-shadow: none;
 }

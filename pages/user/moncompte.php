@@ -15,8 +15,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <title>[Code Academie] Promo #3 - Mon Compte</title>
+  
   <!-- CSS -->
-
   <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
 </head>
 
@@ -147,7 +147,7 @@
             <p>RQTH : <?=$inputrqth?></p>
             <p>Actif : <?=$inputactif?></p>
             <p class="tiers">Requiert un tiers-temps : <?=$inputtiers?></p>
-            <input type="submit" name="update" value="Modifier" class="btnface">
+            <input type="submit" name="update" value="Modifier" class="btnface-small">
           </form>
         </div>
       </div>
