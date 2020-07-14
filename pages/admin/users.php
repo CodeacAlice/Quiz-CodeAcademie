@@ -7,9 +7,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
-
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -19,6 +16,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<title>[Code Academie] Promo #3 - Liste des utilisateurs</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 	else {
 	?>
 
-	<!-- Ajouter un utilisateur -->
+	<!-- Modal pour ajouter un utilisateur -->
 	<div class="modal fade" id="modalAjout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -42,28 +42,28 @@
 				</div>
 				<div class="modal-body">
 					<form action="users.php" method="post">
-						<p>Statut : <input type="radio" name="stat" required value="0" onclick="user()" checked>Utilisateur
-							<input type="radio" name="stat" required value="1" onclick="Adm()">Administrateur
+						<p>Statut : <input type="radio" name="stat" required value="0" onclick="user()" checked> Utilisateur
+							<input type="radio" name="stat" required value="1" onclick="Adm()"> Administrateur
 						</p>
 						<p>Nom : <input type="text" name="nom" required maxlength="50"></p>
 						<p>Prénom : <input type="text" name="prenom" required maxlength="50"></p>
-						<p class="userth">Genre : <input class="checker" type="radio" name="genre" required value="homme" checked>Homme
-							<input class="checker" type="radio" name="genre" required value="femme">Femme
-							<input class="checker" type="radio" name="genre" required value="autre">Autre
+						<p class="userth">Genre : <input class="checker" type="radio" name="genre" required value="homme" checked> Homme
+							<input class="checker" type="radio" name="genre" required value="femme"> Femme
+							<input class="checker" type="radio" name="genre" required value="autre"> Autre
 						</p>
 						<p>Email : <input type="email" name="mail" required maxlength="50"></p>
 						<p>Mot de passe : <input type="password" name="pwd" required maxlength="100"></p>
-						<p class="userth">QPV : <input class="checker" type="radio" name="qpv" value="1">Oui
-							<input class="checker" type="radio" name="qpv" value="0">Non
+						<p class="userth">QPV : <input class="checker" type="radio" name="qpv" value="1"> Oui
+							<input class="checker" type="radio" name="qpv" value="0"> Non
 						</p>
-						<p class="userth">RQTH : <input class="checker" type="radio" name="rqth" onclick="andi()" value="1">Oui
-							<input class="checker" type="radio" name="rqth" onclick="norqth()" value="0">Non
+						<p class="userth">RQTH : <input class="checker" type="radio" name="rqth" onclick="andi()" value="1"> Oui
+							<input class="checker" type="radio" name="rqth" onclick="norqth()" value="0"> Non
 						</p>
-						<p class="userth">Actif : <input class="checker" type="radio" name="actif" value="1">Oui
-							<input class="checker" type="radio" name="actif" value="0">Non
+						<p class="userth">Actif : <input class="checker" type="radio" name="actif" value="1"> Oui
+							<input class="checker" type="radio" name="actif" value="0"> Non
 						</p>
-						<p class="tiers">Requiert un tiers-temps : <input class="checker tiert" type="radio" name="tierstps" value="1">Oui
-							<input class="checker tiert" type="radio" name="tierstps" value="0">Non
+						<p class="tiers">Requiert un tiers-temps : <input class="checker tiert" type="radio" name="tierstps" value="1"> Oui
+							<input class="checker tiert" type="radio" name="tierstps" value="0"> Non
 						</p>
 						<input type="submit" name="add" value="Ajouter" class="btn btn-info">
 					</form>
@@ -81,53 +81,54 @@
 		$mail = $_POST['mail'];
 		$password = $_POST['pwd'];
 		$stat = $_POST['stat'];
-if($stat == 0){
-	$genre = $_POST['genre'];
-	$qpv = $_POST['qpv'];
-	$rqth = $_POST['rqth'];
-	$actif = $_POST['actif'];
-	$tierstps = $_POST['tierstps'];
-	$adduser = $bdd->prepare("INSERT INTO users
-		(nom, prenom, genre, mail, password, QPV, RQTH, actif, tiers_temps, is_admin)
-		VALUES ('".$nom."', '".$prenom."', '".$genre."', '".$mail."', '".$password."', '".$qpv."',
-		'".$rqth."', '".$actif."', '".$tierstps."', '".$stat."')");
-	$adduser->execute();
-}
-else{
-	$adduser = $bdd->prepare("INSERT INTO users
-		(nom, prenom, mail, password, is_admin)
-		VALUES ('".$nom."', '".$prenom."', '".$mail."', '".$password."', '".$stat."')");
-	$adduser->execute();
-}
-
+		if($stat == 0){
+			$genre = $_POST['genre'];
+			$qpv = $_POST['qpv'];
+			$rqth = $_POST['rqth'];
+			$actif = $_POST['actif'];
+			$tierstps = $_POST['tierstps'];
+			$adduser = $bdd->prepare("INSERT INTO users
+				(nom, prenom, genre, mail, password, QPV, RQTH, actif, tiers_temps, is_admin)
+				VALUES ('".$nom."', '".$prenom."', '".$genre."', '".$mail."', '".$password."', '".$qpv."',
+				'".$rqth."', '".$actif."', '".$tierstps."', '".$stat."')");
+			$adduser->execute();
+		}
+		else{
+			$adduser = $bdd->prepare("INSERT INTO users
+				(nom, prenom, mail, password, is_admin)
+				VALUES ('".$nom."', '".$prenom."', '".$mail."', '".$password."', '".$stat."')");
+			$adduser->execute();
+		}
 	}
 	?>
 
 
 	<?php include($path."/assets/views/header.php"); ?>
 
-	<h2>Liste des utilisateurs :</h2>
-	<a class="btn btn-info" href="homepage.php">Retour à la page d'accueil</a>
+	<section>
+		<h2>Liste des utilisateurs :</h2>
 
-	<div id="listeusers">
-		<?php
-		// Code pour afficher tous les utilisateurs
-		$sth = $bdd->prepare("SELECT * FROM users WHERE is_admin = 0 ORDER BY nom, prenom");
-		$sth->execute();
-		$result = $sth->fetchAll();
-		if($sth->rowCount()) {
-			foreach($result as $row){
-				?>
-				<p><?=$row['prenom']?> <span style="text-transform: uppercase;"><?=$row['nom']?></span>
-					<a href="compte_user.php?user=<?=$row['idusers']?>" class="btn btn-info">Voir profil</a>
-					<a href="statistiques.php?user=<?=$row['idusers']?>" class="btn btn-info">Statistiques</a>
-				</p>
-			<?php ;}
-		}
-		else {echo "Il n'y a pas encore d'utilisateurs.";}
-		?>
-	</div>
-	<button class="btn btn-info" data-toggle="modal" data-target="#modalAjout">Ajouter un utilisateur</button>
+		<div id="listeusers">
+			<?php
+			// Code pour afficher tous les utilisateurs
+			$sth = $bdd->prepare("SELECT * FROM users WHERE is_admin = 0 ORDER BY nom, prenom");
+			$sth->execute();
+			$result = $sth->fetchAll();
+			if($sth->rowCount()) {
+				foreach($result as $row){
+					?>
+					<p><?=$row['prenom']?> <span style="text-transform: uppercase;"><?=$row['nom']?></span>
+						<a href="compte_user.php?user=<?=$row['idusers']?>" class="btnface-small">Voir profil</a>
+						<a href="statistiques.php?user=<?=$row['idusers']?>" class="btnface-small">Statistiques</a>
+					</p>
+				<?php ;}
+			}
+			else {echo "Il n'y a pas encore d'utilisateurs.";}
+			?>
+		</div>
+		<button style="margin-top:2rem" data-toggle="modal" data-target="#modalAjout">Ajouter un utilisateur</button>
+
+	</section>
 
 	<?php include($path."/assets/views/footer.php"); ?>
 	

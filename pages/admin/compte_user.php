@@ -6,9 +6,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
-
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -18,6 +15,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <title>[Code Academie] Promo #3 - Compte utilisateur</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
 
 </head>
 
@@ -82,16 +82,23 @@
       $inputgenre = '<input type="radio" name="genre" required value="homme">Homme   <input type="radio" name="genre" required value="femme">Femme   <input type="radio" name="genre" required value="autre" checked>Autre';
     }
   ?>
-  <h2>Informations de l'utilisateur <?= $result['prenom']?> <?= $result['nom']?></h2>
-  <a href="users.php" class="btn btn-info">Retour à la liste</a>
-  <p>Nom : <?= $result['nom']?></p>
-  <p>Prénom : <?= $result['prenom']?></p>
-  <p>Genre : <?= ucfirst($result['genre'])?></p>
-  <p>Email : <?= $result['mail']?></p>
-  <p>QPV : <?= $qpv?></p>
-  <p>RQTH : <?= $rqth?></p>
-  <p>Actif : <?= $actif?></p>
-  <p>Tiers-temps : <?= $tierst?></p>
+
+  <section>
+    <h2>Informations de l'utilisateur <?= $result['prenom']?> <?= $result['nom']?></h2>
+    
+    <p>Nom : <?= $result['nom']?></p>
+    <p>Prénom : <?= $result['prenom']?></p>
+    <p>Genre : <?= ucfirst($result['genre'])?></p>
+    <p>Email : <?= $result['mail']?></p>
+    <p>QPV : <?= $qpv?></p>
+    <p>RQTH : <?= $rqth?></p>
+    <p>Actif : <?= $actif?></p>
+    <p>Tiers-temps : <?= $tierst?></p>
+
+    <div style="margin-top:2rem">
+      <a href="users.php" class="btnface">Retour à la liste</a>
+    </div>
+  </section>
 
   <?php include($path."/assets/views/footer.php"); ?>
 
