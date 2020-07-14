@@ -7,9 +7,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-	<!-- CSS -->
-	<link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
-
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -19,6 +16,9 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 	<title>[Code Academie] Promo #3 - Liste des quiz</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
 
 	<script type="text/javascript">
 		function showDetails(idQuiz) {
@@ -80,8 +80,7 @@
 
 	<?php include($path."/assets/views/header.php"); ?>
 
-	<h2>Liste des quiz</h2>
-	<a href="homepage.php" class="btn btn-info">Retour à l'accueil</a>
+
 	<!-- Modal pour ajouter un quiz -->
 	<div class="modal fade" id="modalAjout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
@@ -97,7 +96,7 @@
 						<p>Titre : <input type="text" name="titre" required maxlength="50"></p>
 						<p>Durée : <input type="text" name="duree" required maxlength="45"></p>
 						<p>Description : <textarea rows="2" name="description" required maxlength="255"></textarea></p>
-						<input type="submit" name="add" value="Ajouter" class="btn btn-info">
+						<input type="submit" name="add" value="Ajouter" class="btnface-small">
 					</form>
 				</div>
 			</div>
@@ -131,7 +130,7 @@
 						<p>Titre : <input type="text" name="titre" required maxlength="50"></p>
 						<p>Durée : <input type="text" name="duree" required maxlength="45"></p>
 						<p>Description : <textarea rows="2" name="description" required maxlength="255"></textarea></p>
-						<input type="submit" name="update" value="Modifier" class="btn btn-info">
+						<input type="submit" name="update" value="Modifier" class="btnface-small">
 					</form>
 				</div>
 			</div>
@@ -153,29 +152,32 @@
 	}
 	?>
 
-	<div id="listedesquiz">
-		
-		<?php
-		$sth = $bdd->prepare('SELECT * FROM quiz ORDER BY titre');
-		$sth->execute();
-		$result = $sth->fetchAll();
-		if($sth->rowCount()) {
-			foreach($result as $row){
-				echo '<h4>'.$row['titre'].'</h4>
-				<button class="btn btn-info" onclick="showDetails(' . $row['idquiz'] . ')">Détails</button> 
-				<a href="questions.php?idquiz='.$row['idquiz'].'" class="btn btn-info">Questions</a> 
-				<a href="tags.php?idquiz='.$row['idquiz'].'" class="btn btn-info">Tags</a> 
-				<a href="../quiz_test.php?idquiz='.$row['idquiz'].'&nq=1" class="btn btn-info">Tester</a>
-				<button class="btn btn-info" onclick="modifQuiz(' . $row['idquiz'] . ')">Modifier</button> ';
+	<section>
+		<h2>Liste des quiz</h2>
+
+		<div id="listedesquiz">
+			<?php
+			$sth = $bdd->prepare('SELECT * FROM quiz ORDER BY titre');
+			$sth->execute();
+			$result = $sth->fetchAll();
+			if($sth->rowCount()) {
+				foreach($result as $row){
+					echo '<h4>'.$row['titre'].'</h4>
+					<button class="btnface-small" onclick="showDetails(' . $row['idquiz'] . ')">Détails</button> 
+					<a href="questions.php?idquiz='.$row['idquiz'].'" class="btnface-small">Questions</a> 
+					<a href="tags.php?idquiz='.$row['idquiz'].'" class="btnface-small">Tags</a> 
+					<a href="../quiz_test.php?idquiz='.$row['idquiz'].'&nq=1" class="btnface-small">Tester</a>
+					<button class="btnface-small" onclick="modifQuiz(' . $row['idquiz'] . ')">Modifier</button> ';
+				}
 			}
-		}
-		else {echo "Il n'y a pas encore de quiz.";}
-		?>
+			else {echo "Il n'y a pas encore de quiz.";}
+			?>
 
-	</div>
+		</div>
+		<button style="margin-top:2.5rem;" data-toggle="modal" data-target="#modalAjout">Ajouter</button>
+	</section>
 
-	<button class="btn btn-info" data-toggle="modal"  data-target="#modalAjout">Ajouter</button>
-
+	
 	<!-- Modal pour afficher les détails d'un quiz  -->
 	<div class="modal fade" id="modalDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
@@ -194,7 +196,7 @@
 						<p class="py-2 px-3">Lorem ipsum</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-info" data-dismiss="modal" style="margin: auto;">Fermer</button>
+						<button type="button" class="btnface-small" data-dismiss="modal" style="margin: auto;">Fermer</button>
 					</div>
 				</div>
 			</div>
