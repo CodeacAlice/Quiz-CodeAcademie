@@ -6,9 +6,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
-
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -18,6 +15,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <title>[Code Academie] Promo #3 - Mon Compte</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
 
 </head>
 
@@ -58,19 +58,20 @@
 
   <?php include($path."/assets/views/header.php"); ?>
 
-  <h2>Mon compte</h2>
-  <a href="homepage.php" class="btn btn-info">Retour à l'accueil</a>
-  <?php
-    $sth = $bdd->prepare("SELECT * FROM users WHERE idusers = '".$_SESSION['iduser']."'");
-    $sth->execute();
-    $result = $sth->fetch(PDO::FETCH_ASSOC);
-  ?>
-  <p>Nom : <?= $result['nom']?></p>
-  <p>Prénom : <?= $result['prenom']?></p>
-  <p>Email : <?= $result['mail']?></p>
+  <section>
+    <h2>Mon compte</h2>
+    
+    <?php
+      $sth = $bdd->prepare("SELECT * FROM users WHERE idusers = '".$_SESSION['iduser']."'");
+      $sth->execute();
+      $result = $sth->fetch(PDO::FETCH_ASSOC);
+    ?>
+    <p>Nom : <?= $result['nom']?></p>
+    <p>Prénom : <?= $result['prenom']?></p>
+    <p>Email : <?= $result['mail']?></p>
 
-  <button class="btn btn-info" data-toggle="modal" data-target="#modalModif">Modifier mes informations</button>
-
+    <button data-toggle="modal" data-target="#modalModif">Modifier mes informations</button>
+  </section>
   <!-- Modal pour modifier les infos -->
   <div class="modal fade" id="modalModif" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -87,7 +88,7 @@
             <p>Prénom : <input type="text" name="prenom" required maxlength="50" value="<?= $result['prenom']?>"></p>
             <p>Ancien mot de passe (obligatoire) : <input type="password" name="oldpwd" required maxlength="100"></p>
             <p>Nouveau mot de passe (non obligatoire) : <input type="password" name="newpwd" maxlength="100"></p>
-            <input type="submit" name="update" value="Modifier" class="btn btn-info">
+            <input type="submit" name="update" value="Modifier" class="btnface">
           </form>
         </div>
       </div>

@@ -6,9 +6,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
-
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
@@ -18,7 +15,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <title>[Code Academie] Promo #3 - Mon Compte</title>
+  <!-- CSS -->
 
+  <link rel="stylesheet" type="text/css" href="../../assets/css/stylesheet.css">
 </head>
 
 <body>
@@ -64,66 +63,68 @@
 
   <?php include($path."/assets/views/header.php"); ?>
 
-  <h2>Mon compte</h2>
-  <a href="homepage.php" class="btn btn-info">Retour à l'accueil</a>
-  <?php
-  // Code pour afficher les informations et remplir la modal de modification
-    $sth = $bdd->prepare("SELECT * FROM users WHERE idusers = '".$_SESSION['iduser']."'");
-    $sth->execute();
-    $result = $sth->fetch(PDO::FETCH_ASSOC);
-    if ($result['QPV'] == 1) {
-      $qpv = 'Oui';
-      $inputqpv = '<input type="radio" name="qpv" value="1" checked>Oui   <input type="radio" name="qpv" value="0">Non';
-    }
-    else {
-      $qpv = 'Non';
-      $inputqpv = '<input type="radio" name="qpv" value="1">Oui   <input type="radio" name="qpv" value="0" checked>Non';
-    }
-    if ($result['RQTH'] == 1) {
-      $rqth = 'Oui';
-      $inputrqth = '<input type="radio" name="rqth" onclick="andi()" value="1" checked>Oui   <input type="radio" name="rqth" onclick="norqth()" value="0">Non';
-    }
-    else {
-      $rqth = 'Non';
-      $inputrqth = '<input type="radio" name="rqth" onclick="andi()" value="1">Oui   <input type="radio" name="rqth" onclick="norqth()" value="0" checked>Non';
-    }
-    if ($result['actif'] == 1) {
-      $actif = 'Oui';
-      $inputactif = '<input type="radio" name="actif" value="1" checked>Oui   <input type="radio" name="actif" value="0">Non';
-    }
-    else {
-      $actif = 'Non';
-      $inputactif = '<input type="radio" name="actif" value="1">Oui   <input type="radio" name="actif" value="0" checked>Non';
-    }
-    if ($result['tiers_temps'] == 1) {
-      $tierst = 'Oui';
-      $inputtiers = '<input class="checker tiert" type="radio" name="tierstps" value="1" checked>Oui   <input class="checker tiert" type="radio" name="tierstps" value="0">Non';
-    }
-    else {
-      $tierst = 'Non';
-      $inputtiers = '<input class="checker tiert" type="radio" name="tierstps" value="1">Oui   <input class="checker tiert" type="radio" name="tierstps" value="0" checked>Non';
-    }
+  <section>
+    <h2>Mon compte</h2>
+    <?php
+    // Code pour afficher les informations et remplir la modal de modification
+      $sth = $bdd->prepare("SELECT * FROM users WHERE idusers = '".$_SESSION['iduser']."'");
+      $sth->execute();
+      $result = $sth->fetch(PDO::FETCH_ASSOC);
+      if ($result['QPV'] == 1) {
+        $qpv = 'Oui';
+        $inputqpv = '<input type="radio" name="qpv" value="1" checked> Oui   <input type="radio" name="qpv" value="0"> Non';
+      }
+      else {
+        $qpv = 'Non';
+        $inputqpv = '<input type="radio" name="qpv" value="1"> Oui   <input type="radio" name="qpv" value="0" checked> Non';
+      }
+      if ($result['RQTH'] == 1) {
+        $rqth = 'Oui';
+        $inputrqth = '<input type="radio" name="rqth" onclick="andi()" value="1" checked> Oui   <input type="radio" name="rqth" onclick="norqth()" value="0"> Non';
+      }
+      else {
+        $rqth = 'Non';
+        $inputrqth = '<input type="radio" name="rqth" onclick="andi()" value="1"> Oui   <input type="radio" name="rqth" onclick="norqth()" value="0" checked> Non';
+      }
+      if ($result['actif'] == 1) {
+        $actif = 'Oui';
+        $inputactif = '<input type="radio" name="actif" value="1" checked> Oui   <input type="radio" name="actif" value="0"> Non';
+      }
+      else {
+        $actif = 'Non';
+        $inputactif = '<input type="radio" name="actif" value="1"> Oui   <input type="radio" name="actif" value="0" checked> Non';
+      }
+      if ($result['tiers_temps'] == 1) {
+        $tierst = 'Oui';
+        $inputtiers = '<input class="checker tiert" type="radio" name="tierstps" value="1" checked> Oui   <input class="checker tiert" type="radio" name="tierstps" value="0"> Non';
+      }
+      else {
+        $tierst = 'Non';
+        $inputtiers = '<input class="checker tiert" type="radio" name="tierstps" value="1"> Oui   <input class="checker tiert" type="radio" name="tierstps" value="0" checked> Non';
+      }
 
-    if ($result['genre'] == 'homme') {
-      $inputgenre = '<input type="radio" name="genre" required value="homme" checked>Homme   <input type="radio" name="genre" required value="femme">Femme   <input type="radio" name="genre" required value="autre">Autre';
-    }
-    else if ($result['genre'] == 'femme') {
-      $inputgenre = '<input type="radio" name="genre" required value="homme">Homme   <input type="radio" name="genre" required value="femme" checked>Femme   <input type="radio" name="genre" required value="autre">Autre';
-    }
-    else {
-      $inputgenre = '<input type="radio" name="genre" required value="homme">Homme   <input type="radio" name="genre" required value="femme">Femme   <input type="radio" name="genre" required value="autre" checked>Autre';
-    }
-  ?>
-  <p>Nom : <?= $result['nom']?></p>
-  <p>Prénom : <?= $result['prenom']?></p>
-  <p>Genre : <?= ucfirst($result['genre'])?></p>
-  <p>Email : <?= $result['mail']?></p>
-  <p>QPV : <?= $qpv?></p>
-  <p>RQTH : <?= $rqth?></p>
-  <p>Actif : <?= $actif?></p>
-  <p>Tiers-temps : <?= $tierst?></p>
+      if ($result['genre'] == 'homme') {
+        $inputgenre = '<input type="radio" name="genre" required value="homme" checked> Homme   <input type="radio" name="genre" required value="femme"> Femme   <input type="radio" name="genre" required value="autre"> Autre';
+      }
+      else if ($result['genre'] == 'femme') {
+        $inputgenre = '<input type="radio" name="genre" required value="homme"> Homme   <input type="radio" name="genre" required value="femme" checked> Femme   <input type="radio" name="genre" required value="autre"> Autre';
+      }
+      else {
+        $inputgenre = '<input type="radio" name="genre" required value="homme"> Homme   <input type="radio" name="genre" required value="femme"> Femme   <input type="radio" name="genre" required value="autre" checked> Autre';
+      }
+    ?>
+    <p>Nom : <?= $result['nom']?></p>
+    <p>Prénom : <?= $result['prenom']?></p>
+    <p>Genre : <?= ucfirst($result['genre'])?></p>
+    <p>Email : <?= $result['mail']?></p>
+    <p>QPV : <?= $qpv?></p>
+    <p>RQTH : <?= $rqth?></p>
+    <p>Actif : <?= $actif?></p>
+    <p>Tiers-temps : <?= $tierst?></p>
 
-  <button class="btn btn-info" data-toggle="modal" data-target="#modalModif">Modifier mes informations</button>
+    <button data-toggle="modal" data-target="#modalModif">Modifier mes informations</button>
+  </section>
+
 
   <!-- Modal pour modifier les infos -->
   <div class="modal fade" id="modalModif" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -146,7 +147,7 @@
             <p>RQTH : <?=$inputrqth?></p>
             <p>Actif : <?=$inputactif?></p>
             <p class="tiers">Requiert un tiers-temps : <?=$inputtiers?></p>
-            <input type="submit" name="update" value="Modifier" class="btn btn-info">
+            <input type="submit" name="update" value="Modifier" class="btnface">
           </form>
         </div>
       </div>

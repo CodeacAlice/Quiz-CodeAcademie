@@ -17,8 +17,16 @@
   <title>[Code Academie] Promo #3 - Quiz - Connexion</title>
 
   <!-- CSS -->
-  <!-- <link rel="stylesheet" type="text/css" href="./assets/css/base.css"> -->
   <link rel="stylesheet" type="text/css" href="./assets/css/stylesheet.css">
+
+  <style>
+    input {
+      border-radius: 10px;
+      padding: 10px 75px;
+      text-align: center;
+      background-color: #EEEEEE;
+    }
+  </style>
 </head>
 
 <body>

@@ -7,15 +7,10 @@ body {
 }
 
 h1 {margin-bottom: 3rem;}
+h2 {margin-bottom: 2rem;}
 
-input {
-	border-radius: 10px;
-	padding: 10px 75px;
-	text-align: center;
-	background-color: #EEEEEE;
-}
 
-button {
+button, .btnface {
 	background-color: #3c8b94;
 	border-radius: 18px;
 	padding: 10px 40px;
