@@ -41,11 +41,11 @@
           <div class="row">
             <div class="liens col-sm-6">
               <a href="mesquiz.php">Mes quiz</a>
-              <?php include($path."/assets/images/test-quiz.svg"); ?>
+              <?php include($path."/assets/img/test-quiz.svg"); ?>
             </div>
             <div class="liens col-sm-6">
               <a href="moncompte.php">Mon compte</a>
-              <?php include($path."/assets/images/user.svg"); ?>
+              <?php include($path."/assets/img/user.svg"); ?>
             </div>
           </div>
         </div>
