@@ -1,3 +1,26 @@
-Avant de lancer l'application, il faut importer le fichier NewBDD.sql dans phpmyadmin. Il faut également modifier les informations pour se connecter à la base de données dans le fichier infosconnect.php. 
-Une fois cela fait, il suffit de lancer la page index.php. Il est possible de se connecter en tant qu'admin avec les identifiants suivants : admin@mail.com, password (pour le mot de passe). A partir de là, il est possible de rajouter et de tester des quiz ainsi que d'ajouter des utilisateurs ou administrateurs à la base de données.
-Lorsqu'un quiz est testé, les scores sont automatiquement enregistrés dans la table "scores". Il n'y a pas encore de chrono et il est possible de rejouer plusieurs fois un quiz.
+# Site de quiz de la Code Académie
+
+## Description / Contexte
+Site pour organiser les tests d'entrée à la prochaine seesion de la Code Académie. Il n'est accessible que pour les utilisateurs connectés, et permet aux inscrits de passer les quiz qui leur ont été attribués, et aux administrateurs de gérer desdits quiz ainsi que les comptes utilisateurs.
+
+Ce projet a été réalisé dans le cadre de la formation Code Académie avec Audrey Gonthier et Hugo Schindelman, sur une période de deux mois. Le design a ensuite été remanié pour ce portfolio.
+
+
+## Prérequis / Installation
+* Importer le fichier NewBDD.sql (dossier sql), qui va créer la base de données en local
+* Remplir le fichier infosconnect.php avec les informations de connexion à la base de données (le nom de la base de données ne peut pour l'instant pas être changé)
+
+Il est ensuite possible de se connecter au site en tant qu'administrateur avec l'adresse 'admin@mail.com' et le mot de passe 'password'.
+
+
+## Technologies utilisées
+* PHP
+* SQL
+
+
+## Sources
+Les icônes viennent du site flaticon : https://www.flaticon.com/
+Elles ont été créées par :
+* Freepik : https://www.flaticon.com/authors/freepik
+* Chanut : https://www.flaticon.com/authors/chanut
+* Dave Gandy : https://www.flaticon.com/authors/dave-gandy
