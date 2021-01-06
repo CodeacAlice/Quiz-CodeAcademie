@@ -2,7 +2,7 @@
   session_start(); 
   $path = "../.."; $titlepage = "Accueil";
 
-  require_once '../../database.php';
+  require_once $path.'/database.php';
   if(!isset($_SESSION['Admin'])){
     header('location:../deconnexion.php');
   }
@@ -11,7 +11,11 @@
     include($path."/assets/views/head.php"); 
   
 ?>
-    
+  <!-- CSS additionnel -->
+  <link rel="stylesheet" type="text/css" href="<?= $path ?>/assets/css/homepage.css">
+
+
+
     <div class="conteneur">
       <h1>Bienvenue Maître <?= $_SESSION['Admin']?> !</h1>
     

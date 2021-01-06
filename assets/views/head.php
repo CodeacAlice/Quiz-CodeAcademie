@@ -16,7 +16,6 @@
 
   <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="<?= $path ?>/assets/css/stylesheet.css">
-  <link rel="stylesheet" type="text/css" href="<?= $path ?>/assets/css/homepage.css">
 
 </head>
 <body>
