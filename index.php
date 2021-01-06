@@ -1,21 +1,12 @@
-<?php session_start(); $path = '.'; ?><!doctype html>
-<html lang="fr">
+<?php 
+session_start(); 
+$path = "."; $titlepage = "Connexion";
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+require_once $path.'/database.php';
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-  <!-- jQuery -->
-  <script src="assets/js/jquery.js"></script>
-
-  <title>[Code Academie] Promo #3 - Quiz - Connexion</title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="./assets/css/stylesheet.css">
+include($path."/assets/views/head.php"); 
+  
+?>
 
   <style>
     input {
@@ -25,12 +16,7 @@
       background-color: #EEEEEE;
     }
   </style>
-</head>
 
-<body>
-  <?php
-  require_once 'database.php';
-  ?>
 
   <?php
     if (isset($_POST) AND !empty($_POST)){
@@ -69,7 +55,7 @@
     }
     ?>
 
-  <?php include($path."/assets/views/header.php"); ?>
+
 
   <section>
     <h1>Bienvenue aux quiz de la prochaine<br>session de la Code Académie</h1>
