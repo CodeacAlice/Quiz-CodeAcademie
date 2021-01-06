@@ -10,13 +10,7 @@
 
     include($path."/assets/views/head.php"); 
   
-  
 ?>
-
-
-<body>
-  <?php include($path."/assets/views/header.php"); ?>
-
     
     <div class="conteneur">
       <h1>Bienvenue Maître <?= $_SESSION['Admin']?> !</h1>
@@ -42,7 +36,8 @@
 
   <?php include($path."/assets/views/footer.php"); ?>
 
-<?php }?>
 </body>
 
 </html>
+
+<?php } ?>
