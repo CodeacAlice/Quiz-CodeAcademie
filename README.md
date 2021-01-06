@@ -1,7 +1,7 @@
 # Site de quiz de la Code Académie
 
 ## Description / Contexte
-Site pour organiser les tests d'entrée à la prochaine seesion de la Code Académie. Il n'est accessible que pour les utilisateurs connectés, et permet aux inscrits de passer les quiz qui leur ont été attribués, et aux administrateurs de gérer desdits quiz ainsi que les comptes utilisateurs.
+Site pour organiser les tests d'entrée à la prochaine session de la Code Académie. Il n'est accessible que pour les utilisateurs connectés, et permet aux inscrits de passer les quiz qui leur ont été attribués, et aux administrateurs de gérer desdits quiz ainsi que les comptes utilisateurs.
 
 Ce projet a été réalisé dans le cadre de la formation Code Académie avec Audrey Gonthier et Hugo Schindelman, sur une période de deux mois. Le design a ensuite été remanié pour ce portfolio.
 
