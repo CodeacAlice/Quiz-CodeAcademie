@@ -16,4 +16,6 @@
 	width: 100%;
 }
 
-
+section svg {
+	max-height: 20px;
+}
