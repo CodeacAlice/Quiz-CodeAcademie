@@ -1,6 +1,7 @@
 <?php 
 session_start(); 
 $path = "."; $titlepage = "Connexion";
+$error = '';
 
 require_once $path.'/database.php';
 
@@ -14,6 +15,10 @@ include($path."/assets/views/head.php");
       padding: 10px 75px;
       text-align: center;
       background-color: #EEEEEE;
+    }
+    #error {
+      color:red;
+      font-weight:bold;
     }
   </style>
 
@@ -44,11 +49,6 @@ include($path."/assets/views/head.php");
           $error = 'Identifiants incorrects.';
         }
       }
-      if(isset($error)){
-        echo '<div>
-        '.$error.'
-        </div>';
-      }
       else {
         $error = 'Veuillez remplir tous les champs.';
       }
@@ -64,6 +64,7 @@ include($path."/assets/views/head.php");
         <input type="text" name='username' placeholder="mail"><br>
         <input type="password" name="password" placeholder="mot de passe"><br><br>
         <button>Connexion</button>
+        <div id="error"><?= $error ?></div>
       </form>
     </div>      
       
