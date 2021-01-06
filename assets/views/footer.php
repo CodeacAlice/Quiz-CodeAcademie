@@ -4,3 +4,8 @@
         Site réalisé par Audrey Gonthier, Hugo Schindelman et Alice Carry, tous droits réservés. 
     </div>
 </footer>
+
+
+
+<script src="<?= $path ?>/assets/js/popper.min.js" ></script>
+<script src="<?= $path ?>/assets/js/bootstrap.min.js"></script>
